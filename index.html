@@ -70,6 +70,9 @@
   .logo-variant .sample{height:48px; display:flex; align-items:center;}
   .logo-variant strong{font-size:12.5px;}
   .logo-variant p{font-size:12px; color:var(--text-secondary); line-height:1.5; margin:6px 0 0;}
+  .logo-on-dark{filter:invert(95%);}
+  [data-theme="dark"] .logo-variant img:not(.logo-blue-mark),
+  .theme-dark .logo-variant img:not(.logo-blue-mark){filter:invert(95%);}
   .logo-blue{filter:none;}
   .logo-blue-mark{filter:brightness(0) saturate(100%) invert(42%) sepia(95%) saturate(2173%) hue-rotate(213deg) brightness(100%) contrast(92%);}
   .grid-form-col{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
@@ -147,7 +150,7 @@
 
   <nav class="side">
     <div class="nav-head">
-      <div class="brand"><img src="logos/logo_2.svg" alt="" style="filter:invert(1) brightness(2);"><span class="mono">Golova</span>&nbsp;Design System</div>
+      <div class="brand"><img class="logo-on-dark" src="logos/logo_2.svg" alt=""><span class="mono">Golova</span>&nbsp;Design System</div>
       <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Открыть меню" data-menu-toggle><i class="bi bi-list"></i></button>
     </div>
     <div class="nav-panel" id="nav-panel" data-nav-panel>
@@ -1039,7 +1042,7 @@
       <div class="tag-eyebrow">Компоненты</div>
       <h2>Футер</h2>
       <div class="foot">
-        <div class="logo"><img src="logos/logo_2.svg" style="filter:invert(1) brightness(2);"> <span class="mono">golova</span></div>
+        <div class="logo"><img class="logo-on-dark" src="logos/logo_2.svg" alt=""> <span class="mono">golova</span></div>
         <div class="col"><h4>Продукты</h4><a href="#">Golova</a><a href="#">Экосистема</a></div>
         <div class="col"><h4>О нас</h4><a href="#">База знаний</a><a href="#">FAQ</a></div>
         <div class="col"><h4>Контакты</h4><a href="#">hello@golova.io</a></div>

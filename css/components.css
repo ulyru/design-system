@@ -150,7 +150,7 @@ body{ margin:0; font-family:var(--font-body); color:var(--text-primary); backgro
 
 /* ---------- logo lockups ---------- */
 .on-dark{ background:var(--surface-inverse); border-radius:var(--radius-lg); padding:24px; }
-.on-dark img{ filter:invert(1) brightness(2); }
+.on-dark img{ filter:invert(95%); }
 
 
 /* =========================================================
