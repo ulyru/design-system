@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Golova — Design System</title>
+<script>
+  document.documentElement.dataset.theme = localStorage.getItem('golova-theme') === 'dark' ? 'dark' : 'light';
+</script>
 <link rel="stylesheet" href="css/tokens.css">
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
@@ -12,6 +15,10 @@
   nav.side{background:var(--surface-inverse); color:var(--surface-inverse-text); padding:32px 20px; position:sticky; top:0; height:100vh; overflow-y:auto;}
   nav.side .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-bottom:32px;}
   nav.side .brand img{width:16px;height:16px;}
+  .theme-toggle{width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--surface-inverse-muted); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); padding:9px 10px; margin:0 0 24px; font:inherit; font-size:12.5px; cursor:pointer; transition:background-color .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease);}
+  .theme-toggle:hover{background:var(--surface-inverse-hover); color:var(--surface-inverse-text);}
+  .theme-toggle:focus-visible{outline:none; box-shadow:var(--shadow-focus-ring);}
+  .theme-toggle .bi{font-size:14px;}
   nav.side a{display:block; color:var(--surface-inverse-muted); text-decoration:none; font-size:13.5px; padding:9px 10px; border-radius:4px; margin-bottom:2px; transition:all .15s var(--ease);}
   nav.side a:hover{background:var(--surface-inverse-hover); color:var(--surface-inverse-text);}
   nav.side .grp{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--surface-inverse-subtle); margin:20px 0 8px; font-weight:700;}
@@ -108,6 +115,12 @@
   .theme-dense-row.head{background:var(--bg-table-hover); color:var(--text-secondary); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;}
   .theme-dense-row strong{font-size:12.5px;}
   .theme-dense-row span{color:var(--text-secondary);}
+  .code-sample{background:var(--neutral-90); color:var(--neutral-0); border-radius:var(--radius-md); padding:16px; margin:16px 0 0; overflow:auto; font-family:var(--font-mono); font-size:12px; line-height:1.6;}
+  .code-sample code{font-family:inherit; white-space:pre;}
+  .handoff-list{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:14px;}
+  .handoff-card{border:1px solid var(--border-default); border-radius:var(--radius-md); background:var(--bg-card); padding:16px;}
+  .handoff-card h3{font-size:13px; margin:0 0 8px;}
+  .handoff-card p{font-size:12.5px; color:var(--text-secondary); line-height:1.5; margin:0;}
   @media (max-width:960px){
     .shell{grid-template-columns:minmax(0,1fr);}
     nav.side{position:static; height:auto;}
@@ -126,6 +139,10 @@
 
   <nav class="side">
     <div class="brand"><img src="logos/logo_2.svg" alt="" style="filter:invert(1) brightness(2);"><span class="mono">Golova</span>&nbsp;Design System</div>
+    <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
+      <span><i class="bi bi-moon"></i> Тема</span>
+      <strong data-theme-label>Светлая</strong>
+    </button>
     <a href="#overview">Обзор</a>
     <a href="#philosophy">Философия</a>
     <div class="grp">Активы</div>
@@ -146,6 +163,7 @@
     <a href="#card">Карточка товара</a>
     <a href="#footer">Футер</a>
     <div class="grp">Гайдлайны</div>
+    <a href="#handoff">Developer Handoff</a>
     <a href="#usage">Как использовать</a>
   </nav>
 
@@ -619,6 +637,10 @@
           Primary — одна на экран, для главного действия. Secondary — для второстепенного рядом с primary.
           Danger — необратимые/разрушающие действия. Ghost — низкоприоритетные действия в тулбарах. Link — действие, встроенное в текст.
         </p>
+        <pre class="code-sample"><code>&lt;button class="btn btn-md btn-primary"&gt;
+  &lt;i class="bi bi-plus-lg"&gt;&lt;/i&gt;
+  Создать
+&lt;/button&gt;</code></pre>
       </div>
 
       <div class="comp-block">
@@ -712,6 +734,11 @@
           <button class="tab">Раздел 3</button>
           <button class="tab">Раздел 4</button>
         </div>
+        <pre class="code-sample"><code>&lt;div class="tabs"&gt;
+  &lt;button class="tab active"&gt;Все&lt;/button&gt;
+  &lt;button class="tab"&gt;В аренде&lt;/button&gt;
+  &lt;button class="tab"&gt;Резерв&lt;/button&gt;
+&lt;/div&gt;</code></pre>
       </div>
     </section>
 
@@ -757,6 +784,11 @@
             </div>
           </div>
         </div>
+        <pre class="code-sample"><code>&lt;label class="field"&gt;
+  &lt;span class="field-label"&gt;Название компании &lt;span class="req"&gt;*&lt;/span&gt;&lt;/span&gt;
+  &lt;input class="ctrl" type="text" placeholder="ООО Ромашка"&gt;
+  &lt;span class="field-hint"&gt;Юридическое или рабочее название клиента.&lt;/span&gt;
+&lt;/label&gt;</code></pre>
       </div>
 
       <div class="comp-block">
@@ -877,6 +909,22 @@
             </div>
           </div>
         </div>
+        <pre class="code-sample"><code>&lt;div class="modal"&gt;
+  &lt;div class="modal-header"&gt;
+    &lt;div&gt;
+      &lt;h3&gt;Редактировать позицию&lt;/h3&gt;
+      &lt;p&gt;Изменения применятся к текущей строке.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;button class="btn btn-sm btn-icon-only btn-ghost modal-close" aria-label="Закрыть"&gt;
+      &lt;i class="bi bi-x-lg"&gt;&lt;/i&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="modal-body"&gt;...&lt;/div&gt;
+  &lt;div class="modal-footer"&gt;
+    &lt;button class="btn btn-md btn-secondary"&gt;Отмена&lt;/button&gt;
+    &lt;button class="btn btn-md btn-primary"&gt;Сохранить&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
       </div>
 
       <div class="comp-block">
@@ -956,6 +1004,20 @@
             </div>
           </div>
         </div>
+        <pre class="code-sample"><code>&lt;article class="pcard"&gt;
+  &lt;div class="img"&gt;
+    &lt;span class="badge badge-neutral"&gt;Продажа б/у&lt;/span&gt;
+    &lt;div class="fav"&gt;♥&lt;/div&gt;
+    фото товара
+  &lt;/div&gt;
+  &lt;div class="body"&gt;
+    &lt;h3 class="title"&gt;Акустическая система Yamaha DXR12&lt;/h3&gt;
+    &lt;p class="price"&gt;8 500 ₽ &lt;span class="kit-flag"&gt;&lt;i&gt;&lt;/i&gt;Комплект&lt;/span&gt;&lt;/p&gt;
+    &lt;div class="seller"&gt;&lt;span class="star"&gt;★&lt;/span&gt; 4.9 · Pro Sound&lt;/div&gt;
+    &lt;div class="loc"&gt;Москва · самовывоз&lt;/div&gt;
+    &lt;button class="cta"&gt;Подробнее&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre>
       </div>
     </section>
 
@@ -968,6 +1030,43 @@
         <div class="col"><h4>Продукты</h4><a href="#">Golova</a><a href="#">Экосистема</a></div>
         <div class="col"><h4>О нас</h4><a href="#">База знаний</a><a href="#">FAQ</a></div>
         <div class="col"><h4>Контакты</h4><a href="#">hello@golova.io</a></div>
+      </div>
+    </section>
+
+    <!-- HANDOFF -->
+    <section id="handoff">
+      <div class="tag-eyebrow">Гайдлайны</div>
+      <h2>Developer Handoff</h2>
+      <p class="desc">Этот раздел нужен разработчикам и ИИ-агентам, которые собирают прототипы или переносят паттерны
+      в продукт. Источник истины остается в токенах, компонентах и правилах витрины.</p>
+
+      <div class="handoff-list">
+        <div class="handoff-card">
+          <h3>Runtime CSS</h3>
+          <p><code class="inline">css/tokens.css</code> и <code class="inline">css/components.css</code> подключаются напрямую в HTML-прототип.</p>
+        </div>
+        <div class="handoff-card">
+          <h3>Machine Tokens</h3>
+          <p><code class="inline">tokens.json</code> можно читать агентам, скриптам, Figma-плагинам и будущему экспорту токенов.</p>
+        </div>
+        <div class="handoff-card">
+          <h3>AI Instructions</h3>
+          <p><code class="inline">AI_USAGE.md</code> — короткий контракт для Claude Code, Codex и других агентов.</p>
+        </div>
+        <div class="handoff-card">
+          <h3>Copy Snippets</h3>
+          <p>Базовые HTML-snippets лежат рядом с кнопками, табами, формами, модалками и карточкой товара.</p>
+        </div>
+      </div>
+
+      <div class="coll-block" style="margin-top:20px;">
+        <h3>Минимальный prompt для ИИ-агента</h3>
+        <p class="sub">Можно вставить в Claude Code перед созданием прототипа Golova.</p>
+        <pre class="code-sample"><code>Перед началом прочитай AI_USAGE.md, tokens.json, css/tokens.css и css/components.css.
+Собери прототип Golova как плотный B2B SaaS/ERP экран.
+Используй существующие CSS variables и component classes.
+Не хардкодь цвета, не делай лендинг, не используй градиенты и декоративные иллюстрации.
+Поддержи светлую и темную тему через data-theme="dark".</code></pre>
       </div>
     </section>
 
@@ -985,5 +1084,25 @@
 
   </main>
 </div>
+<script>
+  const root = document.documentElement;
+  const themeToggle = document.querySelector('[data-theme-toggle]');
+  const themeLabel = document.querySelector('[data-theme-label]');
+  const savedTheme = localStorage.getItem('golova-theme');
+
+  function setTheme(theme){
+    const isDark = theme === 'dark';
+    root.dataset.theme = isDark ? 'dark' : 'light';
+    themeToggle.setAttribute('aria-pressed', String(isDark));
+    themeLabel.textContent = isDark ? 'Темная' : 'Светлая';
+    themeToggle.querySelector('.bi').className = isDark ? 'bi bi-sun' : 'bi bi-moon';
+    localStorage.setItem('golova-theme', root.dataset.theme);
+  }
+
+  setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+  themeToggle.addEventListener('click', () => {
+    setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+</script>
 </body>
 </html>

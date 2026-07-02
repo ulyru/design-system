@@ -13,6 +13,8 @@ Static reference page for the Golova design system: tokens, components, typograp
 - `index.html` is the reference/demo page and imports styles in this order: `css/tokens.css`, then `css/components.css`.
 - `css/tokens.css` defines primitive, semantic, spacing, radius, shadow, motion, and font tokens.
 - `css/components.css` defines reusable component classes built on top of tokens.
+- `tokens.json` is the machine-readable token contract for agents, scripts, Figma workflows, and future exports.
+- `AI_USAGE.md` is the quick instruction file for Claude Code, Codex, and other AI agents building Golova prototypes.
 - `logos/` contains the Golova mark and lockups.
 - `fonts/` contains the licensed PragmataPro Mono web font used only for logo/decorative/display accents.
 - `DESIGN_SYSTEM_GUIDE.md` is a Russian-language working memo for maintaining the system with a designer-led workflow.
