@@ -35,6 +35,16 @@
   --neutral-20:#F7F9FB;
   --neutral-0:#FFFFFF;
 
+  /* ================= COLLECTION 1B — PRIMITIVE / DARK SURFACE ================= */
+  --dark-100:#0F1114;
+  --dark-90:#15181C;
+  --dark-80:#1E2228;
+  --dark-70:#2A3038;
+  --dark-60:#3A424D;
+  --dark-50:#69717D;
+  --dark-20:#C9D0DD;
+  --dark-0:#F7F9FB;
+
   /* ================= COLLECTION 2 — PRIMITIVE / BRAND ================= */
   --brand-informative:#4976F4;
   --brand-positive:#38B000;
@@ -43,6 +53,9 @@
   --brand-informative-soft:rgba(73,118,244,0.10);
   --brand-positive-soft:rgba(56,176,0,0.10);
   --brand-error-soft:rgba(230,58,30,0.10);
+  --brand-informative-soft-dark:rgba(73,118,244,0.18);
+  --brand-positive-soft-dark:rgba(56,176,0,0.18);
+  --brand-error-soft-dark:rgba(230,58,30,0.18);
 
   /* ================= COLLECTION 3 — SEMANTIC ================= */
   /* Text */
@@ -76,6 +89,26 @@
   --icon-error:var(--brand-error);
   --icon-success:var(--brand-positive);
 
+  /* Surface */
+  --surface-inverse:var(--neutral-90);
+  --surface-inverse-text:var(--neutral-0);
+  --surface-inverse-muted:#B9B9B9;
+  --surface-inverse-subtle:#8A8A8A;
+  --surface-inverse-hover:#454545;
+
+  /* Component */
+  --button-primary-bg:var(--neutral-90);
+  --button-primary-bg-hover:#000000;
+  --button-primary-fg:var(--neutral-0);
+  --button-secondary-bg:var(--bg-card);
+  --button-secondary-border:var(--border-strong);
+  --button-secondary-fg:var(--text-primary);
+  --control-checked-bg:var(--neutral-90);
+  --control-checked-fg:var(--neutral-0);
+  --control-disabled-bg:var(--neutral-30);
+  --chip-bg:var(--neutral-30);
+  --media-placeholder-bg:linear-gradient(135deg,var(--neutral-30),var(--neutral-20));
+
   /* ---- not yet in the official palette: local placeholder ----
      Rating stars need a warning/gold accent that Collections 1–3 don't define.
      Flag for whoever owns the palette to add a proper warning/* token. */
@@ -103,6 +136,69 @@
 
   /* ================= MOTION ================= */
   --ease:cubic-bezier(.4,0,.2,1);
+}
+
+[data-theme="dark"],
+.theme-dark{
+  color-scheme:dark;
+
+  /* Text */
+  --text-primary:var(--dark-0);
+  --text-secondary:var(--dark-20);
+  --text-disabled:var(--dark-50);
+  --text-inverse:var(--dark-100);
+  --text-link:#7FA0FF;
+  --text-error:#FF7A66;
+  --text-success:#7DD957;
+
+  /* Background */
+  --bg-page:var(--dark-100);
+  --bg-card:var(--dark-80);
+  --bg-table-hover:var(--dark-70);
+  --bg-selected:var(--brand-informative-soft-dark);
+  --bg-error:var(--brand-error-soft-dark);
+  --bg-success:var(--brand-positive-soft-dark);
+
+  /* Border */
+  --border-default:var(--dark-70);
+  --border-strong:var(--dark-60);
+  --border-focus:#7FA0FF;
+  --border-error:#FF7A66;
+
+  /* Icon */
+  --icon-primary:var(--dark-0);
+  --icon-secondary:var(--dark-20);
+  --icon-disabled:var(--dark-50);
+  --icon-informative:#7FA0FF;
+  --icon-error:#FF7A66;
+  --icon-success:#7DD957;
+
+  /* Surface */
+  --surface-inverse:var(--dark-80);
+  --surface-inverse-text:var(--dark-0);
+  --surface-inverse-muted:var(--dark-20);
+  --surface-inverse-subtle:var(--dark-50);
+  --surface-inverse-hover:var(--dark-70);
+
+  /* Component */
+  --button-primary-bg:var(--dark-0);
+  --button-primary-bg-hover:var(--neutral-0);
+  --button-primary-fg:var(--dark-100);
+  --button-secondary-bg:var(--dark-80);
+  --button-secondary-border:var(--dark-60);
+  --button-secondary-fg:var(--dark-0);
+  --control-checked-bg:var(--dark-0);
+  --control-checked-fg:var(--dark-100);
+  --control-disabled-bg:var(--dark-70);
+  --chip-bg:var(--dark-70);
+  --media-placeholder-bg:linear-gradient(135deg,var(--dark-70),var(--dark-90));
+
+  /* Shadow */
+  --shadow-rest:0 1px 2px rgba(0,0,0,.24);
+  --shadow-card:0 1px 0 rgba(255,255,255,.04), 0 2px 8px rgba(0,0,0,.18);
+  --shadow-float:0 18px 44px rgba(0,0,0,.36), 0 2px 8px rgba(0,0,0,.24);
+  --shadow-focus-ring:0 0 0 3px var(--brand-informative-soft-dark);
+  --shadow-error-ring:0 0 0 3px var(--brand-error-soft-dark);
 }
 
 /* ---- type scale (utility classes, optional) ---- */

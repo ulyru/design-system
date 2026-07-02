@@ -8,22 +8,22 @@
 <link rel="stylesheet" href="css/components.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
 <style>
-  .shell{display:grid; grid-template-columns:240px 1fr; min-height:100vh;}
-  nav.side{background:var(--neutral-90); color:#fff; padding:32px 20px; position:sticky; top:0; height:100vh; overflow-y:auto;}
+  .shell{display:grid; grid-template-columns:240px minmax(0,1fr); min-height:100vh;}
+  nav.side{background:var(--surface-inverse); color:var(--surface-inverse-text); padding:32px 20px; position:sticky; top:0; height:100vh; overflow-y:auto;}
   nav.side .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-bottom:32px;}
   nav.side .brand img{width:16px;height:16px;}
-  nav.side a{display:block; color:#B9B9B9; text-decoration:none; font-size:13.5px; padding:9px 10px; border-radius:4px; margin-bottom:2px; transition:all .15s var(--ease);}
-  nav.side a:hover{background:#454545; color:#fff;}
-  nav.side .grp{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:#8A8A8A; margin:20px 0 8px; font-weight:700;}
+  nav.side a{display:block; color:var(--surface-inverse-muted); text-decoration:none; font-size:13.5px; padding:9px 10px; border-radius:4px; margin-bottom:2px; transition:all .15s var(--ease);}
+  nav.side a:hover{background:var(--surface-inverse-hover); color:var(--surface-inverse-text);}
+  nav.side .grp{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--surface-inverse-subtle); margin:20px 0 8px; font-weight:700;}
   main{padding:56px 64px 120px; max-width:1180px;}
   section{margin-bottom:80px; scroll-margin-top:24px;}
   section h2{font-size:22px; margin:0 0 4px; letter-spacing:-.01em;}
   section .desc{color:var(--text-secondary); font-size:14px; margin:0 0 28px; max-width:680px;}
   .tag-eyebrow{display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--brand-informative); background:var(--bg-selected); padding:4px 10px; border-radius:var(--radius-pill); margin-bottom:10px;}
-  .cover{background:var(--neutral-90); color:#fff; border-radius:var(--radius-xl); padding:56px 56px 48px; margin-bottom:64px;}
+  .cover{background:var(--surface-inverse); color:var(--surface-inverse-text); border-radius:var(--radius-xl); padding:56px 56px 48px; margin-bottom:64px;}
   .cover-brand{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
-  .cover h1{font-size:40px; margin:0; letter-spacing:-.01em; font-family:var(--font-mono); font-weight:400; color:#fff;}
-  .cover p{color:#C7C7C7; font-size:15px; max-width:600px; margin:0; line-height:1.6;}
+  .cover h1{font-size:40px; margin:0; letter-spacing:-.01em; font-family:var(--font-mono); font-weight:400; color:var(--surface-inverse-text);}
+  .cover p{color:var(--surface-inverse-muted); font-size:15px; max-width:600px; margin:0; line-height:1.6;}
   .swatch-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:14px;}
   .swatch{border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-default); background:var(--bg-card);}
   .swatch .fill{height:64px;}
@@ -39,9 +39,10 @@
   .usage-table{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px;}
   .usage-col{border:1px solid var(--border-default); border-radius:var(--radius-md); padding:16px;}
   .usage-col h4{font-size:13px; margin:0 0 12px;}
-  .usage-row{display:flex; justify-content:space-between; font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border-default); color:var(--text-primary);}
+  .usage-row{display:flex; justify-content:space-between; gap:12px; font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border-default); color:var(--text-primary);}
+  .usage-row span{min-width:0;}
   .usage-row:last-child{border-bottom:none;}
-  .usage-row span.token{color:var(--text-secondary); font-size:11.5px;}
+  .usage-row span.token{color:var(--text-secondary); font-size:11.5px; text-align:right; overflow-wrap:anywhere;}
   .comp-block{border:1px solid var(--border-default); border-radius:var(--radius-lg); background:var(--bg-card); padding:28px; margin-bottom:20px;}
   .comp-block .comp-title{font-size:13px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between;}
   .comp-block .comp-title small{font-weight:400; color:var(--text-secondary); font-family:var(--font-mono); font-size:11px;}
@@ -50,16 +51,28 @@
   .logo-card{flex:1; min-width:260px;}
   .logo-card .frame{display:flex; align-items:center; justify-content:center; height:100px;}
   .logo-card p{font-size:12px; color:var(--text-secondary); margin:14px 0 0; line-height:1.5;}
+  .logo-size-table{display:grid; grid-template-columns:80px 90px minmax(0,1fr); width:100%; min-width:0; border:1px solid var(--border-default); border-radius:var(--radius-md); overflow:hidden; background:var(--bg-card);}
+  .logo-size-table > div{min-width:0; padding:12px 14px; font-size:12.5px; border-bottom:1px solid var(--border-default); overflow-wrap:anywhere;}
+  .logo-size-table > div:nth-last-child(-n+3){border-bottom:none;}
+  .logo-size-table .head{background:var(--bg-table-hover); font-weight:700; color:var(--text-primary);}
+  .logo-size-table .size{font-weight:700; color:var(--text-primary);}
+  .logo-variant-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:14px;}
+  .logo-variant{border:1px solid var(--border-default); border-radius:var(--radius-md); background:var(--bg-card); padding:16px; min-height:130px; min-width:0; display:flex; flex-direction:column; justify-content:space-between;}
+  .logo-variant .sample{height:48px; display:flex; align-items:center;}
+  .logo-variant strong{font-size:12.5px;}
+  .logo-variant p{font-size:12px; color:var(--text-secondary); line-height:1.5; margin:6px 0 0;}
+  .logo-blue{filter:none;}
+  .logo-blue-mark{filter:brightness(0) saturate(100%) invert(42%) sepia(95%) saturate(2173%) hue-rotate(213deg) brightness(100%) contrast(92%);}
   .grid-form-col{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
   .usage-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
-  .usage-card{border-radius:var(--radius-lg); padding:20px; border:1px solid var(--border-default);}
-  .usage-card.do{background:var(--bg-success); border-color:#BFEAD1;}
-  .usage-card.dont{background:var(--bg-error); border-color:#F4C6C6;}
+  .usage-card{border-radius:var(--radius-lg); padding:20px; border:1px solid var(--border-default); min-width:0;}
+  .usage-card.do{background:var(--bg-success); border-color:var(--icon-success);}
+  .usage-card.dont{background:var(--bg-error); border-color:var(--border-error);}
   .usage-card .head{font-size:12px; font-weight:700; margin-bottom:6px;}
-  .usage-card.do .head{color:#178A48;}
-  .usage-card.dont .head{color:#C23030;}
+  .usage-card.do .head{color:var(--text-success);}
+  .usage-card.dont .head{color:var(--text-error);}
   .usage-card p{font-size:12.5px; color:var(--text-primary); margin:0; line-height:1.5;}
-  code.inline{background:var(--neutral-30); padding:2px 6px; border-radius:4px; font-size:12px; font-family:var(--font-mono);}
+  code.inline{background:var(--chip-bg); padding:2px 6px; border-radius:4px; font-size:12px; font-family:var(--font-mono);}
   .font-cards{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px;}
   .font-card{border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:22px; background:var(--bg-card);}
   .font-card .role{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--brand-informative); font-weight:700; margin-bottom:10px;}
@@ -79,11 +92,32 @@
   .radius-item{text-align:center;}
   .radius-item .box{width:76px; height:76px; background:var(--bg-card); border:2px solid var(--brand-informative); margin-bottom:8px;}
   .radius-item span{font-size:11.5px; color:var(--text-secondary);}
+  .principle-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:16px;}
+  .principle-card{border:1px solid var(--border-default); border-radius:var(--radius-md); background:var(--bg-card); padding:18px 20px;}
+  .principle-card h3{font-size:13px; margin:0 0 10px; color:var(--text-primary);}
+  .principle-card ul{margin:0; padding-left:18px; color:var(--text-secondary); font-size:13px; line-height:1.7;}
+  .principle-note{border-left:3px solid var(--border-focus); background:var(--bg-selected); padding:16px 20px; margin-top:18px; font-size:13px; line-height:1.6; color:var(--text-primary);}
+  .theme-preview{background:var(--bg-page); color:var(--text-primary); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:24px;}
+  .theme-preview-head{display:flex; align-items:flex-start; justify-content:space-between; gap:16px; margin-bottom:20px;}
+  .theme-preview-head h3{font-size:16px; margin:0 0 4px;}
+  .theme-preview-head p{font-size:12.5px; color:var(--text-secondary); margin:0;}
+  .theme-toolbar{display:flex; gap:8px; flex-wrap:wrap;}
+  .theme-dense-table{border:1px solid var(--border-default); border-radius:var(--radius-md); overflow:hidden; background:var(--bg-card); margin-top:18px;}
+  .theme-dense-row{display:grid; grid-template-columns:1.2fr .9fr .9fr auto; gap:14px; align-items:center; padding:10px 14px; border-bottom:1px solid var(--border-default); font-size:12.5px;}
+  .theme-dense-row:last-child{border-bottom:none;}
+  .theme-dense-row.head{background:var(--bg-table-hover); color:var(--text-secondary); font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.04em;}
+  .theme-dense-row strong{font-size:12.5px;}
+  .theme-dense-row span{color:var(--text-secondary);}
   @media (max-width:960px){
-    .shell{grid-template-columns:1fr;}
+    .shell{grid-template-columns:minmax(0,1fr);}
     nav.side{position:static; height:auto;}
+    nav.side .brand{flex-wrap:wrap;}
     main{padding:32px 20px;}
     .font-cards, .usage-grid, .grid-form-col{grid-template-columns:1fr;}
+    .type-row{display:grid; grid-template-columns:1fr; gap:6px;}
+    .type-row .label, .type-row .spec{width:auto; flex:auto;}
+    .theme-preview-head{display:grid;}
+    .theme-dense-row{grid-template-columns:1fr; gap:4px;}
   }
 </style>
 </head>
@@ -93,10 +127,12 @@
   <nav class="side">
     <div class="brand"><img src="logos/logo_2.svg" alt="" style="filter:invert(1) brightness(2);"><span class="mono">Golova</span>&nbsp;Design System</div>
     <a href="#overview">Обзор</a>
+    <a href="#philosophy">Философия</a>
     <div class="grp">Активы</div>
     <a href="#logo">Логотип</a>
     <div class="grp">Основы</div>
     <a href="#color">Цвет</a>
+    <a href="#theme-dark">Темная тема</a>
     <a href="#type">Типографика</a>
     <a href="#space">Отступы</a>
     <a href="#radius">Скругления</a>
@@ -147,37 +183,126 @@
       логотип и декоративные акценты.</p>
     </section>
 
+    <!-- PHILOSOPHY -->
+    <section id="philosophy">
+      <div class="tag-eyebrow">Бренд</div>
+      <h2>Философия дизайна</h2>
+      <p class="desc">Golova — профессиональная B2B SaaS-платформа для компаний, занимающихся арендой
+      AV-оборудования и техническим обеспечением мероприятий. Каждый экран должен в первую очередь помогать
+      быстро выполнять ежедневные рабочие задачи.</p>
+
+      <div class="principle-grid">
+        <div class="principle-card">
+          <h3>Интерфейс должен ощущаться как</h3>
+          <ul>
+            <li>инженерный;</li>
+            <li>профессиональный;</li>
+            <li>насыщенный информацией;</li>
+            <li>спокойный и надежный;</li>
+            <li>ориентированный на ежедневную работу.</li>
+          </ul>
+        </div>
+        <div class="principle-card">
+          <h3>Избегаем</h3>
+          <ul>
+            <li>игрового или стартапного стиля;</li>
+            <li>больших карточек без необходимости;</li>
+            <li>градиентов и декоративных иллюстраций;</li>
+            <li>тяжелых теней;</li>
+            <li>чрезмерного количества пустого пространства.</li>
+          </ul>
+        </div>
+        <div class="principle-card">
+          <h3>Визуальный язык</h3>
+          <ul>
+            <li>минимализм и плоский интерфейс;</li>
+            <li>тонкие разделители вместо толстых рамок;</li>
+            <li>практически без теней;</li>
+            <li>скругления только там, где они нужны;</li>
+            <li>иерархия строится типографикой, а не цветами.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="principle-note">
+        Интерфейс Golova должен напоминать современную ERP/CRM-систему, а не лендинг или BI-панель:
+        много структурированной информации, спокойная плотность, понятные действия и минимум декоративного шума.
+      </div>
+    </section>
+
     <!-- LOGO -->
     <section id="logo">
       <div class="tag-eyebrow">Активы</div>
       <h2>Логотип</h2>
-      <p class="desc">Два лока: корпоративный «golova» и продуктовый. Знак один и тот же во всех вариантах —
-      точка узнавания бренда, менять начертание или пропорции нельзя.</p>
-      <div class="row-flex" style="align-items:stretch;">
-        <div class="comp-block logo-card">
-          <div class="comp-title">Знак <small>logos/logo_2.svg · 45×45</small></div>
-          <div class="frame"><img src="logos/logo_2.svg" alt="Golova mark" style="width:52px;height:52px;"></div>
-          <p>Фавикон, аватар в соцсетях, иконка приложения, свёрнутое меню.</p>
-        </div>
-        <div class="comp-block logo-card" style="flex:2;">
-          <div class="comp-title">Корпоративный лок «golova» <small>logos/logo_1.svg · 283×101</small></div>
-          <div class="frame"><img src="logos/logo_1.svg" alt="Golova logo" style="height:44px;"></div>
-          <p>Основной лок для всей экосистемы продуктов Golova.</p>
-        </div>
-        <div class="comp-block logo-card" style="flex:2;">
-          <div class="comp-title">Продуктовый лок <small>logos/logo_market.svg · 296×63</small></div>
-          <div class="frame"><img src="logos/logo_market.svg" alt="Golova product logo" style="height:36px;"></div>
-          <p>Внутри конкретного продукта экосистемы — в шапке, письмах, счетах.</p>
+      <p class="desc">Логотип используется как рабочий брендовый идентификатор внутри B2B-интерфейса.
+      По умолчанию выбираем полный логотип, знак используем только там, где полная версия физически не помещается.</p>
+
+      <div class="coll-block">
+        <h3>Logo Sizes</h3>
+        <p class="sub">Четыре рабочих размера закрывают интерфейс, документацию и брендовые материалы.</p>
+        <div class="logo-size-table">
+          <div class="head">Размер</div><div class="head">Высота</div><div class="head">Где используется</div>
+          <div class="size">XS</div><div>16 px</div><div>favicon, плотные таблицы, статусные панели, очень плотные интерфейсы</div>
+          <div class="size">S</div><div>24 px</div><div>верхняя панель приложения, сайдбар, модальные окна; основной размер внутри продукта</div>
+          <div class="size">M</div><div>32 px</div><div>страницы авторизации, настройки, onboarding, пустые состояния</div>
+          <div class="size">L</div><div>48 px</div><div>презентации, сайт, документация</div>
         </div>
       </div>
+
+      <div class="coll-block">
+        <h3>Logo Variants</h3>
+        <p class="sub">Допустимые версии логотипа. Не создаем новые варианты под отдельные экраны.</p>
+        <div class="logo-variant-grid">
+          <div class="logo-variant">
+            <div class="sample"><img src="logos/logo_1.svg" alt="Golova full logo" style="height:32px;"></div>
+            <div><strong>Full Logo</strong><p>Основной вариант. Используется почти всегда: приложение, документы, настройки, onboarding.</p></div>
+          </div>
+          <div class="logo-variant">
+            <div class="sample"><img src="logos/logo_2.svg" alt="Golova symbol" style="height:32px;"></div>
+            <div><strong>Symbol</strong><p>Только знак: favicon, мобильная навигация, аватар продукта, квадратные области.</p></div>
+          </div>
+          <div class="logo-variant">
+            <div class="sample"><img src="logos/logo_1.svg" alt="Golova monochrome logo" style="height:32px;"></div>
+            <div><strong>Monochrome</strong><p>Черный/графитовый вариант для светлого фона. Базовый цвет: <code class="inline">#2B2B2B</code>.</p></div>
+          </div>
+          <div class="logo-variant on-dark">
+            <div class="sample"><img src="logos/logo_1.svg" alt="Golova white logo" style="height:32px;"></div>
+            <div><strong style="color:#fff;">White</strong><p style="color:#B9B9B9;">Для темных интерфейсов. Черные SVG-локапы инвертируются через <code class="inline">.on-dark</code>.</p></div>
+          </div>
+          <div class="logo-variant">
+            <div class="sample"><img class="logo-blue-mark" src="logos/logo_2.svg" alt="Golova blue symbol" style="height:32px;"></div>
+            <div><strong>Blue</strong><p>Цвет <code class="inline">#4976F4</code>. Использовать редко: брендовые материалы и маркетинг, не как основной логотип внутри приложения.</p></div>
+          </div>
+          <div class="logo-variant">
+            <div class="sample"><img src="logos/logo_market.svg" alt="Golova product logo" style="height:32px;"></div>
+            <div><strong>Product Lockup</strong><p>Продуктовый лок для конкретного продукта экосистемы: шапка продукта, письма, счета.</p></div>
+          </div>
+        </div>
+      </div>
+
       <div class="comp-block" style="margin-top:20px;">
-        <div class="comp-title">На тёмном фоне <small>класс .on-dark инвертирует чёрные SVG</small></div>
-        <div class="on-dark row-flex" style="gap:48px;">
-          <img src="logos/logo_2.svg" style="width:36px;height:36px;">
-          <img src="logos/logo_1.svg" style="height:34px;">
-          <img src="logos/logo_market.svg" style="height:28px;">
+        <div class="comp-title">Minimum Size и Safe Area <small>правило применимо ко всем вариантам</small></div>
+        <div class="usage-table">
+          <div class="usage-col">
+            <h4>Minimum Size</h4>
+            <div class="usage-row"><span>Полный логотип</span><span class="token">20 px min-height</span></div>
+            <p style="font-size:12px;color:var(--text-secondary);line-height:1.5;margin:10px 0 0;">Ниже 20 px текстовая часть становится нечитаемой. Для меньших областей используем Symbol.</p>
+          </div>
+          <div class="usage-col">
+            <h4>Safe Area</h4>
+            <div class="usage-row"><span>Минимальный отступ</span><span class="token">max(symbol height, 8 px)</span></div>
+            <p style="font-size:12px;color:var(--text-secondary);line-height:1.5;margin:10px 0 0;">Вокруг логотипа оставляем пространство не меньше высоты символа или 8 px, что больше.</p>
+          </div>
         </div>
       </div>
+
+      <div class="usage-grid">
+        <div class="usage-card do"><div class="head">✓ Так делаем</div><p>В продукте используем Full Logo размера S 24 px. В плотных местах переходим на Symbol, а не ужимаем полный логотип ниже минимума.</p></div>
+        <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не растягиваем, не меняем пропорции, не добавляем тени или градиенты, не перекрашиваем текст отдельно от знака.</p></div>
+        <div class="usage-card do"><div class="head">✓ Так делаем</div><p>White-версию используем на темных интерфейсах; Blue — только в брендовых и маркетинговых материалах.</p></div>
+        <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не используем цветные версии без необходимости и не меняем шрифт логотипа.</p></div>
+      </div>
+
       <div style="margin-top:16px; background:var(--bg-selected); border:1px solid var(--border-focus); border-radius:var(--radius-md); padding:16px 20px; font-size:12.5px; color:var(--text-primary); line-height:1.6;">
         Шрифт <strong>PragmataPro Mono</strong> — <code class="inline">fonts/PragmataProMono-Regular.woff2</code>.
         Веб-лицензия FSD: один сайт, лимит 10 000 просмотров/мес. Загружен только Regular.
@@ -306,6 +431,96 @@
       </div>
     </section>
 
+    <!-- DARK THEME -->
+    <section id="theme-dark">
+      <div class="tag-eyebrow">Основы</div>
+      <h2>Темная тема</h2>
+      <p class="desc">Темная версия строится тем же способом, что и светлая: примитивы → семантика → компоненты.
+      Компоненты не получают отдельные dark-классы; меняются значения семантических токенов через
+      <code class="inline">.theme-dark</code> или <code class="inline">[data-theme="dark"]</code>.</p>
+
+      <div class="coll-block">
+        <h3>Primitive / Dark Surface</h3>
+        <p class="sub">Отдельная шкала темных поверхностей нужна, чтобы не ломать существующую neutral-шкалу.</p>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="fill" style="background:var(--dark-100)"></div><div class="meta"><strong>dark/100</strong><code>#0F1114</code><small>фон приложения</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--dark-90)"></div><div class="meta"><strong>dark/90</strong><code>#15181C</code><small>глубокие поверхности</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--dark-80)"></div><div class="meta"><strong>dark/80</strong><code>#1E2228</code><small>карточки и модалки</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--dark-70)"></div><div class="meta"><strong>dark/70</strong><code>#2A3038</code><small>hover и разделители</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--dark-60)"></div><div class="meta"><strong>dark/60</strong><code>#3A424D</code><small>активные границы</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--dark-20)"></div><div class="meta"><strong>dark/20</strong><code>#C9D0DD</code><small>вторичный текст</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--dark-0)"></div><div class="meta"><strong>dark/0</strong><code>#F7F9FB</code><small>основной текст</small></div></div>
+        </div>
+      </div>
+
+      <div class="coll-block">
+        <h3>Semantic Mapping</h3>
+        <p class="sub">Названия токенов не меняются между темами; меняются только значения.</p>
+        <div class="usage-table">
+          <div class="usage-col"><h4>Text</h4>
+            <div class="usage-row"><span>text/primary</span><span class="token">dark/0</span></div>
+            <div class="usage-row"><span>text/secondary</span><span class="token">dark/20</span></div>
+            <div class="usage-row"><span>text/disabled</span><span class="token">dark/50</span></div>
+          </div>
+          <div class="usage-col"><h4>Background</h4>
+            <div class="usage-row"><span>bg/page</span><span class="token">dark/100</span></div>
+            <div class="usage-row"><span>bg/card</span><span class="token">dark/80</span></div>
+            <div class="usage-row"><span>bg/table-hover</span><span class="token">dark/70</span></div>
+          </div>
+          <div class="usage-col"><h4>Border</h4>
+            <div class="usage-row"><span>border/default</span><span class="token">dark/70</span></div>
+            <div class="usage-row"><span>border/strong</span><span class="token">dark/60</span></div>
+            <div class="usage-row"><span>border/focus</span><span class="token">#7FA0FF</span></div>
+          </div>
+          <div class="usage-col"><h4>State</h4>
+            <div class="usage-row"><span>bg/selected</span><span class="token">informative 18%</span></div>
+            <div class="usage-row"><span>bg/error</span><span class="token">error 18%</span></div>
+            <div class="usage-row"><span>bg/success</span><span class="token">positive 18%</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="theme-preview theme-dark">
+        <div class="theme-preview-head">
+          <div>
+            <h3>Рабочий экран в темной теме</h3>
+            <p>Плотный B2B-интерфейс: минимум декора, видимые разделители, спокойная иерархия.</p>
+          </div>
+          <div class="theme-toolbar">
+            <button class="btn btn-sm btn-primary"><i class="bi bi-plus-lg"></i>Создать</button>
+            <button class="btn btn-sm btn-secondary"><i class="bi bi-sliders"></i>Фильтры</button>
+            <button class="btn btn-sm btn-ghost"><i class="bi bi-three-dots"></i></button>
+          </div>
+        </div>
+
+        <div class="tabs">
+          <button class="tab active">Оборудование</button>
+          <button class="tab">Заказы</button>
+          <button class="tab">Склад</button>
+        </div>
+
+        <div class="theme-dense-table">
+          <div class="theme-dense-row head"><div>Позиция</div><div>Статус</div><div>Локация</div><div>Действие</div></div>
+          <div class="theme-dense-row"><strong>Yamaha QL5</strong><span><span class="badge badge-informative">В аренде</span></span><span>Павильон 4</span><button class="btn btn-sm btn-secondary">Открыть</button></div>
+          <div class="theme-dense-row"><strong>Shure ULXD4Q</strong><span><span class="badge badge-neutral">Резерв</span></span><span>Склад A</span><button class="btn btn-sm btn-secondary">Открыть</button></div>
+          <div class="theme-dense-row"><strong>Astera Titan Tube</strong><span><span class="kit-flag"><i></i>Комплект</span></span><span>Выездная зона</span><button class="btn btn-sm btn-secondary">Открыть</button></div>
+        </div>
+
+        <div style="margin-top:18px; display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px;">
+          <label class="field" style="margin:0; max-width:none;">
+            <span class="field-label">Поиск по инвентарю</span>
+            <span class="ctrl-wrap"><span class="affix"><i class="bi bi-search"></i></span><input class="ctrl" type="text" placeholder="Артикул или название"></span>
+          </label>
+          <label class="switch" style="align-self:end; margin-bottom:10px;"><input type="checkbox" checked><span class="track"></span>Показывать только доступное</label>
+        </div>
+      </div>
+
+      <div class="usage-grid" style="margin-top:16px;">
+        <div class="usage-card do"><div class="head">✓ Так делаем</div><p>Темная тема меняет только semantic/component tokens. Разметка компонента остается такой же, как в светлой теме.</p></div>
+        <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не создаем отдельные классы вроде <code class="inline">.button-dark</code> и не хардкодим цвета в компонентах.</p></div>
+      </div>
+    </section>
+
     <!-- TYPE -->
     <section id="type">
       <div class="tag-eyebrow">Основы</div>
@@ -419,9 +634,9 @@
         <div class="comp-title">Состояния <small>hover / focus / active — интерактивны, наведите и нажмите</small></div>
         <div class="row-flex">
           <button class="btn btn-md btn-primary">Default</button>
-          <button class="btn btn-md btn-primary" style="background:#000;">Hover ⁠— наведите сами</button>
+          <button class="btn btn-md btn-primary" style="background:var(--button-primary-bg-hover);">Hover ⁠— наведите сами</button>
           <button class="btn btn-md btn-primary" style="box-shadow:var(--shadow-focus-ring);">Focus ⁠— Tab к кнопке</button>
-          <button class="btn btn-md btn-primary" style="transform:translateY(1px); background:#000;">Active ⁠— зажмите ЛКМ</button>
+          <button class="btn btn-md btn-primary" style="transform:translateY(1px); background:var(--button-primary-bg-hover);">Active ⁠— зажмите ЛКМ</button>
           <button class="btn btn-md btn-primary" disabled>Disabled</button>
           <button class="btn btn-md btn-informative is-loading"><i class="bi bi-arrow-repeat"></i>Loading</button>
         </div>

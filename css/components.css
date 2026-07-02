@@ -17,25 +17,25 @@ body{ margin:0; font-family:var(--font-body); color:var(--text-primary); backgro
 .btn .bi{ font-size:1.05em; line-height:1; }
 
 /* variants */
-.btn-primary{ background:var(--neutral-90); color:var(--neutral-0); }
-.btn-primary:hover{ background:#000; }
-.btn-primary:active{ background:#000; transform:translateY(1px); }
+.btn-primary{ background:var(--button-primary-bg); color:var(--button-primary-fg); }
+.btn-primary:hover{ background:var(--button-primary-bg-hover); }
+.btn-primary:active{ background:var(--button-primary-bg-hover); transform:translateY(1px); }
 
-.btn-secondary{ background:var(--neutral-0); border-color:var(--neutral-70); color:var(--neutral-90); }
+.btn-secondary{ background:var(--button-secondary-bg); border-color:var(--button-secondary-border); color:var(--button-secondary-fg); }
 .btn-secondary:hover{ background:var(--bg-table-hover); }
-.btn-secondary:active{ background:var(--neutral-50); transform:translateY(1px); }
+.btn-secondary:active{ background:var(--border-default); transform:translateY(1px); }
 
-.btn-informative{ background:var(--brand-informative); color:#fff; }
+.btn-informative{ background:var(--brand-informative); color:var(--neutral-0); }
 .btn-informative:hover{ filter:brightness(.92); }
 .btn-informative:active{ filter:brightness(.85); transform:translateY(1px); }
 
-.btn-danger{ background:var(--brand-error); color:#fff; }
+.btn-danger{ background:var(--brand-error); color:var(--neutral-0); }
 .btn-danger:hover{ filter:brightness(.92); }
 .btn-danger:active{ filter:brightness(.85); transform:translateY(1px); }
 
 .btn-ghost{ background:transparent; color:var(--text-secondary); }
 .btn-ghost:hover{ background:var(--bg-table-hover); color:var(--text-primary); }
-.btn-ghost:active{ background:var(--neutral-50); transform:translateY(1px); }
+.btn-ghost:active{ background:var(--border-default); transform:translateY(1px); }
 
 .btn-link{ background:transparent; color:var(--text-link); padding-left:2px; padding-right:2px; text-decoration:underline; text-underline-offset:2px; }
 .btn-link:hover{ color:var(--brand-informative); filter:brightness(.9); }
@@ -47,7 +47,7 @@ body{ margin:0; font-family:var(--font-body); color:var(--text-primary); backgro
 /* disabled — same across all variants */
 .btn:disabled,
 .btn.is-disabled{
-  background:var(--neutral-30) !important; color:var(--text-disabled) !important;
+  background:var(--control-disabled-bg) !important; color:var(--text-disabled) !important;
   border-color:var(--border-default) !important; cursor:not-allowed; filter:none !important;
   transform:none !important; box-shadow:none !important;
 }
@@ -88,7 +88,7 @@ body{ margin:0; font-family:var(--font-body); color:var(--text-primary); backgro
    modal in context — it is not part of the shippable component.
    ========================================================= */
 .modal-stage{
-  background:repeating-linear-gradient(45deg, var(--neutral-30), var(--neutral-30) 6px, var(--bg-page) 6px, var(--bg-page) 12px);
+  background:repeating-linear-gradient(45deg, var(--bg-table-hover), var(--bg-table-hover) 6px, var(--bg-page) 6px, var(--bg-page) 12px);
   border:1px dashed var(--border-strong); border-radius:var(--radius-lg);
   padding:40px 24px; display:flex; align-items:flex-start; justify-content:center;
 }
@@ -109,10 +109,10 @@ body{ margin:0; font-family:var(--font-body); color:var(--text-primary); backgro
 
 /* ---------- badges & tags ---------- */
 .badge{ display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:700; padding:5px 12px; border-radius:var(--radius-pill); }
-.badge-informative{ background:var(--brand-informative); color:#fff; }
-.badge-neutral{ background:var(--neutral-30); color:var(--text-secondary); }
-.badge-dark{ background:var(--neutral-90); color:#fff; }
-.tag{ display:inline-flex; align-items:center; gap:5px; font-size:11.5px; color:var(--text-secondary); background:var(--neutral-30); padding:4px 10px; border-radius:var(--radius-pill); }
+.badge-informative{ background:var(--brand-informative); color:var(--neutral-0); }
+.badge-neutral{ background:var(--chip-bg); color:var(--text-secondary); }
+.badge-dark{ background:var(--surface-inverse); color:var(--surface-inverse-text); }
+.tag{ display:inline-flex; align-items:center; gap:5px; font-size:11.5px; color:var(--text-secondary); background:var(--chip-bg); padding:4px 10px; border-radius:var(--radius-pill); }
 .kit-flag{ display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--text-success); font-weight:600; }
 .kit-flag i{ width:7px; height:7px; border-radius:50%; background:var(--brand-positive); display:inline-block; }
 
@@ -129,7 +129,7 @@ body{ margin:0; font-family:var(--font-body); color:var(--text-primary); backgro
 
 /* ---------- product card ---------- */
 .pcard{ border:1px solid var(--border-default); border-radius:var(--radius-lg); background:var(--bg-card); overflow:hidden; width:240px; box-shadow:var(--shadow-card); }
-.pcard .img{ height:150px; background:linear-gradient(135deg,var(--neutral-30),var(--neutral-20)); position:relative; display:flex; align-items:center; justify-content:center; color:var(--text-disabled); font-size:12px; }
+.pcard .img{ height:150px; background:var(--media-placeholder-bg); position:relative; display:flex; align-items:center; justify-content:center; color:var(--text-disabled); font-size:12px; }
 .pcard .img .fav{ position:absolute; top:10px; right:10px; width:28px; height:28px; border-radius:50%; background:var(--bg-card); display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-rest); color:var(--brand-error); font-size:13px; }
 .pcard .img .badge{ position:absolute; top:10px; left:10px; }
 .pcard .body{ padding:14px; }
@@ -138,18 +138,18 @@ body{ margin:0; font-family:var(--font-body); color:var(--text-primary); backgro
 .pcard .seller{ display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--text-secondary); margin-bottom:4px; }
 .pcard .seller .star{ color:var(--_placeholder-warning); }
 .pcard .loc{ font-size:11.5px; color:var(--text-secondary); margin-bottom:10px; }
-.pcard .cta{ width:100%; text-align:center; padding:9px; border:1px solid var(--neutral-90); border-radius:var(--radius-md); font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; background:var(--bg-card); cursor:pointer; }
+.pcard .cta{ width:100%; text-align:center; padding:9px; border:1px solid var(--text-primary); border-radius:var(--radius-md); font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--text-primary); background:var(--bg-card); cursor:pointer; }
 
 /* ---------- footer ---------- */
-.foot{ background:var(--neutral-90); color:#B9B9B9; border-radius:var(--radius-lg); padding:32px 36px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; }
-.foot .logo{ color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; gap:8px; }
+.foot{ background:var(--surface-inverse); color:var(--surface-inverse-muted); border-radius:var(--radius-lg); padding:32px 36px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+.foot .logo{ color:var(--surface-inverse-text); font-weight:700; font-size:16px; display:flex; align-items:center; gap:8px; }
 .foot .logo img{ width:18px; height:18px; }
-.foot .col h4{ font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:#8A8A8A; margin:0 0 10px; }
-.foot .col a{ display:block; color:#B9B9B9; font-size:12.5px; text-decoration:none; margin-bottom:6px; }
-.foot .col a:hover{ color:#fff; }
+.foot .col h4{ font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:var(--surface-inverse-subtle); margin:0 0 10px; }
+.foot .col a{ display:block; color:var(--surface-inverse-muted); font-size:12.5px; text-decoration:none; margin-bottom:6px; }
+.foot .col a:hover{ color:var(--surface-inverse-text); }
 
 /* ---------- logo lockups ---------- */
-.on-dark{ background:var(--neutral-90); border-radius:var(--radius-lg); padding:24px; }
+.on-dark{ background:var(--surface-inverse); border-radius:var(--radius-lg); padding:24px; }
 .on-dark img{ filter:invert(1) brightness(2); }
 
 
@@ -182,11 +182,11 @@ body{ margin:0; font-family:var(--font-body); color:var(--text-primary); backgro
 .ctrl::placeholder{ color:var(--text-disabled); }
 .ctrl:hover{ border-color:var(--border-strong); }
 .ctrl:focus{ border-color:var(--border-focus); box-shadow:var(--shadow-focus-ring); }
-.ctrl:disabled{ background:var(--neutral-30); color:var(--text-disabled); border-color:var(--border-default); cursor:not-allowed; }
+.ctrl:disabled{ background:var(--control-disabled-bg); color:var(--text-disabled); border-color:var(--border-default); cursor:not-allowed; }
 
 .field.is-error .ctrl{ border-color:var(--border-error); }
 .field.is-error .ctrl:focus{ box-shadow:var(--shadow-error-ring); }
-.field.is-success .ctrl{ border-color:var(--brand-positive); }
+.field.is-success .ctrl{ border-color:var(--icon-success); }
 
 /* input with leading/trailing icon or affix */
 .ctrl-wrap{ position:relative; display:flex; align-items:center; }
@@ -218,10 +218,10 @@ select.ctrl{
   background:var(--bg-card); display:flex; align-items:center; justify-content:center; margin-top:1px;
   transition:all .15s var(--ease);
 }
-.check input:checked ~ .box{ background:var(--neutral-90); border-color:var(--neutral-90); }
-.check input:checked ~ .box::after{ content:""; width:5px; height:9px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg) translate(-1px,-1px); }
+.check input:checked ~ .box{ background:var(--control-checked-bg); border-color:var(--control-checked-bg); }
+.check input:checked ~ .box::after{ content:""; width:5px; height:9px; border:solid var(--control-checked-fg); border-width:0 2px 2px 0; transform:rotate(45deg) translate(-1px,-1px); }
 .check input:focus-visible ~ .box{ box-shadow:var(--shadow-focus-ring); border-color:var(--border-focus); }
-.check input:disabled ~ .box{ background:var(--neutral-30); border-color:var(--border-default); }
+.check input:disabled ~ .box{ background:var(--control-disabled-bg); border-color:var(--border-default); }
 .check.disabled{ color:var(--text-disabled); cursor:not-allowed; }
 
 /* radio */
@@ -232,19 +232,19 @@ select.ctrl{
   background:var(--bg-card); display:flex; align-items:center; justify-content:center; margin-top:1px;
   transition:all .15s var(--ease);
 }
-.radio input:checked ~ .dot{ border-color:var(--neutral-90); }
-.radio input:checked ~ .dot::after{ content:""; width:8px; height:8px; border-radius:50%; background:var(--neutral-90); }
+.radio input:checked ~ .dot{ border-color:var(--control-checked-bg); }
+.radio input:checked ~ .dot::after{ content:""; width:8px; height:8px; border-radius:50%; background:var(--control-checked-bg); }
 .radio input:focus-visible ~ .dot{ box-shadow:var(--shadow-focus-ring); }
-.radio input:disabled ~ .dot{ background:var(--neutral-30); border-color:var(--border-default); }
+.radio input:disabled ~ .dot{ background:var(--control-disabled-bg); border-color:var(--border-default); }
 
 /* switch (only pill-shaped form control — it's a physical toggle metaphor) */
 .switch{ display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:13.5px; color:var(--text-primary); user-select:none; }
 .switch input{ position:absolute; opacity:0; width:0; height:0; }
-.switch .track{ width:36px; height:20px; border-radius:var(--radius-pill); background:var(--neutral-70); position:relative; transition:background-color .15s var(--ease); flex:0 0 auto; }
-.switch .track::after{ content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; transition:transform .15s var(--ease); }
+.switch .track{ width:36px; height:20px; border-radius:var(--radius-pill); background:var(--border-strong); position:relative; transition:background-color .15s var(--ease); flex:0 0 auto; }
+.switch .track::after{ content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:var(--neutral-0); transition:transform .15s var(--ease); }
 .switch input:checked ~ .track{ background:var(--brand-informative); }
 .switch input:checked ~ .track::after{ transform:translateX(16px); }
-.switch input:disabled ~ .track{ background:var(--neutral-30); }
+.switch input:disabled ~ .track{ background:var(--control-disabled-bg); }
 
 /* form-scoped buttons (angular, 4px) */
 .form-actions{ display:flex; gap:10px; margin-top:8px; }
