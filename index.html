@@ -15,6 +15,8 @@
   nav.side{background:var(--surface-inverse); color:var(--surface-inverse-text); padding:32px 20px; position:sticky; top:0; height:100vh; overflow-y:auto;}
   nav.side .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-bottom:32px;}
   nav.side .brand img{width:16px;height:16px;}
+  .mobile-menu-toggle{display:none; align-items:center; justify-content:center; width:36px; height:36px; color:var(--surface-inverse-text); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); cursor:pointer;}
+  .mobile-menu-toggle:focus-visible{outline:none; box-shadow:var(--shadow-focus-ring);}
   .theme-toggle{width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--surface-inverse-muted); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); padding:9px 10px; margin:0 0 24px; font:inherit; font-size:12.5px; cursor:pointer; transition:background-color .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease);}
   .theme-toggle:hover{background:var(--surface-inverse-hover); color:var(--surface-inverse-text);}
   .theme-toggle:focus-visible{outline:none; box-shadow:var(--shadow-focus-ring);}
@@ -121,10 +123,16 @@
   .handoff-card{border:1px solid var(--border-default); border-radius:var(--radius-md); background:var(--bg-card); padding:16px;}
   .handoff-card h3{font-size:13px; margin:0 0 8px;}
   .handoff-card p{font-size:12.5px; color:var(--text-secondary); line-height:1.5; margin:0;}
+  .handoff-actions{display:flex; gap:10px; flex-wrap:wrap; margin-top:14px;}
   @media (max-width:960px){
     .shell{grid-template-columns:minmax(0,1fr);}
-    nav.side{position:static; height:auto;}
-    nav.side .brand{flex-wrap:wrap;}
+    nav.side{position:sticky; z-index:10; height:auto; padding:14px 20px; overflow:visible;}
+    nav.side .brand{margin:0; flex-wrap:wrap;}
+    nav.side .nav-head{display:flex; align-items:center; justify-content:space-between; gap:16px;}
+    .mobile-menu-toggle{display:inline-flex; flex:0 0 auto;}
+    nav.side .nav-panel{display:none; padding-top:16px; max-height:calc(100vh - 68px); overflow:auto;}
+    nav.side.is-open .nav-panel{display:block;}
+    .theme-toggle{margin-bottom:16px;}
     main{padding:32px 20px;}
     .font-cards, .usage-grid, .grid-form-col{grid-template-columns:1fr;}
     .type-row{display:grid; grid-template-columns:1fr; gap:6px;}
@@ -138,33 +146,38 @@
 <div class="shell">
 
   <nav class="side">
-    <div class="brand"><img src="logos/logo_2.svg" alt="" style="filter:invert(1) brightness(2);"><span class="mono">Golova</span>&nbsp;Design System</div>
-    <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
-      <span><i class="bi bi-moon"></i> Тема</span>
-      <strong data-theme-label>Светлая</strong>
-    </button>
-    <a href="#overview">Обзор</a>
-    <a href="#philosophy">Философия</a>
-    <div class="grp">Активы</div>
-    <a href="#logo">Логотип</a>
-    <div class="grp">Основы</div>
-    <a href="#color">Цвет</a>
-    <a href="#theme-dark">Темная тема</a>
-    <a href="#type">Типографика</a>
-    <a href="#space">Отступы</a>
-    <a href="#radius">Скругления</a>
-    <a href="#shadow">Тени</a>
-    <div class="grp">Компоненты</div>
-    <a href="#buttons">Кнопки</a>
-    <a href="#badges">Бейджи и теги</a>
-    <a href="#tabs">Табы</a>
-    <a href="#forms">Формы</a>
-    <a href="#modals">Модалки</a>
-    <a href="#card">Карточка товара</a>
-    <a href="#footer">Футер</a>
-    <div class="grp">Гайдлайны</div>
-    <a href="#handoff">Developer Handoff</a>
-    <a href="#usage">Как использовать</a>
+    <div class="nav-head">
+      <div class="brand"><img src="logos/logo_2.svg" alt="" style="filter:invert(1) brightness(2);"><span class="mono">Golova</span>&nbsp;Design System</div>
+      <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Открыть меню" data-menu-toggle><i class="bi bi-list"></i></button>
+    </div>
+    <div class="nav-panel" id="nav-panel" data-nav-panel>
+      <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
+        <span><i class="bi bi-moon"></i> Тема</span>
+        <strong data-theme-label>Светлая</strong>
+      </button>
+      <a href="#overview">Обзор</a>
+      <a href="#philosophy">Философия</a>
+      <div class="grp">Активы</div>
+      <a href="#logo">Логотип</a>
+      <div class="grp">Основы</div>
+      <a href="#color">Цвет</a>
+      <a href="#theme-dark">Темная тема</a>
+      <a href="#type">Типографика</a>
+      <a href="#space">Отступы</a>
+      <a href="#radius">Скругления</a>
+      <a href="#shadow">Тени</a>
+      <div class="grp">Компоненты</div>
+      <a href="#buttons">Кнопки</a>
+      <a href="#badges">Бейджи и теги</a>
+      <a href="#tabs">Табы</a>
+      <a href="#forms">Формы</a>
+      <a href="#modals">Модалки</a>
+      <a href="#card">Карточка товара</a>
+      <a href="#footer">Футер</a>
+      <div class="grp">Гайдлайны</div>
+      <a href="#handoff">Developer Handoff</a>
+      <a href="#usage">Как использовать</a>
+    </div>
   </nav>
 
   <main>
@@ -1060,6 +1073,30 @@
       </div>
 
       <div class="coll-block" style="margin-top:20px;">
+        <h3>Где взять файлы</h3>
+        <p class="sub">Разработчик или ИИ-агент может взять файлы из репозитория или скачать прямо из этой статической витрины.</p>
+        <div class="usage-table">
+          <div class="usage-col">
+            <h4>Repository</h4>
+            <div class="usage-row"><span>GitHub</span><span class="token">github.com/ulyru/design-system</span></div>
+            <div class="handoff-actions">
+              <a class="btn btn-sm btn-secondary" href="https://github.com/ulyru/design-system" target="_blank" rel="noopener"><i class="bi bi-github"></i>Открыть репозиторий</a>
+            </div>
+          </div>
+          <div class="usage-col">
+            <h4>Downloads</h4>
+            <p style="font-size:12px;color:var(--text-secondary);line-height:1.5;margin:0;">Работает при открытии через static server или из репозитория.</p>
+            <div class="handoff-actions">
+              <a class="btn btn-sm btn-secondary" href="tokens.json" download><i class="bi bi-download"></i>tokens.json</a>
+              <a class="btn btn-sm btn-secondary" href="AI_USAGE.md" download><i class="bi bi-download"></i>AI_USAGE.md</a>
+              <a class="btn btn-sm btn-secondary" href="css/tokens.css" download><i class="bi bi-download"></i>tokens.css</a>
+              <a class="btn btn-sm btn-secondary" href="css/components.css" download><i class="bi bi-download"></i>components.css</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="coll-block" style="margin-top:20px;">
         <h3>Минимальный prompt для ИИ-агента</h3>
         <p class="sub">Можно вставить в Claude Code перед созданием прототипа Golova.</p>
         <pre class="code-sample"><code>Перед началом прочитай AI_USAGE.md, tokens.json, css/tokens.css и css/components.css.
@@ -1086,9 +1123,18 @@
 </div>
 <script>
   const root = document.documentElement;
+  const sideNav = document.querySelector('.side');
+  const menuToggle = document.querySelector('[data-menu-toggle]');
   const themeToggle = document.querySelector('[data-theme-toggle]');
   const themeLabel = document.querySelector('[data-theme-label]');
   const savedTheme = localStorage.getItem('golova-theme');
+
+  function setMenu(open){
+    sideNav.classList.toggle('is-open', open);
+    menuToggle.setAttribute('aria-expanded', String(open));
+    menuToggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+    menuToggle.querySelector('.bi').className = open ? 'bi bi-x-lg' : 'bi bi-list';
+  }
 
   function setTheme(theme){
     const isDark = theme === 'dark';
@@ -1100,6 +1146,14 @@
   }
 
   setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+  menuToggle.addEventListener('click', () => {
+    setMenu(!sideNav.classList.contains('is-open'));
+  });
+  sideNav.querySelectorAll('.nav-panel a').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (window.matchMedia('(max-width: 960px)').matches) setMenu(false);
+    });
+  });
   themeToggle.addEventListener('click', () => {
     setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
   });

@@ -2,6 +2,10 @@
 
 Static reference page for the Golova design system: tokens, components, typography, logos, and usage guidance for the product ecosystem.
 
+Repository: <https://github.com/ulyru/design-system>
+
+Live version: <https://golova-ds.rubashkin.xyz>
+
 ## Open Locally
 
 - Open `index.html` directly in a browser, or serve the folder with any static server.
