@@ -1,0 +1,255 @@
+/* =========================================================
+   GOLOVA DESIGN SYSTEM — COMPONENTS
+   Built entirely on tokens.css. Import tokens.css first.
+   ========================================================= */
+
+*{box-sizing:border-box;}
+body{ margin:0; font-family:var(--font-body); color:var(--text-primary); background:var(--bg-page); }
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px;
+  border-radius:var(--radius-md); font-size:14px; font-weight:600; padding:10px 18px;
+  cursor:pointer; border:1px solid transparent; letter-spacing:.01em;
+  transition:background-color .15s var(--ease), border-color .15s var(--ease), box-shadow .15s var(--ease), transform .08s var(--ease);
+  font-family:inherit; line-height:1; white-space:nowrap;
+}
+.btn .bi{ font-size:1.05em; line-height:1; }
+
+/* variants */
+.btn-primary{ background:var(--neutral-90); color:var(--neutral-0); }
+.btn-primary:hover{ background:#000; }
+.btn-primary:active{ background:#000; transform:translateY(1px); }
+
+.btn-secondary{ background:var(--neutral-0); border-color:var(--neutral-70); color:var(--neutral-90); }
+.btn-secondary:hover{ background:var(--bg-table-hover); }
+.btn-secondary:active{ background:var(--neutral-50); transform:translateY(1px); }
+
+.btn-informative{ background:var(--brand-informative); color:#fff; }
+.btn-informative:hover{ filter:brightness(.92); }
+.btn-informative:active{ filter:brightness(.85); transform:translateY(1px); }
+
+.btn-danger{ background:var(--brand-error); color:#fff; }
+.btn-danger:hover{ filter:brightness(.92); }
+.btn-danger:active{ filter:brightness(.85); transform:translateY(1px); }
+
+.btn-ghost{ background:transparent; color:var(--text-secondary); }
+.btn-ghost:hover{ background:var(--bg-table-hover); color:var(--text-primary); }
+.btn-ghost:active{ background:var(--neutral-50); transform:translateY(1px); }
+
+.btn-link{ background:transparent; color:var(--text-link); padding-left:2px; padding-right:2px; text-decoration:underline; text-underline-offset:2px; }
+.btn-link:hover{ color:var(--brand-informative); filter:brightness(.9); }
+.btn-link:active{ transform:translateY(1px); }
+
+/* focus (keyboard) */
+.btn:focus-visible{ outline:none; box-shadow:var(--shadow-focus-ring); }
+
+/* disabled — same across all variants */
+.btn:disabled,
+.btn.is-disabled{
+  background:var(--neutral-30) !important; color:var(--text-disabled) !important;
+  border-color:var(--border-default) !important; cursor:not-allowed; filter:none !important;
+  transform:none !important; box-shadow:none !important;
+}
+.btn-link:disabled, .btn-link.is-disabled{ background:transparent !important; text-decoration:none; }
+
+/* loading */
+.btn.is-loading{ pointer-events:none; opacity:.85; position:relative; }
+.btn.is-loading .bi{ animation:btn-spin .7s linear infinite; }
+@keyframes btn-spin{ to{ transform:rotate(360deg); } }
+
+/* sizes */
+.btn-sm{ padding:6px 12px; font-size:12.5px; gap:6px; border-radius:var(--radius-sm); }
+.btn-md{ padding:10px 18px; font-size:14px; gap:8px; }
+.btn-lg{ padding:13px 22px; font-size:15px; gap:10px; }
+
+/* icon-only */
+.btn-icon-only{ padding:0; }
+.btn-icon-only.btn-sm{ width:32px; height:32px; }
+.btn-icon-only.btn-md{ width:40px; height:40px; }
+.btn-icon-only.btn-lg{ width:48px; height:48px; }
+
+/* round modifier — for toolbar icon buttons (gear, chevrons, FAB "+") */
+.btn-round{ border-radius:50%; }
+
+/* button group */
+.btn-group{ display:inline-flex; }
+.btn-group .btn{ border-radius:0; }
+.btn-group .btn.btn-secondary + .btn.btn-secondary{ border-left-width:0; }
+.btn-group .btn:first-child{ border-top-left-radius:var(--radius-md); border-bottom-left-radius:var(--radius-md); }
+.btn-group .btn:last-child{ border-top-right-radius:var(--radius-md); border-bottom-right-radius:var(--radius-md); }
+.btn-group .btn.active{ background:var(--bg-selected); color:var(--text-link); border-color:var(--border-focus); position:relative; z-index:1; }
+
+
+/* =========================================================
+   MODAL
+   Angular header/footer, radius-lg body (same language as cards).
+   .modal-stage is a documentation-only wrapper to preview the
+   modal in context — it is not part of the shippable component.
+   ========================================================= */
+.modal-stage{
+  background:repeating-linear-gradient(45deg, var(--neutral-30), var(--neutral-30) 6px, var(--bg-page) 6px, var(--bg-page) 12px);
+  border:1px dashed var(--border-strong); border-radius:var(--radius-lg);
+  padding:40px 24px; display:flex; align-items:flex-start; justify-content:center;
+}
+.modal{ background:var(--bg-card); border-radius:var(--radius-lg); box-shadow:var(--shadow-float); width:100%; max-width:440px; overflow:hidden; }
+.modal.modal-lg{ max-width:620px; }
+.modal-header{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:18px 20px; border-bottom:1px solid var(--border-default); }
+.modal-header h3{ font-size:16px; margin:0 0 2px; font-weight:700; color:var(--text-primary); }
+.modal-header p{ font-size:12.5px; margin:0; color:var(--text-secondary); }
+.modal-body{ padding:20px; max-height:60vh; overflow:auto; }
+.modal-footer{ display:flex; justify-content:flex-end; gap:10px; padding:16px 20px; border-top:1px solid var(--border-default); background:var(--bg-page); }
+.modal-footer.spread{ justify-content:space-between; }
+.modal-close{ flex:0 0 auto; }
+
+/* compact row used inside table-settings style modals */
+.col-toggle-row{ display:flex; align-items:center; justify-content:space-between; padding:9px 4px; border-bottom:1px solid var(--border-default); }
+.col-toggle-row:last-child{ border-bottom:none; }
+.col-toggle-row .drag{ color:var(--icon-disabled); margin-right:8px; cursor:grab; }
+
+/* ---------- badges & tags ---------- */
+.badge{ display:inline-flex; align-items:center; gap:4px; font-size:11.5px; font-weight:700; padding:5px 12px; border-radius:var(--radius-pill); }
+.badge-informative{ background:var(--brand-informative); color:#fff; }
+.badge-neutral{ background:var(--neutral-30); color:var(--text-secondary); }
+.badge-dark{ background:var(--neutral-90); color:#fff; }
+.tag{ display:inline-flex; align-items:center; gap:5px; font-size:11.5px; color:var(--text-secondary); background:var(--neutral-30); padding:4px 10px; border-radius:var(--radius-pill); }
+.kit-flag{ display:inline-flex; align-items:center; gap:5px; font-size:12px; color:var(--text-success); font-weight:600; }
+.kit-flag i{ width:7px; height:7px; border-radius:50%; background:var(--brand-positive); display:inline-block; }
+
+/* ---------- tabs ---------- */
+.tabs{ display:flex; gap:28px; border-bottom:1px solid var(--border-default); }
+.tab{ padding:0 0 12px; font-size:14px; color:var(--text-secondary); cursor:pointer; border-bottom:2px solid transparent; font-weight:500; background:none; border-top:none; border-left:none; border-right:none; font-family:inherit; }
+.tab.active{ color:var(--text-primary); font-weight:700; border-bottom-color:var(--text-primary); }
+
+/* ---------- pill input (search / category filter) ---------- */
+.pill-input{ display:flex; align-items:center; justify-content:space-between; border:1px solid var(--border-default); border-radius:var(--radius-pill); padding:8px 8px 8px 20px; background:var(--bg-card); }
+.pill-input .txt strong{ display:block; font-size:12px; color:var(--text-primary); }
+.pill-input .txt small{ color:var(--text-secondary); font-size:12.5px; }
+.icon-circle{ width:38px; height:38px; border-radius:50%; border:1px solid var(--border-default); display:flex; align-items:center; justify-content:center; background:var(--bg-card); flex:0 0 auto; color:var(--icon-secondary); }
+
+/* ---------- product card ---------- */
+.pcard{ border:1px solid var(--border-default); border-radius:var(--radius-lg); background:var(--bg-card); overflow:hidden; width:240px; box-shadow:var(--shadow-card); }
+.pcard .img{ height:150px; background:linear-gradient(135deg,var(--neutral-30),var(--neutral-20)); position:relative; display:flex; align-items:center; justify-content:center; color:var(--text-disabled); font-size:12px; }
+.pcard .img .fav{ position:absolute; top:10px; right:10px; width:28px; height:28px; border-radius:50%; background:var(--bg-card); display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-rest); color:var(--brand-error); font-size:13px; }
+.pcard .img .badge{ position:absolute; top:10px; left:10px; }
+.pcard .body{ padding:14px; }
+.pcard .title{ font-size:13.5px; font-weight:600; margin:0 0 6px; color:var(--text-primary); }
+.pcard .price{ font-size:16px; font-weight:700; margin:0 0 8px; color:var(--text-primary); }
+.pcard .seller{ display:flex; align-items:center; gap:6px; font-size:11.5px; color:var(--text-secondary); margin-bottom:4px; }
+.pcard .seller .star{ color:var(--_placeholder-warning); }
+.pcard .loc{ font-size:11.5px; color:var(--text-secondary); margin-bottom:10px; }
+.pcard .cta{ width:100%; text-align:center; padding:9px; border:1px solid var(--neutral-90); border-radius:var(--radius-md); font-size:11.5px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; background:var(--bg-card); cursor:pointer; }
+
+/* ---------- footer ---------- */
+.foot{ background:var(--neutral-90); color:#B9B9B9; border-radius:var(--radius-lg); padding:32px 36px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:24px; }
+.foot .logo{ color:#fff; font-weight:700; font-size:16px; display:flex; align-items:center; gap:8px; }
+.foot .logo img{ width:18px; height:18px; }
+.foot .col h4{ font-size:10.5px; text-transform:uppercase; letter-spacing:.06em; color:#8A8A8A; margin:0 0 10px; }
+.foot .col a{ display:block; color:#B9B9B9; font-size:12.5px; text-decoration:none; margin-bottom:6px; }
+.foot .col a:hover{ color:#fff; }
+
+/* ---------- logo lockups ---------- */
+.on-dark{ background:var(--neutral-90); border-radius:var(--radius-lg); padding:24px; }
+.on-dark img{ filter:invert(1) brightness(2); }
+
+
+/* =========================================================
+   FORM COMPONENTS
+   Angular: every form control uses --radius-form (4px), flat,
+   no pill shapes except the switch track (functionally a toggle).
+   ========================================================= */
+
+.field{ display:flex; flex-direction:column; gap:6px; margin-bottom:20px; max-width:360px; }
+.field-label{ font-size:13px; font-weight:600; color:var(--text-primary); display:flex; align-items:center; gap:4px; }
+.field-label .req{ color:var(--text-error); }
+.field-hint{ font-size:12px; color:var(--text-secondary); }
+.field-error-text{ font-size:12px; color:var(--text-error); display:flex; align-items:center; gap:4px; }
+.field-success-text{ font-size:12px; color:var(--text-success); display:flex; align-items:center; gap:4px; }
+
+/* base control chrome shared by input / textarea / select */
+.ctrl{
+  width:100%;
+  font-family:var(--font-body);
+  font-size:14px;
+  color:var(--text-primary);
+  background:var(--bg-card);
+  border:1px solid var(--border-default);
+  border-radius:var(--radius-form);
+  padding:10px 12px;
+  transition:border-color .15s var(--ease), box-shadow .15s var(--ease), background-color .15s var(--ease);
+  outline:none;
+}
+.ctrl::placeholder{ color:var(--text-disabled); }
+.ctrl:hover{ border-color:var(--border-strong); }
+.ctrl:focus{ border-color:var(--border-focus); box-shadow:var(--shadow-focus-ring); }
+.ctrl:disabled{ background:var(--neutral-30); color:var(--text-disabled); border-color:var(--border-default); cursor:not-allowed; }
+
+.field.is-error .ctrl{ border-color:var(--border-error); }
+.field.is-error .ctrl:focus{ box-shadow:var(--shadow-error-ring); }
+.field.is-success .ctrl{ border-color:var(--brand-positive); }
+
+/* input with leading/trailing icon or affix */
+.ctrl-wrap{ position:relative; display:flex; align-items:center; }
+.ctrl-wrap .ctrl{ padding-left:36px; }
+.ctrl-wrap .ctrl.has-suffix{ padding-right:36px; }
+.ctrl-wrap .affix{
+  position:absolute; left:10px; color:var(--icon-secondary); display:flex; align-items:center; pointer-events:none;
+}
+.ctrl-wrap .affix.suffix{ left:auto; right:10px; pointer-events:auto; cursor:pointer; }
+
+textarea.ctrl{ resize:vertical; min-height:88px; font-family:var(--font-body); }
+
+/* select */
+select.ctrl{
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6' fill='none'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23727272' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+  padding-right:32px;
+  cursor:pointer;
+}
+
+/* checkbox */
+.check{ display:flex; align-items:flex-start; gap:8px; cursor:pointer; font-size:13.5px; color:var(--text-primary); user-select:none; }
+.check input{ position:absolute; opacity:0; width:0; height:0; }
+.check .box{
+  width:18px; height:18px; flex:0 0 auto; border:1px solid var(--border-strong); border-radius:4px;
+  background:var(--bg-card); display:flex; align-items:center; justify-content:center; margin-top:1px;
+  transition:all .15s var(--ease);
+}
+.check input:checked ~ .box{ background:var(--neutral-90); border-color:var(--neutral-90); }
+.check input:checked ~ .box::after{ content:""; width:5px; height:9px; border:solid #fff; border-width:0 2px 2px 0; transform:rotate(45deg) translate(-1px,-1px); }
+.check input:focus-visible ~ .box{ box-shadow:var(--shadow-focus-ring); border-color:var(--border-focus); }
+.check input:disabled ~ .box{ background:var(--neutral-30); border-color:var(--border-default); }
+.check.disabled{ color:var(--text-disabled); cursor:not-allowed; }
+
+/* radio */
+.radio{ display:flex; align-items:flex-start; gap:8px; cursor:pointer; font-size:13.5px; color:var(--text-primary); user-select:none; }
+.radio input{ position:absolute; opacity:0; width:0; height:0; }
+.radio .dot{
+  width:18px; height:18px; flex:0 0 auto; border:1px solid var(--border-strong); border-radius:50%;
+  background:var(--bg-card); display:flex; align-items:center; justify-content:center; margin-top:1px;
+  transition:all .15s var(--ease);
+}
+.radio input:checked ~ .dot{ border-color:var(--neutral-90); }
+.radio input:checked ~ .dot::after{ content:""; width:8px; height:8px; border-radius:50%; background:var(--neutral-90); }
+.radio input:focus-visible ~ .dot{ box-shadow:var(--shadow-focus-ring); }
+.radio input:disabled ~ .dot{ background:var(--neutral-30); border-color:var(--border-default); }
+
+/* switch (only pill-shaped form control — it's a physical toggle metaphor) */
+.switch{ display:inline-flex; align-items:center; gap:8px; cursor:pointer; font-size:13.5px; color:var(--text-primary); user-select:none; }
+.switch input{ position:absolute; opacity:0; width:0; height:0; }
+.switch .track{ width:36px; height:20px; border-radius:var(--radius-pill); background:var(--neutral-70); position:relative; transition:background-color .15s var(--ease); flex:0 0 auto; }
+.switch .track::after{ content:""; position:absolute; top:2px; left:2px; width:16px; height:16px; border-radius:50%; background:#fff; transition:transform .15s var(--ease); }
+.switch input:checked ~ .track{ background:var(--brand-informative); }
+.switch input:checked ~ .track::after{ transform:translateX(16px); }
+.switch input:disabled ~ .track{ background:var(--neutral-30); }
+
+/* form-scoped buttons (angular, 4px) */
+.form-actions{ display:flex; gap:10px; margin-top:8px; }
+.btn-form{ border-radius:var(--radius-form); }
+
+/* fieldset grouping */
+.fieldset{ border:1px solid var(--border-default); border-radius:var(--radius-form); padding:16px; margin-bottom:20px; }
+.fieldset legend{ font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.05em; color:var(--text-secondary); padding:0 6px; }

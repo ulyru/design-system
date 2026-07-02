@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golova — Design System</title>
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
+<style>
+  .shell{display:grid; grid-template-columns:240px 1fr; min-height:100vh;}
+  nav.side{background:var(--neutral-90); color:#fff; padding:32px 20px; position:sticky; top:0; height:100vh; overflow-y:auto;}
+  nav.side .brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;margin-bottom:32px;}
+  nav.side .brand img{width:16px;height:16px;}
+  nav.side a{display:block; color:#B9B9B9; text-decoration:none; font-size:13.5px; padding:9px 10px; border-radius:4px; margin-bottom:2px; transition:all .15s var(--ease);}
+  nav.side a:hover{background:#454545; color:#fff;}
+  nav.side .grp{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:#8A8A8A; margin:20px 0 8px; font-weight:700;}
+  main{padding:56px 64px 120px; max-width:1180px;}
+  section{margin-bottom:80px; scroll-margin-top:24px;}
+  section h2{font-size:22px; margin:0 0 4px; letter-spacing:-.01em;}
+  section .desc{color:var(--text-secondary); font-size:14px; margin:0 0 28px; max-width:680px;}
+  .tag-eyebrow{display:inline-block; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; color:var(--brand-informative); background:var(--bg-selected); padding:4px 10px; border-radius:var(--radius-pill); margin-bottom:10px;}
+  .cover{background:var(--neutral-90); color:#fff; border-radius:var(--radius-xl); padding:56px 56px 48px; margin-bottom:64px;}
+  .cover-brand{ display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+  .cover h1{font-size:40px; margin:0; letter-spacing:-.01em; font-family:var(--font-mono); font-weight:400; color:#fff;}
+  .cover p{color:#C7C7C7; font-size:15px; max-width:600px; margin:0; line-height:1.6;}
+  .swatch-grid{display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr)); gap:14px;}
+  .swatch{border-radius:var(--radius-md); overflow:hidden; border:1px solid var(--border-default); background:var(--bg-card);}
+  .swatch .fill{height:64px;}
+  .swatch .meta{padding:10px 12px;}
+  .swatch .meta strong{display:block; font-size:12.5px; margin-bottom:1px;}
+  .swatch .meta code{font-size:11px; color:var(--text-secondary);}
+  .swatch .meta small{display:block; margin-top:3px; font-size:11px; color:var(--text-secondary); line-height:1.4;}
+  .group-title{font-size:14px; font-weight:700; margin:28px 0 12px;}
+  .group-title:first-child{margin-top:0;}
+  .coll-block{border:1px solid var(--border-default); border-radius:var(--radius-lg); background:var(--bg-card); padding:24px; margin-bottom:20px;}
+  .coll-block h3{font-size:15px; margin:0 0 4px;}
+  .coll-block .sub{font-size:12.5px; color:var(--text-secondary); margin:0 0 20px;}
+  .usage-table{display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:16px;}
+  .usage-col{border:1px solid var(--border-default); border-radius:var(--radius-md); padding:16px;}
+  .usage-col h4{font-size:13px; margin:0 0 12px;}
+  .usage-row{display:flex; justify-content:space-between; font-size:12.5px; padding:6px 0; border-bottom:1px dashed var(--border-default); color:var(--text-primary);}
+  .usage-row:last-child{border-bottom:none;}
+  .usage-row span.token{color:var(--text-secondary); font-size:11.5px;}
+  .comp-block{border:1px solid var(--border-default); border-radius:var(--radius-lg); background:var(--bg-card); padding:28px; margin-bottom:20px;}
+  .comp-block .comp-title{font-size:13px; font-weight:700; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between;}
+  .comp-block .comp-title small{font-weight:400; color:var(--text-secondary); font-family:var(--font-mono); font-size:11px;}
+  .row-flex{display:flex; gap:12px; flex-wrap:wrap; align-items:center;}
+  .row-flex-start{display:flex; gap:32px; flex-wrap:wrap; align-items:flex-start;}
+  .logo-card{flex:1; min-width:260px;}
+  .logo-card .frame{display:flex; align-items:center; justify-content:center; height:100px;}
+  .logo-card p{font-size:12px; color:var(--text-secondary); margin:14px 0 0; line-height:1.5;}
+  .grid-form-col{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  .usage-grid{display:grid; grid-template-columns:1fr 1fr; gap:16px;}
+  .usage-card{border-radius:var(--radius-lg); padding:20px; border:1px solid var(--border-default);}
+  .usage-card.do{background:var(--bg-success); border-color:#BFEAD1;}
+  .usage-card.dont{background:var(--bg-error); border-color:#F4C6C6;}
+  .usage-card .head{font-size:12px; font-weight:700; margin-bottom:6px;}
+  .usage-card.do .head{color:#178A48;}
+  .usage-card.dont .head{color:#C23030;}
+  .usage-card p{font-size:12.5px; color:var(--text-primary); margin:0; line-height:1.5;}
+  code.inline{background:var(--neutral-30); padding:2px 6px; border-radius:4px; font-size:12px; font-family:var(--font-mono);}
+  .font-cards{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:24px;}
+  .font-card{border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:22px; background:var(--bg-card);}
+  .font-card .role{font-size:11px; text-transform:uppercase; letter-spacing:.06em; color:var(--brand-informative); font-weight:700; margin-bottom:10px;}
+  .font-card .big{font-size:28px; margin-bottom:6px;}
+  .font-card .name{font-size:13px; color:var(--text-primary); font-weight:600;}
+  .font-card .use{font-size:12.5px; color:var(--text-secondary); margin-top:4px;}
+  .type-row{display:flex; align-items:baseline; gap:24px; padding:18px 0; border-bottom:1px solid var(--border-default);}
+  .type-row:last-child{border-bottom:none;}
+  .type-row .label{width:120px; flex:0 0 auto; font-size:11.5px; color:var(--text-secondary);}
+  .type-row .spec{flex:0 0 90px; font-size:11px; color:var(--text-secondary);}
+  .type-row .sample{flex:1;}
+  .scale-grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(96px,1fr)); gap:14px;}
+  .scale-item{text-align:center;}
+  .scale-item .box{background:var(--brand-informative); border-radius:2px; margin:0 auto 8px;}
+  .scale-item span{font-size:11.5px; color:var(--text-secondary); display:block;}
+  .radius-grid{display:flex; gap:16px; flex-wrap:wrap;}
+  .radius-item{text-align:center;}
+  .radius-item .box{width:76px; height:76px; background:var(--bg-card); border:2px solid var(--brand-informative); margin-bottom:8px;}
+  .radius-item span{font-size:11.5px; color:var(--text-secondary);}
+  @media (max-width:960px){
+    .shell{grid-template-columns:1fr;}
+    nav.side{position:static; height:auto;}
+    main{padding:32px 20px;}
+    .font-cards, .usage-grid, .grid-form-col{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <nav class="side">
+    <div class="brand"><img src="logos/logo_2.svg" alt="" style="filter:invert(1) brightness(2);"><span class="mono">Golova</span>&nbsp;Design System</div>
+    <a href="#overview">Обзор</a>
+    <div class="grp">Активы</div>
+    <a href="#logo">Логотип</a>
+    <div class="grp">Основы</div>
+    <a href="#color">Цвет</a>
+    <a href="#type">Типографика</a>
+    <a href="#space">Отступы</a>
+    <a href="#radius">Скругления</a>
+    <a href="#shadow">Тени</a>
+    <div class="grp">Компоненты</div>
+    <a href="#buttons">Кнопки</a>
+    <a href="#badges">Бейджи и теги</a>
+    <a href="#tabs">Табы</a>
+    <a href="#forms">Формы</a>
+    <a href="#modals">Модалки</a>
+    <a href="#card">Карточка товара</a>
+    <a href="#footer">Футер</a>
+    <div class="grp">Гайдлайны</div>
+    <a href="#usage">Как использовать</a>
+  </nav>
+
+  <main>
+
+    <section id="overview">
+      <div class="cover">
+        <div class="tag-eyebrow" style="background:rgba(255,255,255,.1); color:#fff;">Design System v2.0</div>
+        <div class="cover-brand">
+          <svg width="40" height="40" viewBox="0 0 45 45" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M29.8966 11.3686C32.2307 11.3686 34.1231 9.49515 34.1231 7.18421C34.1231 4.8734 32.2307 3 29.8966 3C27.5623 3 25.6699 4.8734 25.6699 7.18421C25.6699 9.49515 27.5623 11.3686 29.8966 11.3686Z" fill="#fff" fill-opacity="0.95" stroke="#fff" stroke-width="3"/>
+            <path d="M22.2891 26.0157C24.6233 26.0157 26.5156 24.1424 26.5156 21.8315C26.5156 19.5207 24.6233 17.6472 22.2891 17.6472C19.9549 17.6472 18.0625 19.5207 18.0625 21.8315C18.0625 24.1424 19.9549 26.0157 22.2891 26.0157Z" fill="#fff" stroke="#fff" stroke-width="3"/>
+            <path d="M38.7734 26.0157C41.1077 26.0157 42.9999 24.1424 42.9999 21.8315C42.9999 19.5207 41.1077 17.6472 38.7734 17.6472C36.4391 17.6472 34.5469 19.5207 34.5469 21.8315C34.5469 24.1424 36.4391 26.0157 38.7734 26.0157Z" fill="#fff" stroke="#fff" stroke-width="3"/>
+            <path d="M29.8966 41.0816C32.2307 41.0816 34.1231 39.2083 34.1231 36.8974C34.1231 34.5864 32.2307 32.7131 29.8966 32.7131C27.5623 32.7131 25.6699 34.5864 25.6699 36.8974C25.6699 39.2083 27.5623 41.0816 29.8966 41.0816Z" fill="#fff" stroke="#fff" stroke-width="3"/>
+            <path d="M14.2578 41.5C16.5921 41.5 18.4843 39.6265 18.4843 37.3157C18.4843 35.0048 16.5921 33.1313 14.2578 33.1313C11.9235 33.1313 10.0312 35.0048 10.0312 37.3157C10.0312 39.6265 11.9235 41.5 14.2578 41.5Z" fill="#fff" stroke="#fff" stroke-width="3"/>
+            <path d="M6.22653 26.0157C8.56077 26.0157 10.4531 24.1424 10.4531 21.8315C10.4531 19.5207 8.56077 17.6472 6.22653 17.6472C3.89228 17.6472 2 19.5207 2 21.8315C2 24.1424 3.89228 26.0157 6.22653 26.0157Z" fill="#fff" stroke="#fff" stroke-width="3"/>
+            <path d="M14.2578 11.3686C16.5921 11.3686 18.4843 9.49515 18.4843 7.18421C18.4843 4.8734 16.5921 3 14.2578 3C11.9235 3 10.0312 4.8734 10.0312 7.18421C10.0312 9.49515 11.9235 11.3686 14.2578 11.3686Z" fill="#fff" stroke="#fff" stroke-width="3"/>
+            <path d="M28.1464 11.1635L23.9199 18.2768" stroke="#fff" stroke-width="3"/>
+            <path d="M20.1231 25.8016L15.8965 33.3335" stroke="#fff" stroke-width="3"/>
+            <path d="M34.9697 21.832H26.5166" stroke="#fff" stroke-width="3"/>
+            <path d="M18.4853 21.832H10.0322" stroke="#fff" stroke-width="3"/>
+            <path d="M15.8955 10.7448L20.0104 17.9219" stroke="#fff" stroke-width="3"/>
+            <path d="M23.9268 25.8105L28.0417 32.9877" stroke="#fff" stroke-width="3"/>
+          </svg>
+          <h1 class="mono">Golova</h1>
+        </div>
+        <p>Единая система для SaaS-продукта Golova и всей экосистемы связанных продуктов.
+        Три уровня токенов — примитивы → семантика → компоненты — так изменения палитры
+        не ломают компоненты, собранные поверх неё.</p>
+      </div>
+      <p class="desc">Структура: <code class="inline">css/tokens.css</code> — примитивы и семантические токены
+      (цвет, шрифты, отступы, радиусы, тени), <code class="inline">css/components.css</code> — компоненты
+      поверх токенов, включая полный набор форм. <code class="inline">fonts/</code> и <code class="inline">logos/</code> —
+      фирменные ассеты. Шрифты: <strong>Roboto Flex</strong> — весь UI-текст, <strong>PragmataPro</strong> — только
+      логотип и декоративные акценты.</p>
+    </section>
+
+    <!-- LOGO -->
+    <section id="logo">
+      <div class="tag-eyebrow">Активы</div>
+      <h2>Логотип</h2>
+      <p class="desc">Два лока: корпоративный «golova» и продуктовый. Знак один и тот же во всех вариантах —
+      точка узнавания бренда, менять начертание или пропорции нельзя.</p>
+      <div class="row-flex" style="align-items:stretch;">
+        <div class="comp-block logo-card">
+          <div class="comp-title">Знак <small>logos/logo_2.svg · 45×45</small></div>
+          <div class="frame"><img src="logos/logo_2.svg" alt="Golova mark" style="width:52px;height:52px;"></div>
+          <p>Фавикон, аватар в соцсетях, иконка приложения, свёрнутое меню.</p>
+        </div>
+        <div class="comp-block logo-card" style="flex:2;">
+          <div class="comp-title">Корпоративный лок «golova» <small>logos/logo_1.svg · 283×101</small></div>
+          <div class="frame"><img src="logos/logo_1.svg" alt="Golova logo" style="height:44px;"></div>
+          <p>Основной лок для всей экосистемы продуктов Golova.</p>
+        </div>
+        <div class="comp-block logo-card" style="flex:2;">
+          <div class="comp-title">Продуктовый лок <small>logos/logo_market.svg · 296×63</small></div>
+          <div class="frame"><img src="logos/logo_market.svg" alt="Golova product logo" style="height:36px;"></div>
+          <p>Внутри конкретного продукта экосистемы — в шапке, письмах, счетах.</p>
+        </div>
+      </div>
+      <div class="comp-block" style="margin-top:20px;">
+        <div class="comp-title">На тёмном фоне <small>класс .on-dark инвертирует чёрные SVG</small></div>
+        <div class="on-dark row-flex" style="gap:48px;">
+          <img src="logos/logo_2.svg" style="width:36px;height:36px;">
+          <img src="logos/logo_1.svg" style="height:34px;">
+          <img src="logos/logo_market.svg" style="height:28px;">
+        </div>
+      </div>
+      <div style="margin-top:16px; background:var(--bg-selected); border:1px solid var(--border-focus); border-radius:var(--radius-md); padding:16px 20px; font-size:12.5px; color:var(--text-primary); line-height:1.6;">
+        Шрифт <strong>PragmataPro Mono</strong> — <code class="inline">fonts/PragmataProMono-Regular.woff2</code>.
+        Веб-лицензия FSD: один сайт, лимит 10 000 просмотров/мес. Загружен только Regular.
+      </div>
+    </section>
+
+    <!-- COLOR -->
+    <section id="color">
+      <div class="tag-eyebrow">Основы</div>
+      <h2>Цвет</h2>
+      <p class="desc">Трёхуровневая модель: примитивы задают физические значения, семантика называет их по
+      роли в интерфейсе, компоненты используют только семантику — никогда не примитивы напрямую.</p>
+
+      <div class="coll-block">
+        <h3>Collection 1 · Primitive / Neutral</h3>
+        <p class="sub">Базовая графитовая шкала. Шаги неравномерные (90→80→70→50→30→20→0) — так и задумано.</p>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="fill" style="background:var(--neutral-90)"></div><div class="meta"><strong>neutral/90</strong><code>#333333</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--neutral-80)"></div><div class="meta"><strong>neutral/80</strong><code>#727272</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--neutral-70)"></div><div class="meta"><strong>neutral/70</strong><code>#DADADA</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--neutral-50)"></div><div class="meta"><strong>neutral/50</strong><code>#E1E5EF</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--neutral-30)"></div><div class="meta"><strong>neutral/30</strong><code>#F0F2F7</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--neutral-20)"></div><div class="meta"><strong>neutral/20</strong><code>#F7F9FB</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--neutral-0); border-bottom:1px solid var(--border-default);"></div><div class="meta"><strong>neutral/0</strong><code>#FFFFFF</code></div></div>
+        </div>
+      </div>
+
+      <div class="coll-block">
+        <h3>Collection 2 · Primitive / Brand</h3>
+        <p class="sub">Основные и их soft-варианты (10% opacity) для подложек.</p>
+        <div class="group-title" style="margin-top:0;">Основные</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="fill" style="background:var(--brand-informative)"></div><div class="meta"><strong>brand/informative</strong><code>#4976F4</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--brand-positive)"></div><div class="meta"><strong>brand/positive</strong><code>#38B000</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--brand-error)"></div><div class="meta"><strong>brand/error</strong><code>#E63A1E</code></div></div>
+        </div>
+        <div class="group-title">Soft (10% opacity)</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="fill" style="background:var(--brand-informative-soft)"></div><div class="meta"><strong>brand/informative-soft</strong><code>rgba(73,118,244,.10)</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--brand-positive-soft)"></div><div class="meta"><strong>brand/positive-soft</strong><code>rgba(56,176,0,.10)</code></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--brand-error-soft)"></div><div class="meta"><strong>brand/error-soft</strong><code>rgba(230,58,30,.10)</code></div></div>
+        </div>
+      </div>
+
+      <div class="coll-block">
+        <h3>Collection 3 · Semantic</h3>
+        <p class="sub">Роль → примитив. Компоненты ссылаются только на эти имена.</p>
+
+        <div class="group-title" style="margin-top:0;">Text</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="fill" style="background:var(--text-primary)"></div><div class="meta"><strong>text/primary</strong><small>→ neutral/90</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--text-secondary)"></div><div class="meta"><strong>text/secondary</strong><small>→ neutral/80</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--text-disabled)"></div><div class="meta"><strong>text/disabled</strong><small>→ neutral/70</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--text-inverse); border-bottom:1px solid var(--border-default);"></div><div class="meta"><strong>text/inverse</strong><small>→ neutral/0</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--text-link)"></div><div class="meta"><strong>text/link</strong><small>→ brand/informative</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--text-error)"></div><div class="meta"><strong>text/error</strong><small>→ brand/error</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--text-success)"></div><div class="meta"><strong>text/success</strong><small>→ brand/positive</small></div></div>
+        </div>
+
+        <div class="group-title">Background</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="fill" style="background:var(--bg-page)"></div><div class="meta"><strong>bg/page</strong><small>→ neutral/20</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--bg-card); border-bottom:1px solid var(--border-default);"></div><div class="meta"><strong>bg/card</strong><small>→ neutral/0</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--bg-table-hover)"></div><div class="meta"><strong>bg/table-hover</strong><small>→ neutral/30</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--bg-selected)"></div><div class="meta"><strong>bg/selected</strong><small>→ brand/informative-soft</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--bg-error)"></div><div class="meta"><strong>bg/error</strong><small>→ brand/error-soft</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--bg-success)"></div><div class="meta"><strong>bg/success</strong><small>→ brand/positive-soft</small></div></div>
+        </div>
+
+        <div class="group-title">Border</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="fill" style="background:var(--border-default)"></div><div class="meta"><strong>border/default</strong><small>→ neutral/50</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--border-strong)"></div><div class="meta"><strong>border/strong</strong><small>→ neutral/70</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--border-focus)"></div><div class="meta"><strong>border/focus</strong><small>→ brand/informative</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--border-error)"></div><div class="meta"><strong>border/error</strong><small>→ brand/error</small></div></div>
+        </div>
+
+        <div class="group-title">Icon</div>
+        <div class="swatch-grid">
+          <div class="swatch"><div class="fill" style="background:var(--icon-primary)"></div><div class="meta"><strong>icon/primary</strong><small>→ neutral/90</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--icon-secondary)"></div><div class="meta"><strong>icon/secondary</strong><small>→ neutral/80</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--icon-disabled)"></div><div class="meta"><strong>icon/disabled</strong><small>→ neutral/70</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--icon-informative)"></div><div class="meta"><strong>icon/informative</strong><small>→ brand/informative</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--icon-error)"></div><div class="meta"><strong>icon/error</strong><small>→ brand/error</small></div></div>
+          <div class="swatch"><div class="fill" style="background:var(--icon-success)"></div><div class="meta"><strong>icon/success</strong><small>→ brand/positive</small></div></div>
+        </div>
+      </div>
+
+      <div style="margin-top:16px; background:var(--bg-error); border:1px solid var(--border-error); border-radius:var(--radius-md); padding:14px 18px; font-size:12.5px; color:var(--text-primary); line-height:1.6;">
+        В присланной палитре нет отдельного <code class="inline">warning/*</code> токена — он нужен минимум для звезды рейтинга
+        в карточке товара. Сейчас используется локальный placeholder <code class="inline">#F5A623</code>, не входящий
+        в официальные коллекции. Стоит добавить <code class="inline">brand/warning</code> в Collection 2, когда будете
+        расширять палитру.
+      </div>
+
+      <div class="coll-block" style="margin-top:20px;">
+        <h3>Применение цветов</h3>
+        <p class="sub">Как семантика ложится на конкретные UI-паттерны.</p>
+        <div class="usage-table">
+          <div class="usage-col"><h4>Текст</h4>
+            <div class="usage-row">Основной текст <span class="token">neutral/90</span></div>
+            <div class="usage-row">Вторичный текст <span class="token">neutral/80</span></div>
+            <div class="usage-row">Disabled текст <span class="token">neutral/70</span></div>
+          </div>
+          <div class="usage-col"><h4>Фоны</h4>
+            <div class="usage-row">Фон страницы <span class="token">neutral/20</span></div>
+            <div class="usage-row">Карточки / модалки <span class="token">neutral/0</span></div>
+            <div class="usage-row">Hover строк таблицы <span class="token">neutral/30</span></div>
+          </div>
+          <div class="usage-col"><h4>Границы</h4>
+            <div class="usage-row">Обычная граница <span class="token">neutral/50</span></div>
+            <div class="usage-row">Активная граница <span class="token">brand/informative</span></div>
+            <div class="usage-row">Ошибка <span class="token">brand/error</span></div>
+          </div>
+          <div class="usage-col"><h4>Состояния</h4>
+            <div class="usage-row">Выделенная строка <span class="token">informative-soft</span></div>
+            <div class="usage-row">Ошибка инпута <span class="token">error + error-soft</span></div>
+            <div class="usage-row">Успешное состояние <span class="token">positive + positive-soft</span></div>
+          </div>
+          <div class="usage-col"><h4>Кнопки</h4>
+            <div class="usage-row">Primary <span class="token">фон 90, текст 0</span></div>
+            <div class="usage-row">Secondary <span class="token">фон 0, обводка 70</span></div>
+            <div class="usage-row">Danger <span class="token">фон error, текст 0</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPE -->
+    <section id="type">
+      <div class="tag-eyebrow">Основы</div>
+      <h2>Типографика</h2>
+      <p class="desc">Roboto Flex — весь интерфейсный текст (переменный шрифт, гибкие насыщенности). PragmataPro — только логотип и декоративные акценты, не для чтения.</p>
+      <div class="font-cards">
+        <div class="font-card">
+          <div class="role">UI / Body — Roboto Flex</div>
+          <div class="big" style="font-family:var(--font-body);">Audiotechnik Y8</div>
+          <div class="name">Roboto Flex, 400–700 (variable)</div>
+          <div class="use">Весь интерфейс: заголовки, подзаголовки, тело, формы, кнопки, таблицы.</div>
+        </div>
+        <div class="font-card">
+          <div class="role">Display / Logo — Mono</div>
+          <div class="big mono">golova.system</div>
+          <div class="name">PragmataPro Mono, Regular (400)</div>
+          <div class="use">Логотип, hero-заголовки, декоративные акценты. Точечно — не тело текста.</div>
+        </div>
+      </div>
+      <div style="margin-top:28px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:24px 28px;">
+        <div class="type-row"><div class="label">Display</div><div class="spec">32/40 · 700</div><div class="sample text-display">Найдите нужное решение</div></div>
+        <div class="type-row"><div class="label">H1</div><div class="spec">24/32 · 700</div><div class="sample text-h1">Заголовок раздела</div></div>
+        <div class="type-row"><div class="label">H2</div><div class="spec">18/26 · 600</div><div class="sample text-h2">Подзаголовок</div></div>
+        <div class="type-row"><div class="label">Body</div><div class="spec">14/20 · 400</div><div class="sample text-body">Обычный текст интерфейса</div></div>
+        <div class="type-row"><div class="label">Body Bold</div><div class="spec">14/20 · 700</div><div class="sample text-body-bold">Акцентный текст</div></div>
+        <div class="type-row"><div class="label">Caption</div><div class="spec">12/16 · 500</div><div class="sample text-caption">Подпись, мета-информация</div></div>
+        <div class="type-row"><div class="label">Eyebrow</div><div class="spec">11/14 · 700, upper</div><div class="sample text-eyebrow" style="color:var(--text-secondary);">Категория</div></div>
+      </div>
+    </section>
+
+    <!-- SPACE -->
+    <section id="space">
+      <div class="tag-eyebrow">Основы</div>
+      <h2>Отступы</h2>
+      <p class="desc">Шкала на базе 4px.</p>
+      <div class="scale-grid">
+        <div class="scale-item"><div class="box" style="width:4px;height:24px;"></div><span>4 · sp-1</span></div>
+        <div class="scale-item"><div class="box" style="width:8px;height:24px;"></div><span>8 · sp-2</span></div>
+        <div class="scale-item"><div class="box" style="width:12px;height:24px;"></div><span>12 · sp-3</span></div>
+        <div class="scale-item"><div class="box" style="width:16px;height:24px;"></div><span>16 · sp-4</span></div>
+        <div class="scale-item"><div class="box" style="width:24px;height:24px;"></div><span>24 · sp-6</span></div>
+        <div class="scale-item"><div class="box" style="width:32px;height:24px;"></div><span>32 · sp-8</span></div>
+        <div class="scale-item"><div class="box" style="width:56px;height:24px;"></div><span>56 · sp-14</span></div>
+        <div class="scale-item"><div class="box" style="width:64px;height:24px;"></div><span>64 · sp-16</span></div>
+      </div>
+    </section>
+
+    <!-- RADIUS -->
+    <section id="radius">
+      <div class="tag-eyebrow">Основы</div>
+      <h2>Скругления</h2>
+      <p class="desc">Система в целом угловатая. Формы — самые острые: 4px флэт, без исключений (кроме переключателя-свитча — он физическая пилюля по смыслу).</p>
+      <div class="radius-grid">
+        <div class="radius-item"><div class="box" style="border-radius:4px;"></div><span>4 · form — все поля форм</span></div>
+        <div class="radius-item"><div class="box" style="border-radius:6px;"></div><span>6 · sm — чипы, теги</span></div>
+        <div class="radius-item"><div class="box" style="border-radius:8px;"></div><span>8 · md — кнопки, поповеры</span></div>
+        <div class="radius-item"><div class="box" style="border-radius:12px;"></div><span>12 · lg — карточки, панели</span></div>
+        <div class="radius-item"><div class="box" style="border-radius:16px;"></div><span>16 · xl — модалки</span></div>
+        <div class="radius-item"><div class="box" style="border-radius:999px;"></div><span>pill — только switch-track</span></div>
+      </div>
+    </section>
+
+    <!-- SHADOW -->
+    <section id="shadow">
+      <div class="tag-eyebrow">Основы</div>
+      <h2>Тени</h2>
+      <p class="desc">Незаметны в покое, раскрываются на интерактиве. Focus/error-ring — отдельные токены для полей форм.</p>
+      <div class="row-flex">
+        <div style="width:150px;height:80px;background:var(--bg-card);border-radius:10px;box-shadow:var(--shadow-rest);display:flex;align-items:center;justify-content:center;font-size:11.5px;color:var(--text-secondary);">rest</div>
+        <div style="width:150px;height:80px;background:var(--bg-card);border-radius:10px;box-shadow:var(--shadow-card);display:flex;align-items:center;justify-content:center;font-size:11.5px;color:var(--text-secondary);">card</div>
+        <div style="width:150px;height:80px;background:var(--bg-card);border-radius:10px;box-shadow:var(--shadow-float);display:flex;align-items:center;justify-content:center;font-size:11.5px;color:var(--text-secondary);">float</div>
+        <div style="width:150px;height:80px;background:var(--bg-card);border:1px solid var(--border-focus);border-radius:4px;box-shadow:var(--shadow-focus-ring);display:flex;align-items:center;justify-content:center;font-size:11.5px;color:var(--text-secondary);">focus-ring</div>
+        <div style="width:150px;height:80px;background:var(--bg-card);border:1px solid var(--border-error);border-radius:4px;box-shadow:var(--shadow-error-ring);display:flex;align-items:center;justify-content:center;font-size:11.5px;color:var(--text-secondary);">error-ring</div>
+      </div>
+    </section>
+
+    <!-- BUTTONS -->
+    <section id="buttons">
+      <div class="tag-eyebrow">Компоненты</div>
+      <h2>Кнопки</h2>
+      <p class="desc">Один компонент <code class="inline">.btn</code>, собираемый из вариантов, размеров и состояний.
+      Иконки — <a href="https://icons.getbootstrap.com/" target="_blank" rel="noopener">Bootstrap Icons</a> (MIT, свободная лицензия),
+      подключены как иконный шрифт: класс <code class="inline">bi bi-*</code>.</p>
+
+      <div class="comp-block">
+        <div class="comp-title">Варианты <small>.btn-primary / -secondary / -informative / -danger / -ghost / -link</small></div>
+        <div class="row-flex">
+          <button class="btn btn-md btn-primary">Primary</button>
+          <button class="btn btn-md btn-secondary">Secondary</button>
+          <button class="btn btn-md btn-informative">Informative</button>
+          <button class="btn btn-md btn-danger">Danger</button>
+          <button class="btn btn-md btn-ghost">Ghost</button>
+          <button class="btn btn-md btn-link">Link-кнопка</button>
+        </div>
+        <p style="font-size:12px; color:var(--text-secondary); margin:16px 0 0;">
+          Primary — одна на экран, для главного действия. Secondary — для второстепенного рядом с primary.
+          Danger — необратимые/разрушающие действия. Ghost — низкоприоритетные действия в тулбарах. Link — действие, встроенное в текст.
+        </p>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Размеры <small>.btn-sm / .btn-md / .btn-lg</small></div>
+        <div class="row-flex">
+          <button class="btn btn-sm btn-primary">Small</button>
+          <button class="btn btn-md btn-primary">Medium</button>
+          <button class="btn btn-lg btn-primary">Large</button>
+        </div>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Состояния <small>hover / focus / active — интерактивны, наведите и нажмите</small></div>
+        <div class="row-flex">
+          <button class="btn btn-md btn-primary">Default</button>
+          <button class="btn btn-md btn-primary" style="background:#000;">Hover ⁠— наведите сами</button>
+          <button class="btn btn-md btn-primary" style="box-shadow:var(--shadow-focus-ring);">Focus ⁠— Tab к кнопке</button>
+          <button class="btn btn-md btn-primary" style="transform:translateY(1px); background:#000;">Active ⁠— зажмите ЛКМ</button>
+          <button class="btn btn-md btn-primary" disabled>Disabled</button>
+          <button class="btn btn-md btn-informative is-loading"><i class="bi bi-arrow-repeat"></i>Loading</button>
+        </div>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">С иконками <small>bi bi-* ведущая / замыкающая / только иконка</small></div>
+        <div class="row-flex">
+          <button class="btn btn-md btn-primary"><i class="bi bi-plus-lg"></i>Создать</button>
+          <button class="btn btn-md btn-secondary">Продолжить<i class="bi bi-arrow-right"></i></button>
+          <button class="btn btn-md btn-danger"><i class="bi bi-trash3"></i>Удалить</button>
+          <button class="btn btn-md btn-secondary"><i class="bi bi-download"></i>Экспорт</button>
+          <button class="btn btn-md btn-icon-only btn-secondary" aria-label="Ещё"><i class="bi bi-three-dots"></i></button>
+          <button class="btn btn-sm btn-icon-only btn-ghost" aria-label="Закрыть"><i class="bi bi-x-lg"></i></button>
+          <button class="btn btn-lg btn-icon-only btn-primary" aria-label="Добавить"><i class="bi bi-plus-lg"></i></button>
+        </div>
+        <p style="font-size:12px; color:var(--text-secondary); margin:16px 0 0;">
+          У icon-only кнопок обязателен <code class="inline">aria-label</code> — своей подписи у них нет.
+        </p>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Круглые иконочные кнопки <small>.btn-round — тулбары, действия над таблицей, FAB</small></div>
+        <div class="row-flex">
+          <button class="btn btn-sm btn-icon-only btn-round btn-secondary" aria-label="Свернуть"><i class="bi bi-chevron-double-up"></i></button>
+          <button class="btn btn-sm btn-icon-only btn-round btn-secondary" aria-label="Развернуть"><i class="bi bi-chevron-double-down"></i></button>
+          <button class="btn btn-sm btn-icon-only btn-round btn-secondary" aria-label="Свернуть уровень"><i class="bi bi-chevron-down"></i></button>
+          <button class="btn btn-sm btn-icon-only btn-round btn-secondary" aria-label="Перемешать"><i class="bi bi-shuffle"></i></button>
+          <button class="btn btn-md btn-icon-only btn-round btn-secondary" aria-label="Настройки таблицы"><i class="bi bi-gear"></i></button>
+          <button class="btn btn-md btn-icon-only btn-round btn-ghost" aria-label="Ещё"><i class="bi bi-three-dots"></i></button>
+          <button class="btn btn-lg btn-icon-only btn-round btn-primary" aria-label="Добавить запись"><i class="bi bi-plus-lg"></i></button>
+        </div>
+        <p style="font-size:12px; color:var(--text-secondary); margin:16px 0 0;">
+          Круглая форма — только для плотных тулбаров над таблицами/деревьями (действия с выбранными, параметры,
+          сворачивание уровней) и для одиночного FAB-действия «добавить». Обычные действия в интерфейсе — квадратные <code class="inline">.btn-icon-only</code> выше.
+        </p>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Группа кнопок <small>.btn-group — сегментированный переключатель</small></div>
+        <div class="btn-group">
+          <button class="btn btn-md btn-secondary active"><i class="bi bi-grid-3x3-gap"></i>Сетка</button>
+          <button class="btn btn-md btn-secondary"><i class="bi bi-list-ul"></i>Список</button>
+          <button class="btn btn-md btn-secondary"><i class="bi bi-map"></i>Карта</button>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- BADGES -->
+    <section id="badges">
+      <div class="tag-eyebrow">Компоненты</div>
+      <h2>Бейджи и теги</h2>
+      <div class="comp-block">
+        <div class="row-flex">
+          <span class="badge badge-informative">Информативный</span>
+          <span class="badge badge-neutral">Нейтральный</span>
+          <span class="badge badge-dark">Тёмный</span>
+          <span class="tag">💡 Категория</span>
+          <span class="kit-flag"><i></i>Активно</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TABS -->
+    <section id="tabs">
+      <div class="tag-eyebrow">Компоненты</div>
+      <h2>Табы</h2>
+      <div class="comp-block">
+        <div class="tabs">
+          <button class="tab active">Все</button>
+          <button class="tab">Раздел 2</button>
+          <button class="tab">Раздел 3</button>
+          <button class="tab">Раздел 4</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMS -->
+    <section id="forms">
+      <div class="tag-eyebrow">Компоненты</div>
+      <h2>Формы</h2>
+      <p class="desc">Полный набор форм-компонентов на базе переменных Golova. Все контролы — 4px радиус
+      (<code class="inline">--radius-form</code>), фокус — рамка <code class="inline">border/focus</code> + мягкое кольцо
+      <code class="inline">shadow-focus-ring</code>, ошибка — <code class="inline">border/error</code> + <code class="inline">shadow-error-ring</code>.</p>
+
+      <div class="comp-block">
+        <div class="comp-title">Text input <small>.field / .ctrl</small></div>
+        <div class="grid-form-col">
+          <div class="field">
+            <label class="field-label">Название компании</label>
+            <input class="ctrl" type="text" placeholder="ООО «Ромашка»">
+            <span class="field-hint">Как в учредительных документах</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Email <span class="req">*</span></label>
+            <input class="ctrl" type="email" placeholder="you@company.com">
+          </div>
+          <div class="field is-error">
+            <label class="field-label">ИНН <span class="req">*</span></label>
+            <input class="ctrl" type="text" value="77012345">
+            <span class="field-error-text">⚠ Должно быть 10 или 12 цифр</span>
+          </div>
+          <div class="field is-success">
+            <label class="field-label">Промокод</label>
+            <input class="ctrl" type="text" value="GOLOVA2026">
+            <span class="field-success-text">✓ Промокод применён</span>
+          </div>
+          <div class="field">
+            <label class="field-label">Заблокировано</label>
+            <input class="ctrl" type="text" value="Недоступно для редактирования" disabled>
+          </div>
+          <div class="field">
+            <label class="field-label">Поиск с иконкой</label>
+            <div class="ctrl-wrap">
+              <span class="affix">🔍</span>
+              <input class="ctrl" type="text" placeholder="Найти в системе">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Textarea <small>.ctrl (textarea)</small></div>
+        <div class="field" style="max-width:520px;">
+          <label class="field-label">Комментарий</label>
+          <textarea class="ctrl" placeholder="Опишите задачу подробнее..."></textarea>
+        </div>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Select <small>select.ctrl</small></div>
+        <div class="grid-form-col">
+          <div class="field">
+            <label class="field-label">Роль в команде</label>
+            <select class="ctrl">
+              <option>Администратор</option>
+              <option>Редактор</option>
+              <option>Только просмотр</option>
+            </select>
+          </div>
+          <div class="field">
+            <label class="field-label">Часовой пояс</label>
+            <select class="ctrl" disabled><option>МСК (UTC+3)</option></select>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Checkbox / Radio / Switch</div>
+        <div class="row-flex-start">
+          <div>
+            <div class="text-caption" style="margin-bottom:10px;">Checkbox</div>
+            <label class="check" style="margin-bottom:10px;"><input type="checkbox" checked><span class="box"></span>Согласен с условиями</label>
+            <label class="check" style="margin-bottom:10px;"><input type="checkbox"><span class="box"></span>Подписаться на рассылку</label>
+            <label class="check disabled"><input type="checkbox" disabled><span class="box"></span>Недоступно</label>
+          </div>
+          <div>
+            <div class="text-caption" style="margin-bottom:10px;">Radio</div>
+            <label class="radio" style="margin-bottom:10px;"><input type="radio" name="plan" checked><span class="dot"></span>Месячный тариф</label>
+            <label class="radio"><input type="radio" name="plan"><span class="dot"></span>Годовой тариф (−20%)</label>
+          </div>
+          <div>
+            <div class="text-caption" style="margin-bottom:10px;">Switch</div>
+            <label class="switch" style="margin-bottom:10px;"><input type="checkbox" checked><span class="track"></span>Уведомления включены</label>
+            <label class="switch"><input type="checkbox"><span class="track"></span>Двухфакторная аутентификация</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Fieldset + form actions</div>
+        <fieldset class="fieldset" style="max-width:420px;">
+          <legend>Контактное лицо</legend>
+          <div class="field" style="margin-bottom:14px;">
+            <label class="field-label">Имя</label>
+            <input class="ctrl" type="text" placeholder="Иван Иванов">
+          </div>
+          <div class="field" style="margin-bottom:0;">
+            <label class="field-label">Телефон</label>
+            <input class="ctrl" type="tel" placeholder="+7 900 000-00-00">
+          </div>
+        </fieldset>
+        <div class="form-actions">
+          <button class="btn btn-primary btn-form">Сохранить</button>
+          <button class="btn btn-secondary btn-form">Отмена</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MODALS -->
+    <section id="modals">
+      <div class="tag-eyebrow">Компоненты</div>
+      <h2>Модалки</h2>
+      <p class="desc">Три сценария под самые частые действия у сложных таблиц/деревьев: форма-редактор строки, подтверждение
+      удаления, настройка видимости колонок. Структура одинаковая: заголовок с подписью и крестиком → тело (скроллится
+      само, если контента много) → футер с действиями, прижатыми вправо.</p>
+
+      <div class="comp-block">
+        <div class="comp-title">Форма редактирования строки <small>.modal → .modal-header / .modal-body / .modal-footer</small></div>
+        <div class="modal-stage">
+          <div class="modal">
+            <div class="modal-header">
+              <div>
+                <h3>Редактировать позицию</h3>
+                <p>Спецификация · Звуковое оборудование — аренда</p>
+              </div>
+              <button class="btn btn-sm btn-icon-only btn-round btn-ghost modal-close" aria-label="Закрыть"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="modal-body">
+              <div class="field">
+                <label class="field-label">Название <span class="req">*</span></label>
+                <input class="ctrl" type="text" value="Радиосистема полное название">
+              </div>
+              <div class="field">
+                <label class="field-label">Артикул</label>
+                <input class="ctrl" type="text" value="EW 100 G4">
+              </div>
+              <div class="grid-form-col">
+                <div class="field">
+                  <label class="field-label">Количество</label>
+                  <input class="ctrl" type="number" value="1">
+                </div>
+                <div class="field">
+                  <label class="field-label">Категория</label>
+                  <select class="ctrl"><option>Бэклайн</option><option>Микрофоны</option></select>
+                </div>
+              </div>
+              <div class="field is-error" style="margin-bottom:0;">
+                <label class="field-label">Поставщик</label>
+                <input class="ctrl" type="text" value="Sennheiser">
+                <span class="field-error-text">⚠ На складе только 2 из 17 запрошенных</span>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-md btn-secondary btn-form">Отмена</button>
+              <button class="btn btn-md btn-primary btn-form"><i class="bi bi-check-lg"></i>Сохранить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Подтверждение удаления <small>деструктивное действие — danger в футере</small></div>
+        <div class="modal-stage">
+          <div class="modal" style="max-width:380px;">
+            <div class="modal-body" style="padding-top:24px;">
+              <div style="width:44px;height:44px;border-radius:50%;background:var(--bg-error);display:flex;align-items:center;justify-content:center;margin-bottom:16px;">
+                <i class="bi bi-exclamation-triangle" style="color:var(--brand-error); font-size:20px;"></i>
+              </div>
+              <h3 style="font-size:16px;margin:0 0 6px;">Удалить 44 позиции?</h3>
+              <p style="font-size:13px;color:var(--text-secondary);margin:0;line-height:1.5;">Раздел «Звуковое оборудование — аренда»
+              будет удалён из спецификации вместе со всеми вложенными строками. Это действие необратимо.</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-md btn-secondary btn-form">Отмена</button>
+              <button class="btn btn-md btn-danger btn-form"><i class="bi bi-trash3"></i>Удалить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="comp-block">
+        <div class="comp-title">Настройка колонок таблицы <small>для плотных таблиц/деревьев с параметрами</small></div>
+        <div class="modal-stage">
+          <div class="modal">
+            <div class="modal-header">
+              <div><h3>Параметры таблицы</h3><p>Видимость и порядок колонок</p></div>
+              <button class="btn btn-sm btn-icon-only btn-round btn-ghost modal-close" aria-label="Закрыть"><i class="bi bi-x-lg"></i></button>
+            </div>
+            <div class="modal-body">
+              <div class="col-toggle-row"><span><i class="bi bi-grip-vertical drag"></i>Название</span><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+              <div class="col-toggle-row"><span><i class="bi bi-grip-vertical drag"></i>Артикул</span><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+              <div class="col-toggle-row"><span><i class="bi bi-grip-vertical drag"></i>Количество</span><label class="switch"><input type="checkbox" checked><span class="track"></span></label></div>
+              <div class="col-toggle-row"><span><i class="bi bi-grip-vertical drag"></i>Вес</span><label class="switch"><input type="checkbox"><span class="track"></span></label></div>
+              <div class="col-toggle-row"><span><i class="bi bi-grip-vertical drag"></i>Мощность</span><label class="switch"><input type="checkbox"><span class="track"></span></label></div>
+              <div class="col-toggle-row"><span><i class="bi bi-grip-vertical drag"></i>Ток</span><label class="switch"><input type="checkbox"><span class="track"></span></label></div>
+            </div>
+            <div class="modal-footer spread">
+              <button class="btn btn-sm btn-ghost btn-form">Сбросить</button>
+              <button class="btn btn-md btn-primary btn-form">Применить</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="usage-grid">
+        <div class="usage-card do"><div class="head">✓ Так делаем</div><p>Заголовок модалки — краткий, подпись под ним уточняет контекст (где именно мы редактируем). Крестик закрытия — всегда круглый ghost справа.</p></div>
+        <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не ставим danger-действие первым/слева в футере — порядок всегда: второстепенное слева, главное (в т.ч. деструктивное) справа.</p></div>
+      </div>
+    </section>
+
+    <!-- CARD -->
+    <section id="card">
+      <div class="tag-eyebrow">Компоненты</div>
+      <h2>Карточка товара</h2>
+      <div class="comp-block">
+        <div class="row-flex">
+          <div class="pcard">
+            <div class="img"><span class="badge badge-informative">Продажа</span><div class="fav">♥</div>фото товара</div>
+            <div class="body">
+              <div class="title">Audiotechnik Y8 Line Array</div>
+              <div class="price">88 500 ₽</div>
+              <div class="seller"><span class="star">★</span> Light sound lab · 4.8 (12)</div>
+              <div class="loc">📍 Москва, Московская область</div>
+              <button class="cta">Связаться</button>
+            </div>
+          </div>
+          <div class="pcard">
+            <div class="img" style="background:linear-gradient(135deg,var(--bg-selected),var(--bg-page));"><span class="badge badge-neutral">Продажа б/у</span><div class="fav" style="color:var(--brand-error);">♥</div>фото товара</div>
+            <div class="body">
+              <div class="title">ADJ Mega Par Profile</div>
+              <div class="price">8 500 ₽ <span class="kit-flag" style="margin-left:6px;"><i></i>Комплект</span></div>
+              <div class="seller"><span class="star">★</span> Light sound lab · 4.8 (12)</div>
+              <div class="loc">📍 Москва, Московская область</div>
+              <button class="cta">Связаться</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <section id="footer">
+      <div class="tag-eyebrow">Компоненты</div>
+      <h2>Футер</h2>
+      <div class="foot">
+        <div class="logo"><img src="logos/logo_2.svg" style="filter:invert(1) brightness(2);"> <span class="mono">golova</span></div>
+        <div class="col"><h4>Продукты</h4><a href="#">Golova</a><a href="#">Экосистема</a></div>
+        <div class="col"><h4>О нас</h4><a href="#">База знаний</a><a href="#">FAQ</a></div>
+        <div class="col"><h4>Контакты</h4><a href="#">hello@golova.io</a></div>
+      </div>
+    </section>
+
+    <!-- USAGE -->
+    <section id="usage">
+      <div class="tag-eyebrow">Гайдлайны</div>
+      <h2>Как использовать</h2>
+      <div class="usage-grid">
+        <div class="usage-card do"><div class="head">✓ Так делаем</div><p>Компоненты ссылаются только на семантические токены (<code class="inline">text/*</code>, <code class="inline">bg/*</code>...), никогда напрямую на <code class="inline">neutral/*</code> или <code class="inline">brand/*</code>.</p></div>
+        <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не хардкодим hex в компонентах и не создаём новые цвета «по ощущению» — сначала примитив, потом семантика.</p></div>
+        <div class="usage-card do"><div class="head">✓ Так делаем</div><p>Все поля форм — 4px радиус, без исключений. Это единообразный, узнаваемо угловатый язык форм.</p></div>
+        <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не скругляем формы под общий radius-lg карточек — формы концептуально более острые, чем контейнеры.</p></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>

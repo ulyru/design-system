@@ -1,0 +1,31 @@
+# Golova Design System
+
+Static reference page for the Golova design system: tokens, components, typography, logos, and usage guidance for the product ecosystem.
+
+## Open Locally
+
+- Open `index.html` directly in a browser, or serve the folder with any static server.
+- Example: `python3 -m http.server` from this directory, then open `http://localhost:8000`.
+- There is no package install, build, lint, or test step in this repo.
+
+## Structure
+
+- `index.html` is the reference/demo page and imports styles in this order: `css/tokens.css`, then `css/components.css`.
+- `css/tokens.css` defines primitive, semantic, spacing, radius, shadow, motion, and font tokens.
+- `css/components.css` defines reusable component classes built on top of tokens.
+- `logos/` contains the Golova mark and lockups.
+- `fonts/` contains the licensed PragmataPro Mono web font used only for logo/decorative/display accents.
+- `DESIGN_SYSTEM_GUIDE.md` is a Russian-language working memo for maintaining the system with a designer-led workflow.
+
+## Design Rules
+
+- Keep the color system three-tiered: primitive -> semantic -> component.
+- Prefer semantic tokens in components instead of hard-coded primitive colors.
+- Do not normalize the neutral scale; its uneven steps are intentional: `90, 80, 70, 50, 30, 20, 0`.
+- Forms are intentionally angular and use `--radius-form` (`4px`); the switch track is the only pill-shaped form control.
+- There is no official warning token yet. Rating stars currently use `--_placeholder-warning:#F5A623`.
+- Roboto Flex is the UI font. PragmataPro Mono is reserved for logo/decorative/display accents, not body copy.
+
+## Verification
+
+After changes, check `index.html` in a browser on desktop and at the existing mobile breakpoint (`max-width:960px`).

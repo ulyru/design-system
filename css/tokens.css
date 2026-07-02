@@ -1,0 +1,116 @@
+/* =========================================================
+   GOLOVA DESIGN SYSTEM — TOKENS
+   Ecosystem-level tokens for the Golova SaaS product family.
+   Three-tier color model: Primitive → Semantic → Component.
+   Import this file before components.css / forms.css.
+   ========================================================= */
+
+/* ---- fonts ---- */
+/* Roboto Flex — open-source (Apache 2.0), loaded from Google Fonts.
+   Used for all UI text: headings, body, labels, controls. */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&display=swap');
+
+@font-face{
+  font-family:"PragmataPro Mono";
+  src:url("../fonts/PragmataProMono-Regular.woff2") format("woff2");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}
+/* PragmataPro — licensed, web tier (1 site / 10k pageviews·mo per FSD EULA).
+   Reserved for the logotype and decorative/display text only — never body copy.
+   Only Regular is web-licensed today; register Bold/Italic here if purchased. */
+
+:root{
+  /* ================= FONT FAMILIES ================= */
+  --font-body:"Roboto Flex","Roboto",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-mono:"PragmataPro Mono","IBM Plex Mono",SFMono-Regular,Consolas,monospace; /* logo + decorative only */
+
+  /* ================= COLLECTION 1 — PRIMITIVE / NEUTRAL ================= */
+  --neutral-90:#333333;
+  --neutral-80:#727272;
+  --neutral-70:#DADADA;
+  --neutral-50:#E1E5EF;
+  --neutral-30:#F0F2F7;
+  --neutral-20:#F7F9FB;
+  --neutral-0:#FFFFFF;
+
+  /* ================= COLLECTION 2 — PRIMITIVE / BRAND ================= */
+  --brand-informative:#4976F4;
+  --brand-positive:#38B000;
+  --brand-error:#E63A1E;
+
+  --brand-informative-soft:rgba(73,118,244,0.10);
+  --brand-positive-soft:rgba(56,176,0,0.10);
+  --brand-error-soft:rgba(230,58,30,0.10);
+
+  /* ================= COLLECTION 3 — SEMANTIC ================= */
+  /* Text */
+  --text-primary:var(--neutral-90);
+  --text-secondary:var(--neutral-80);
+  --text-disabled:var(--neutral-70);
+  --text-inverse:var(--neutral-0);
+  --text-link:var(--brand-informative);
+  --text-error:var(--brand-error);
+  --text-success:var(--brand-positive);
+
+  /* Background */
+  --bg-page:var(--neutral-20);
+  --bg-card:var(--neutral-0);
+  --bg-table-hover:var(--neutral-30);
+  --bg-selected:var(--brand-informative-soft);
+  --bg-error:var(--brand-error-soft);
+  --bg-success:var(--brand-positive-soft);
+
+  /* Border */
+  --border-default:var(--neutral-50);
+  --border-strong:var(--neutral-70);
+  --border-focus:var(--brand-informative);
+  --border-error:var(--brand-error);
+
+  /* Icon */
+  --icon-primary:var(--neutral-90);
+  --icon-secondary:var(--neutral-80);
+  --icon-disabled:var(--neutral-70);
+  --icon-informative:var(--brand-informative);
+  --icon-error:var(--brand-error);
+  --icon-success:var(--brand-positive);
+
+  /* ---- not yet in the official palette: local placeholder ----
+     Rating stars need a warning/gold accent that Collections 1–3 don't define.
+     Flag for whoever owns the palette to add a proper warning/* token. */
+  --_placeholder-warning:#F5A623;
+
+  /* ================= RADIUS ================= */
+  /* System language is intentionally angular. Forms are the sharpest: 4px flat. */
+  --radius-form:4px;      /* inputs, selects, checkboxes, textareas, form buttons */
+  --radius-sm:6px;        /* small chips, tags */
+  --radius-md:8px;        /* buttons outside forms, popovers */
+  --radius-lg:12px;       /* cards, panels */
+  --radius-xl:16px;       /* large surfaces, modals */
+  --radius-pill:999px;    /* only for pill-shaped badges / switch track */
+
+  /* ================= SHADOW ================= */
+  --shadow-rest:0 1px 2px rgba(20,20,30,.06);
+  --shadow-card:0 2px 10px rgba(20,20,30,.06);
+  --shadow-float:0 16px 40px rgba(20,20,30,.14), 0 2px 8px rgba(20,20,30,.08);
+  --shadow-focus-ring:0 0 0 3px var(--brand-informative-soft);
+  --shadow-error-ring:0 0 0 3px var(--brand-error-soft);
+
+  /* ================= SPACE (4px base) ================= */
+  --sp-1:4px;  --sp-2:8px;  --sp-3:12px; --sp-4:16px; --sp-5:20px;
+  --sp-6:24px; --sp-8:32px; --sp-10:40px; --sp-14:56px; --sp-16:64px;
+
+  /* ================= MOTION ================= */
+  --ease:cubic-bezier(.4,0,.2,1);
+}
+
+/* ---- type scale (utility classes, optional) ---- */
+.text-display{ font-size:32px; line-height:40px; font-weight:700; letter-spacing:-.01em; font-family:var(--font-body); }
+.text-h1{ font-size:24px; line-height:32px; font-weight:700; font-family:var(--font-body); }
+.text-h2{ font-size:18px; line-height:26px; font-weight:600; font-family:var(--font-body); }
+.text-body{ font-size:14px; line-height:20px; font-weight:400; font-family:var(--font-body); }
+.text-body-bold{ font-size:14px; line-height:20px; font-weight:700; font-family:var(--font-body); }
+.text-caption{ font-size:12px; line-height:16px; font-weight:500; color:var(--text-secondary); font-family:var(--font-body); }
+.text-eyebrow{ font-size:11px; line-height:14px; font-weight:700; text-transform:uppercase; letter-spacing:.06em; font-family:var(--font-body); }
+.mono{ font-family:var(--font-mono); font-weight:400; } /* logo / decorative only */
