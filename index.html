@@ -180,6 +180,7 @@
       <a href="#modals">Модалки</a>
       <a href="#card">Карточка товара</a>
       <a href="#footer">Футер</a>
+      <a href="#emails">Письма</a>
       <div class="grp">Гайдлайны</div>
       <a href="#handoff">Developer Handoff</a>
       <a href="#usage">Как использовать</a>
@@ -1037,6 +1038,33 @@
       </div>
     </section>
 
+    <!-- EMAILS -->
+    <section id="emails">
+      <div class="tag-eyebrow">Компоненты</div>
+      <h2>Письма</h2>
+      <p class="desc">Email-шаблоны живут отдельно от продуктового UI: почтовики требуют табличную верстку,
+      inline CSS и осторожную поддержку темной темы. JavaScript, внешние шрифты, SVG как единственный логотип
+      и сложные layout-свойства в письмах не используем.</p>
+
+      <div class="comp-block">
+        <div class="comp-title">Код подтверждения <small>emails/verification-code.html</small></div>
+        <div class="usage-grid">
+          <div class="usage-card do">
+            <div class="head">✓ Так делаем</div>
+            <p>Верстаем таблицами, критичные стили пишем inline, для Outlook добавляем MSO/VML fallback. Цвета темной темы задаем через <code class="inline">prefers-color-scheme</code> и <code class="inline">data-ogsc</code>.</p>
+          </div>
+          <div class="usage-card dont">
+            <div class="head">✗ Так не делаем</div>
+            <p>Не используем JS-копирование, web fonts, flex/grid как основу, тяжелые тени и SVG без fallback. В письме кнопка может вести только на страницу подтверждения.</p>
+          </div>
+        </div>
+        <div class="handoff-actions">
+          <a class="btn btn-sm btn-secondary" href="emails/verification-code.html" target="_blank" rel="noopener"><i class="bi bi-envelope"></i>Открыть письмо</a>
+          <a class="btn btn-sm btn-secondary" href="emails/verification-code.html" download><i class="bi bi-download"></i>Скачать HTML</a>
+        </div>
+      </div>
+    </section>
+
     <!-- HANDOFF -->
     <section id="handoff">
       <div class="tag-eyebrow">Гайдлайны</div>
@@ -1082,6 +1110,7 @@
               <a class="btn btn-sm btn-secondary" href="AI_USAGE.md" download><i class="bi bi-download"></i>AI_USAGE.md</a>
               <a class="btn btn-sm btn-secondary" href="css/tokens.css" download><i class="bi bi-download"></i>tokens.css</a>
               <a class="btn btn-sm btn-secondary" href="css/components.css" download><i class="bi bi-download"></i>components.css</a>
+              <a class="btn btn-sm btn-secondary" href="emails/verification-code.html" download><i class="bi bi-download"></i>verification-code.html</a>
             </div>
           </div>
         </div>

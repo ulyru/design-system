@@ -19,6 +19,7 @@ Live version: <https://golova-ds.rubashkin.xyz>
 - `css/components.css` defines reusable component classes built on top of tokens.
 - `tokens.json` is the machine-readable token contract for agents, scripts, Figma workflows, and future exports.
 - `AI_USAGE.md` is the quick instruction file for Claude Code, Codex, and other AI agents building Golova prototypes.
+- `emails/` contains standalone production-oriented HTML email templates.
 - `logos/` contains the Golova mark and lockups.
 - `fonts/` contains the licensed PragmataPro Mono web font used only for logo/decorative/display accents.
 - `DESIGN_SYSTEM_GUIDE.md` is a Russian-language working memo for maintaining the system with a designer-led workflow.
