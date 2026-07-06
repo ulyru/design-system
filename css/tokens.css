@@ -35,6 +35,20 @@
   --neutral-20:#F7F9FB;
   --neutral-0:#FFFFFF;
 
+  /* ================= COLLECTION 1A — SAAS PLATFORM / CONTENT NEUTRAL ================= */
+  /* Product-facing palette names used by the Golova SaaS platform. These coexist with
+     the original uneven neutral scale above to avoid breaking existing components. */
+  --content-neutral-90:#333333;
+  --content-neutral-80:#727272;
+  --content-neutral-70:#DADADA;
+  --content-neutral-60:#F4F4F4;
+  --content-neutral-50:#E4E4E4;
+  --content-neutral-40:#E8E8E8;
+  --content-neutral-30:#F2F2F2;
+  --content-neutral-20:#F9F9F9;
+  --content-neutral-10:#FDFDFD;
+  --content-neutral-0:#FFFFFF;
+
   /* ================= COLLECTION 1B — PRIMITIVE / DARK SURFACE ================= */
   --dark-100:#0F1114;
   --dark-90:#15181C;
@@ -56,6 +70,33 @@
   --brand-informative-soft-dark:rgba(73,118,244,0.18);
   --brand-positive-soft-dark:rgba(56,176,0,0.18);
   --brand-error-soft-dark:rgba(230,58,30,0.18);
+
+  /* ================= COLLECTION 2A — SAAS PLATFORM / SEMANTIC PRIMITIVES ================= */
+  --content-informative:#4976F4;
+  --content-positive:#38B000;
+  --content-error:#E63A1E;
+  --warning-rating:#F5A623;
+
+  --border-informative:#D1DDFC;
+  --border-positive:#CDEBBF;
+  --border-error:#F9CEC7;
+
+  --background-primary:#FFFFFF;
+  --background-secondary:#F9F9F9;
+  --background-tertiary:#F2F2F2;
+  --background-blue:#EDF2FE;
+  --background-green:#EEF5F0;
+  --background-red:#F7EDED;
+  --background-orange:#FBF4EC;
+  --background-purple:#F4EDF7;
+  --background-yellow:#F7F7E8;
+
+  --category-equipment:#EC407A;
+  --category-services:#7E57C2;
+  --category-components:#42A5F5;
+  --category-consumables:#66BB6A;
+  --category-kits:#FFCA28;
+  --category-sets:#FF7043;
 
   /* ================= COLLECTION 3 — SEMANTIC ================= */
   /* Text */
@@ -109,11 +150,6 @@
   --control-disabled-bg:var(--neutral-30);
   --chip-bg:var(--neutral-30);
   --media-placeholder-bg:linear-gradient(135deg,var(--neutral-30),var(--neutral-20));
-
-  /* ---- not yet in the official palette: local placeholder ----
-     Rating stars need a warning/gold accent that Collections 1–3 don't define.
-     Flag for whoever owns the palette to add a proper warning/* token. */
-  --_placeholder-warning:#F5A623;
 
   /* ================= RADIUS ================= */
   /* System language is intentionally angular. Forms are the sharpest: 4px flat. */

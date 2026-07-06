@@ -16,6 +16,7 @@ Live version: <https://golova-ds.rubashkin.xyz>
 
 - `index.html` is the reference/demo page and imports styles in this order: `css/tokens.css`, then `css/components.css`.
 - `css/tokens.css` defines primitive, semantic, spacing, radius, shadow, motion, and font tokens.
+- SaaS platform color tokens are exposed as `content-*`, `background-*`, `border-*`, and `category-*` CSS variables alongside legacy-compatible `neutral/*` and `brand/*` variables.
 - `css/components.css` defines reusable component classes built on top of tokens.
 - `tokens.json` is the machine-readable token contract for agents, scripts, Figma workflows, and future exports.
 - `AI_USAGE.md` is the quick instruction file for Claude Code, Codex, and other AI agents building Golova prototypes.
@@ -28,8 +29,9 @@ Live version: <https://golova-ds.rubashkin.xyz>
 - Keep the color system three-tiered: primitive -> semantic -> component.
 - Prefer semantic tokens in components instead of hard-coded primitive colors.
 - Do not normalize the neutral scale; its uneven steps are intentional: `90, 80, 70, 50, 30, 20, 0`.
+- Use SaaS platform tokens for product handoff naming: `content-neutral-*`, `content-informative`, `background-primary`, `border-informative`, `category-equipment`, `warning-rating`, etc.
 - Forms are intentionally angular and use `--radius-form` (`4px`); the switch track is the only pill-shaped form control.
-- There is no official warning token yet. Rating stars currently use `--_placeholder-warning:#F5A623`.
+- Rating stars use the official `warning/rating` token: `--warning-rating:#F5A623`.
 - Roboto Flex is the UI font. PragmataPro Mono is reserved for logo/decorative/display accents, not body copy.
 
 ## Verification
