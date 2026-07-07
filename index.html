@@ -12,19 +12,48 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css">
 <style>
   .shell{display:grid; grid-template-columns:240px minmax(0,1fr); min-height:100vh;}
-  nav.side{background:var(--surface-inverse); color:var(--surface-inverse-text); padding:32px 20px; position:sticky; top:0; height:100vh; overflow-y:auto;}
-  nav.side .brand{display:flex;align-items:center;gap:12px;font-weight:700;font-size:15px;margin-bottom:32px;}
-  nav.side .brand img{height:24px;width:auto;}
+  nav.side{background:var(--surface-inverse); color:var(--surface-inverse-text); padding:28px 20px; position:sticky; top:0; height:100vh; overflow-y:auto; font-family:var(--font-body);}
+  .nav-head{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:22px; margin-bottom:16px; border-bottom:1px solid rgba(201,208,221,.14);}
+  .nav-product{display:flex; align-items:center; gap:12px; min-width:0;}
+  .nav-product-mark{display:block; width:22px; height:22px; flex:0 0 auto;}
+  .nav-product-title{font-family:var(--font-mono); font-size:17px; font-weight:400; letter-spacing:-2px; color:var(--surface-inverse-text); white-space:nowrap;}
   .brand-lockup{display:block;height:24px;width:auto;}
   .mobile-menu-toggle{display:none; align-items:center; justify-content:center; width:36px; height:36px; color:var(--surface-inverse-text); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); cursor:pointer;}
   .mobile-menu-toggle:focus-visible{outline:none; box-shadow:var(--shadow-focus-ring);}
-  .theme-toggle{width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--surface-inverse-muted); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); padding:9px 10px; margin:0 0 24px; font:inherit; font-size:12.5px; cursor:pointer; transition:background-color .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease);}
-  .theme-toggle:hover{background:var(--surface-inverse-hover); color:var(--surface-inverse-text);}
-  .theme-toggle:focus-visible{outline:none; box-shadow:var(--shadow-focus-ring);}
-  .theme-toggle .bi{font-size:14px;}
-  nav.side a{display:block; color:var(--surface-inverse-muted); text-decoration:none; font-size:13.5px; padding:9px 10px; border-radius:4px; margin-bottom:2px; transition:all .15s var(--ease);}
-  nav.side a:hover{background:var(--surface-inverse-hover); color:var(--surface-inverse-text);}
-  nav.side .grp{font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--surface-inverse-subtle); margin:20px 0 8px; font-weight:700;}
+  .nav-controls{display:grid; gap:8px; margin-bottom:18px;}
+  .nav-control{width:100%; display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--surface-inverse-muted); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); padding:9px 10px; font:inherit; font-size:12.5px; cursor:pointer; transition:background-color .15s var(--ease), color .15s var(--ease), border-color .15s var(--ease);}
+  .nav-control:hover{background:rgba(255,255,255,.04); color:var(--surface-inverse-text);}
+  .nav-control:focus-visible{outline:none; box-shadow:var(--shadow-focus-ring);}
+  .nav-control-left{display:flex; align-items:center; gap:8px; min-width:0;}
+  .nav-control strong{font-weight:500;}
+  .language-switcher{position:relative;}
+  .language-menu{display:none; position:absolute; z-index:20; left:0; right:0; top:calc(100% + 6px); background:var(--surface-inverse); border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-md); padding:6px; box-shadow:var(--shadow-float);}
+  .language-switcher.is-open .language-menu{display:grid; gap:2px;}
+  .language-option{width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--surface-inverse-muted); background:transparent; border:0; border-radius:var(--radius-form); padding:8px 8px; font:inherit; font-size:12.5px; text-align:left; cursor:pointer;}
+  .language-option:hover{background:rgba(255,255,255,.04); color:var(--surface-inverse-text);}
+  .language-option.is-current{color:var(--surface-inverse-text);}
+  .language-option[disabled]{cursor:not-allowed; opacity:.48;}
+  .language-option[disabled]:hover{background:transparent; color:var(--surface-inverse-muted);}
+  .language-soon{font-size:10.5px; color:var(--surface-inverse-subtle);}
+  .nav-search{position:relative;}
+  .nav-search .bi{position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--surface-inverse-subtle); font-size:12px; pointer-events:none;}
+  .nav-search input{width:100%; height:34px; color:var(--surface-inverse-text); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); padding:0 10px 0 30px; font:inherit; font-size:12.5px; outline:none;}
+  .nav-search input::placeholder{color:var(--surface-inverse-subtle);}
+  .nav-search input:focus{border-color:rgba(73,118,244,.72); box-shadow:0 0 0 2px rgba(73,118,244,.18);}
+  .nav-tree{display:grid; gap:2px;}
+  .nav-section{padding-top:14px; margin-top:14px; border-top:1px solid rgba(201,208,221,.12);}
+  .nav-parent{width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px; color:rgba(201,208,221,.52); background:transparent; border:0; padding:0 8px 7px 0; font:inherit; font-size:9.5px; font-weight:600; letter-spacing:.09em; text-transform:uppercase; cursor:pointer;}
+  .nav-parent:hover{color:rgba(247,249,251,.76);}
+  .nav-parent.is-active{color:var(--surface-inverse-text);}
+  .nav-parent .bi{font-size:10px; transition:transform .15s var(--ease);}
+  .nav-section.is-open .nav-parent .bi{transform:rotate(90deg);}
+  .nav-children{display:none; gap:1px;}
+  .nav-section.is-open .nav-children{display:grid;}
+  .nav-item{position:relative; display:block; color:var(--surface-inverse-muted); background:transparent; text-decoration:none; font-size:13px; padding:7px 10px 7px 14px; border-radius:0 4px 4px 0; margin-bottom:1px; transition:color .15s var(--ease), background-color .15s var(--ease);}
+  .nav-item:hover{color:var(--surface-inverse-text); background:rgba(255,255,255,.04);}
+  .nav-item.active{color:var(--surface-inverse-text); background:rgba(255,255,255,.018);}
+  .nav-item.active::before{content:""; position:absolute; left:0; top:7px; bottom:7px; width:2px; background:#4976F4; border-radius:var(--radius-pill);}
+  .nav-item.active:hover{color:var(--surface-inverse-text); background:rgba(255,255,255,.04);}
   main{padding:56px 64px 120px; max-width:1180px;}
   section{margin-bottom:80px; scroll-margin-top:24px;}
   section h2{font-size:22px; margin:0 0 4px; letter-spacing:-.01em;}
@@ -133,12 +162,10 @@
   @media (max-width:960px){
     .shell{grid-template-columns:minmax(0,1fr);}
     nav.side{position:sticky; z-index:10; height:auto; padding:14px 20px; overflow:visible;}
-    nav.side .brand{margin:0; flex-wrap:wrap;}
     nav.side .nav-head{display:flex; align-items:center; justify-content:space-between; gap:16px;}
     .mobile-menu-toggle{display:inline-flex; flex:0 0 auto;}
     nav.side .nav-panel{display:none; padding-top:16px; max-height:calc(100vh - 68px); overflow:auto;}
     nav.side.is-open .nav-panel{display:block;}
-    .theme-toggle{margin-bottom:16px;}
     main{padding:32px 20px;}
     .font-cards, .usage-grid, .grid-form-col{grid-template-columns:1fr;}
     .type-row{display:grid; grid-template-columns:1fr; gap:6px;}
@@ -153,36 +180,30 @@
 
   <nav class="side">
     <div class="nav-head">
-      <div class="brand"><img class="brand-lockup logo-on-dark" src="logos/logo_1.svg" alt="Golova"><span>Design System</span></div>
-      <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" aria-label="Открыть меню" data-menu-toggle><i class="bi bi-list"></i></button>
+      <div class="nav-product">
+        <img class="nav-product-mark logo-on-dark" src="logos/logo_2.svg" alt="Golova">
+        <span class="nav-product-title" data-i18n="app.title"></span>
+      </div>
+      <button class="mobile-menu-toggle" type="button" aria-expanded="false" aria-controls="nav-panel" data-i18n-aria-label="app.openMenu" data-menu-toggle><i class="bi bi-list"></i></button>
     </div>
     <div class="nav-panel" id="nav-panel" data-nav-panel>
-      <button class="theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
-        <span><i class="bi bi-moon"></i> Тема</span>
-        <strong data-theme-label>Светлая</strong>
-      </button>
-      <a href="#overview">Обзор</a>
-      <a href="#philosophy">Философия</a>
-      <div class="grp">Активы</div>
-      <a href="#logo">Логотип</a>
-      <div class="grp">Основы</div>
-      <a href="#color">Цвет</a>
-      <a href="#theme-dark">Темная тема</a>
-      <a href="#type">Типографика</a>
-      <a href="#space">Отступы</a>
-      <a href="#radius">Скругления</a>
-      <a href="#shadow">Тени</a>
-      <div class="grp">Компоненты</div>
-      <a href="#buttons">Кнопки</a>
-      <a href="#badges">Бейджи и теги</a>
-      <a href="#tabs">Табы</a>
-      <a href="#forms">Формы</a>
-      <a href="#modals">Модалки</a>
-      <a href="#card">Карточка товара</a>
-      <a href="#footer">Футер</a>
-      <div class="grp">Гайдлайны</div>
-      <a href="#handoff">Developer Handoff</a>
-      <a href="#usage">Как использовать</a>
+      <div class="nav-controls">
+        <div class="nav-search">
+          <i class="bi bi-search"></i>
+          <input type="search" data-i18n-placeholder="search.placeholder" data-i18n-aria-label="search.label">
+        </div>
+        <div class="language-switcher" data-language-switcher>
+          <button class="nav-control" type="button" aria-haspopup="true" aria-expanded="false" data-language-toggle>
+            <span class="nav-control-left"><span aria-hidden="true">🌐</span><strong data-language-label></strong></span>
+            <i class="bi bi-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="language-menu" role="menu" data-language-menu></div>
+        </div>
+        <button class="nav-control theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
+          <span class="nav-control-left"><i class="bi bi-sun" aria-hidden="true"></i><strong data-theme-label></strong></span>
+        </button>
+      </div>
+      <div class="nav-tree" data-nav-tree></div>
     </div>
   </nav>
 
@@ -1174,12 +1195,157 @@
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const themeToggle = document.querySelector('[data-theme-toggle]');
   const themeLabel = document.querySelector('[data-theme-label]');
+  const languageSwitcher = document.querySelector('[data-language-switcher]');
+  const languageToggle = document.querySelector('[data-language-toggle]');
+  const languageLabel = document.querySelector('[data-language-label]');
+  const languageMenu = document.querySelector('[data-language-menu]');
+  const navTree = document.querySelector('[data-nav-tree]');
   const savedTheme = localStorage.getItem('golova-theme');
+  const savedLanguage = localStorage.getItem('golova-language') || 'ru';
+  const supportedLanguages = ['ru', 'en', 'es'];
+  const enabledLanguages = ['ru'];
+  let activeLanguage = enabledLanguages.includes(savedLanguage) ? savedLanguage : 'ru';
+  let messages = {};
+
+  const navigationTree = [
+    {
+      type: 'links',
+      items: [
+        { id: 'overview', href: '#overview', label: 'menu.overview' },
+        { id: 'getting-started', href: '#usage', label: 'menu.gettingStarted' },
+        { id: 'design-principles', href: '#philosophy', label: 'menu.designPrinciples' },
+        { id: 'system-architecture', href: '#architecture', label: 'menu.systemArchitecture' }
+      ]
+    },
+    {
+      id: 'foundations',
+      label: 'menu.foundations',
+      items: [
+        { id: 'brand', href: '#brand', label: 'menu.brand' },
+        { id: 'color', href: '#color', label: 'menu.color' },
+        { id: 'typography', href: '#type', label: 'menu.typography' },
+        { id: 'icons', href: '#icons', label: 'menu.icons' },
+        { id: 'spacing', href: '#space', label: 'menu.spacing' },
+        { id: 'radius', href: '#radius', label: 'menu.radius' },
+        { id: 'shadows', href: '#shadow', label: 'menu.shadows' },
+        { id: 'motion', href: '#motion', label: 'menu.motion' }
+      ]
+    },
+    {
+      id: 'assets',
+      label: 'menu.assets',
+      items: [
+        { id: 'logo', href: '#logo', label: 'menu.logo' },
+        { id: 'asset-icons', href: '#asset-icons', label: 'menu.icons' },
+        { id: 'illustrations', href: '#illustrations', label: 'menu.illustrations' }
+      ]
+    },
+    {
+      id: 'components',
+      label: 'menu.components',
+      items: [
+        { id: 'buttons', href: '#buttons', label: 'menu.buttons' },
+        { id: 'badges', href: '#badges', label: 'menu.badges' },
+        { id: 'fields', href: '#fields', label: 'menu.fields' },
+        { id: 'tables', href: '#tables', label: 'menu.tables' },
+        { id: 'tabs', href: '#tabs', label: 'menu.tabs' },
+        { id: 'forms', href: '#forms', label: 'menu.forms' },
+        { id: 'cards', href: '#card', label: 'menu.cards' },
+        { id: 'modals', href: '#modals', label: 'menu.modals' },
+        { id: 'dropdown', href: '#dropdown', label: 'menu.dropdown' },
+        { id: 'tooltip', href: '#tooltip', label: 'menu.tooltip' },
+        { id: 'toast', href: '#toast', label: 'menu.toast' },
+        { id: 'pagination', href: '#pagination', label: 'menu.pagination' },
+        { id: 'tree', href: '#tree', label: 'menu.tree' }
+      ]
+    },
+    {
+      id: 'patterns',
+      label: 'menu.patterns',
+      items: [
+        { id: 'search', href: '#search', label: 'menu.search' },
+        { id: 'filtering', href: '#filtering', label: 'menu.filtering' },
+        { id: 'bulk-actions', href: '#bulk-actions', label: 'menu.bulkActions' },
+        { id: 'empty-states', href: '#empty-states', label: 'menu.emptyStates' },
+        { id: 'navigation', href: '#navigation', label: 'menu.navigation' },
+        { id: 'errors', href: '#errors', label: 'menu.errors' },
+        { id: 'file-upload', href: '#file-upload', label: 'menu.fileUpload' }
+      ]
+    },
+    {
+      id: 'templates',
+      label: 'menu.templates',
+      items: [
+        { id: 'dashboard-template', href: '#dashboard-template', label: 'menu.dashboard' },
+        { id: 'table-page-template', href: '#table-page-template', label: 'menu.tablePage' },
+        { id: 'form-page-template', href: '#form-page-template', label: 'menu.formPage' },
+        { id: 'marketplace-template', href: '#marketplace-template', label: 'menu.marketplace' },
+        { id: 'settings-template', href: '#settings-template', label: 'menu.settings' }
+      ]
+    },
+    {
+      id: 'documentation',
+      label: 'menu.documentation',
+      items: [
+        { id: 'changelog', href: '#changelog', label: 'menu.changelog' }
+      ]
+    }
+  ];
+
+  function t(key){
+    return key.split('.').reduce((value, part) => value && value[part], messages) || key;
+  }
+
+  async function loadMessages(language){
+    const response = await fetch(`locales/${language}.json`);
+    if (!response.ok) throw new Error(`Cannot load locale: ${language}`);
+    messages = await response.json();
+    root.lang = language;
+  }
+
+  function applyI18n(){
+    document.querySelectorAll('[data-i18n]').forEach((node) => {
+      node.textContent = t(node.dataset.i18n);
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach((node) => {
+      node.setAttribute('placeholder', t(node.dataset.i18nPlaceholder));
+    });
+    document.querySelectorAll('[data-i18n-aria-label]').forEach((node) => {
+      node.setAttribute('aria-label', t(node.dataset.i18nAriaLabel));
+    });
+    languageLabel.textContent = t(`language.${activeLanguage}`);
+  }
+
+  function renderLanguageMenu(){
+    languageMenu.innerHTML = supportedLanguages.map((language) => {
+      const isCurrent = language === activeLanguage;
+      const disabled = !enabledLanguages.includes(language);
+      const check = isCurrent ? '✓' : '';
+      const soon = disabled ? `<span class="language-soon">${t('language.soon')}</span>` : '';
+      return `<button class="language-option${isCurrent ? ' is-current' : ''}" type="button" role="menuitem" data-language="${language}"${disabled ? ' disabled aria-disabled="true"' : ''}><span>${check} ${t(`language.${language}`)}</span>${soon}</button>`;
+    }).join('');
+  }
+
+  function createNavItem(item){
+    return `<a class="nav-item" href="${item.href}" data-nav-id="${item.id}" data-route="${item.href}">${t(item.label)}</a>`;
+  }
+
+  function renderNavigation(){
+    navTree.innerHTML = navigationTree.map((group) => {
+      if (group.type === 'links') return group.items.map(createNavItem).join('');
+      return `<section class="nav-section" data-nav-section="${group.id}">
+        <button class="nav-parent" type="button" aria-expanded="false" data-nav-parent="${group.id}">
+          <span>${t(group.label)}</span><i class="bi bi-chevron-right" aria-hidden="true"></i>
+        </button>
+        <div class="nav-children" data-nav-children="${group.id}">${group.items.map(createNavItem).join('')}</div>
+      </section>`;
+    }).join('');
+  }
 
   function setMenu(open){
     sideNav.classList.toggle('is-open', open);
     menuToggle.setAttribute('aria-expanded', String(open));
-    menuToggle.setAttribute('aria-label', open ? 'Закрыть меню' : 'Открыть меню');
+    menuToggle.setAttribute('aria-label', open ? t('app.closeMenu') : t('app.openMenu'));
     menuToggle.querySelector('.bi').className = open ? 'bi bi-x-lg' : 'bi bi-list';
   }
 
@@ -1187,23 +1353,108 @@
     const isDark = theme === 'dark';
     root.dataset.theme = isDark ? 'dark' : 'light';
     themeToggle.setAttribute('aria-pressed', String(isDark));
-    themeLabel.textContent = isDark ? 'Темная' : 'Светлая';
-    themeToggle.querySelector('.bi').className = isDark ? 'bi bi-sun' : 'bi bi-moon';
+    themeLabel.textContent = isDark ? t('theme.dark') : t('theme.light');
+    themeToggle.querySelector('.bi').className = isDark ? 'bi bi-moon' : 'bi bi-sun';
     localStorage.setItem('golova-theme', root.dataset.theme);
   }
 
-  setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+  function getRouteKey(url){
+    return `${url.pathname}${url.hash || '#overview'}`;
+  }
+
+  function setActiveLink(){
+    const navLinks = Array.from(navTree.querySelectorAll('.nav-item'));
+    const currentRoute = getRouteKey(window.location);
+    let activeLink = navLinks.find((link) => {
+      const linkUrl = new URL(link.getAttribute('href'), window.location.href);
+      return getRouteKey(linkUrl) === currentRoute;
+    });
+    if (!activeLink) activeLink = navLinks[0];
+
+    navLinks.forEach((link) => {
+      const isActive = link === activeLink;
+      link.classList.toggle('active', isActive);
+      if (isActive) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+
+    navTree.querySelectorAll('.nav-section').forEach((section) => {
+      const parent = section.querySelector('.nav-parent');
+      const containsActive = Boolean(section.querySelector('.nav-item.active'));
+      section.classList.toggle('is-active', containsActive);
+      section.classList.toggle('is-open', containsActive || section.dataset.userOpen === 'true');
+      parent.classList.toggle('is-active', containsActive);
+      parent.setAttribute('aria-expanded', String(section.classList.contains('is-open')));
+    });
+  }
+
+  function bindNavigation(){
+    navTree.addEventListener('click', (event) => {
+      const parent = event.target.closest('[data-nav-parent]');
+      if (parent) {
+        const section = parent.closest('.nav-section');
+        const hasActiveChild = Boolean(section.querySelector('.nav-item.active'));
+        const open = hasActiveChild ? true : !section.classList.contains('is-open');
+        section.dataset.userOpen = String(open);
+        section.classList.toggle('is-open', open);
+        parent.setAttribute('aria-expanded', String(open));
+        return;
+      }
+
+      const link = event.target.closest('.nav-item');
+      if (!link) return;
+      if (window.matchMedia('(max-width: 960px)').matches) setMenu(false);
+      window.requestAnimationFrame(setActiveLink);
+    });
+  }
+
+  function bindLanguage(){
+    languageToggle.addEventListener('click', () => {
+      const open = !languageSwitcher.classList.contains('is-open');
+      languageSwitcher.classList.toggle('is-open', open);
+      languageToggle.setAttribute('aria-expanded', String(open));
+    });
+    languageMenu.addEventListener('click', async (event) => {
+      const option = event.target.closest('[data-language]');
+      if (!option || option.disabled) return;
+      activeLanguage = option.dataset.language;
+      localStorage.setItem('golova-language', activeLanguage);
+      await loadMessages(activeLanguage);
+      applyI18n();
+      renderLanguageMenu();
+      renderNavigation();
+      setTheme(root.dataset.theme);
+      setActiveLink();
+      languageSwitcher.classList.remove('is-open');
+      languageToggle.setAttribute('aria-expanded', 'false');
+    });
+    document.addEventListener('click', (event) => {
+      if (languageSwitcher.contains(event.target)) return;
+      languageSwitcher.classList.remove('is-open');
+      languageToggle.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  async function initNavigation(){
+    await loadMessages(activeLanguage);
+    applyI18n();
+    renderLanguageMenu();
+    renderNavigation();
+    bindNavigation();
+    bindLanguage();
+    setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+    setActiveLink();
+  }
+
   menuToggle.addEventListener('click', () => {
     setMenu(!sideNav.classList.contains('is-open'));
-  });
-  sideNav.querySelectorAll('.nav-panel a').forEach((link) => {
-    link.addEventListener('click', () => {
-      if (window.matchMedia('(max-width: 960px)').matches) setMenu(false);
-    });
   });
   themeToggle.addEventListener('click', () => {
     setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
   });
+  window.addEventListener('hashchange', setActiveLink);
+  window.addEventListener('popstate', setActiveLink);
+  initNavigation();
 </script>
 </body>
 </html>

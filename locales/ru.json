@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "language": "Русский"
+  },
+  "app": {
+    "title": "Design System",
+    "openMenu": "Открыть меню",
+    "closeMenu": "Закрыть меню"
+  },
+  "search": {
+    "placeholder": "Search documentation...",
+    "label": "Поиск по документации"
+  },
+  "language": {
+    "label": "Язык документации",
+    "current": "Русский",
+    "ru": "Русский",
+    "en": "English",
+    "es": "Español",
+    "soon": "Soon"
+  },
+  "theme": {
+    "light": "Светлая",
+    "dark": "Темная"
+  },
+  "menu": {
+    "overview": "Обзор",
+    "gettingStarted": "Getting Started",
+    "designPrinciples": "Принципы дизайна",
+    "systemArchitecture": "Архитектура системы",
+    "foundations": "FOUNDATIONS",
+    "brand": "Бренд",
+    "color": "Цвет",
+    "typography": "Типографика",
+    "icons": "Иконки",
+    "spacing": "Отступы",
+    "radius": "Скругления",
+    "shadows": "Тени",
+    "motion": "Motion",
+    "assets": "ASSETS",
+    "logo": "Логотип",
+    "illustrations": "Иллюстрации",
+    "components": "COMPONENTS",
+    "buttons": "Кнопки",
+    "badges": "Бейджи",
+    "fields": "Поля",
+    "tables": "Таблицы",
+    "tabs": "Tabs",
+    "forms": "Формы",
+    "cards": "Карточки",
+    "modals": "Модальные окна",
+    "dropdown": "Dropdown",
+    "tooltip": "Tooltip",
+    "toast": "Toast",
+    "pagination": "Pagination",
+    "tree": "Tree",
+    "patterns": "PATTERNS",
+    "search": "Поиск",
+    "filtering": "Фильтрация",
+    "bulkActions": "Массовые действия",
+    "emptyStates": "Пустые состояния",
+    "navigation": "Навигация",
+    "errors": "Ошибки",
+    "fileUpload": "Загрузка файлов",
+    "templates": "TEMPLATES",
+    "dashboard": "Dashboard",
+    "tablePage": "Table Page",
+    "formPage": "Form Page",
+    "marketplace": "Marketplace",
+    "settings": "Settings",
+    "documentation": "DOCUMENTATION",
+    "changelog": "Changelog"
+  }
+}

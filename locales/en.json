@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "language": "English"
+  },
+  "app": {
+    "title": "Design System",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "search": {
+    "placeholder": "Search documentation...",
+    "label": "Search documentation"
+  },
+  "language": {
+    "label": "Documentation language",
+    "current": "English",
+    "ru": "Русский",
+    "en": "English",
+    "es": "Español",
+    "soon": "Soon"
+  },
+  "theme": {
+    "light": "Light",
+    "dark": "Dark"
+  },
+  "menu": {
+    "overview": "Overview",
+    "gettingStarted": "Getting Started",
+    "designPrinciples": "Design Principles",
+    "systemArchitecture": "System Architecture",
+    "foundations": "FOUNDATIONS",
+    "brand": "Brand",
+    "color": "Color",
+    "typography": "Typography",
+    "icons": "Icons",
+    "spacing": "Spacing",
+    "radius": "Radius",
+    "shadows": "Shadows",
+    "motion": "Motion",
+    "assets": "ASSETS",
+    "logo": "Logo",
+    "illustrations": "Illustrations",
+    "components": "COMPONENTS",
+    "buttons": "Buttons",
+    "badges": "Badges",
+    "fields": "Fields",
+    "tables": "Tables",
+    "tabs": "Tabs",
+    "forms": "Forms",
+    "cards": "Cards",
+    "modals": "Modal Windows",
+    "dropdown": "Dropdown",
+    "tooltip": "Tooltip",
+    "toast": "Toast",
+    "pagination": "Pagination",
+    "tree": "Tree",
+    "patterns": "PATTERNS",
+    "search": "Search",
+    "filtering": "Filtering",
+    "bulkActions": "Bulk Actions",
+    "emptyStates": "Empty States",
+    "navigation": "Navigation",
+    "errors": "Errors",
+    "fileUpload": "File Upload",
+    "templates": "TEMPLATES",
+    "dashboard": "Dashboard",
+    "tablePage": "Table Page",
+    "formPage": "Form Page",
+    "marketplace": "Marketplace",
+    "settings": "Settings",
+    "documentation": "DOCUMENTATION",
+    "changelog": "Changelog"
+  }
+}

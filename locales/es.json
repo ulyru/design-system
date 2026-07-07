@@ -1,0 +1,74 @@
+{
+  "meta": {
+    "language": "Español"
+  },
+  "app": {
+    "title": "Design System",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
+  },
+  "search": {
+    "placeholder": "Search documentation...",
+    "label": "Buscar documentación"
+  },
+  "language": {
+    "label": "Idioma de documentación",
+    "current": "Español",
+    "ru": "Русский",
+    "en": "English",
+    "es": "Español",
+    "soon": "Soon"
+  },
+  "theme": {
+    "light": "Claro",
+    "dark": "Oscuro"
+  },
+  "menu": {
+    "overview": "Resumen",
+    "gettingStarted": "Getting Started",
+    "designPrinciples": "Principios de Diseño",
+    "systemArchitecture": "Arquitectura del Sistema",
+    "foundations": "FOUNDATIONS",
+    "brand": "Marca",
+    "color": "Color",
+    "typography": "Tipografía",
+    "icons": "Iconos",
+    "spacing": "Espaciado",
+    "radius": "Radios",
+    "shadows": "Sombras",
+    "motion": "Motion",
+    "assets": "ASSETS",
+    "logo": "Logo",
+    "illustrations": "Ilustraciones",
+    "components": "COMPONENTS",
+    "buttons": "Botones",
+    "badges": "Badges",
+    "fields": "Campos",
+    "tables": "Tablas",
+    "tabs": "Tabs",
+    "forms": "Formularios",
+    "cards": "Tarjetas",
+    "modals": "Ventanas Modales",
+    "dropdown": "Dropdown",
+    "tooltip": "Tooltip",
+    "toast": "Toast",
+    "pagination": "Pagination",
+    "tree": "Tree",
+    "patterns": "PATTERNS",
+    "search": "Búsqueda",
+    "filtering": "Filtrado",
+    "bulkActions": "Acciones Masivas",
+    "emptyStates": "Estados Vacíos",
+    "navigation": "Navegación",
+    "errors": "Errores",
+    "fileUpload": "Carga de Archivos",
+    "templates": "TEMPLATES",
+    "dashboard": "Dashboard",
+    "tablePage": "Table Page",
+    "formPage": "Form Page",
+    "marketplace": "Marketplace",
+    "settings": "Settings",
+    "documentation": "DOCUMENTATION",
+    "changelog": "Changelog"
+  }
+}
