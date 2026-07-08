@@ -23,7 +23,11 @@
 
 :root{
   /* ================= FONT FAMILIES ================= */
-  --font-body:"Roboto Flex","Roboto",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-ui-roboto:"Roboto Flex","Roboto",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-ui-system:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-ui-arial:Arial,Helvetica,sans-serif;
+  --font-ui-active:var(--font-ui-roboto);
+  --font-body:var(--font-ui-active);
   --font-mono:"PragmataPro Mono","IBM Plex Mono",SFMono-Regular,Consolas,monospace; /* logo + decorative only */
 
   /* ================= COLLECTION 1 — PRIMITIVE / NEUTRAL ================= */
@@ -173,6 +177,21 @@
 
   /* ================= MOTION ================= */
   --ease:cubic-bezier(.4,0,.2,1);
+}
+
+:root[data-ui-font="roboto"],
+[data-ui-font="roboto"]{
+  --font-ui-active:var(--font-ui-roboto);
+}
+
+:root[data-ui-font="system"],
+[data-ui-font="system"]{
+  --font-ui-active:var(--font-ui-system);
+}
+
+:root[data-ui-font="arial"],
+[data-ui-font="arial"]{
+  --font-ui-active:var(--font-ui-arial);
 }
 
 [data-theme="dark"],
