@@ -6,9 +6,10 @@
    ========================================================= */
 
 /* ---- fonts ---- */
-/* Roboto Flex — open-source (Apache 2.0), loaded from Google Fonts.
-   Used for all UI text: headings, body, labels, controls. */
+/* Roboto Flex and Inter — open-source UI fonts loaded from Google Fonts.
+   The active UI font is selected via data-ui-font on the root element. */
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,400;8..144,500;8..144,600;8..144,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 @font-face{
   font-family:"PragmataPro Mono";
@@ -18,17 +19,17 @@
   font-display:swap;
 }
 /* PragmataPro — licensed, web tier (1 site / 10k pageviews·mo per FSD EULA).
-   Reserved for the logotype and decorative/display text only — never body copy.
    Only Regular is web-licensed today; register Bold/Italic here if purchased. */
 
 :root{
   /* ================= FONT FAMILIES ================= */
   --font-ui-roboto:"Roboto Flex","Roboto",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-  --font-ui-system:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
-  --font-ui-arial:Arial,Helvetica,sans-serif;
+  --font-ui-inter:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --font-ui-pragmata:"PragmataPro Mono","IBM Plex Mono",SFMono-Regular,Consolas,monospace;
   --font-ui-active:var(--font-ui-roboto);
+  --font-ui-letter-spacing:0;
   --font-body:var(--font-ui-active);
-  --font-mono:"PragmataPro Mono","IBM Plex Mono",SFMono-Regular,Consolas,monospace; /* logo + decorative only */
+  --font-mono:var(--font-ui-pragmata);
 
   /* ================= COLLECTION 1 — PRIMITIVE / NEUTRAL ================= */
   --neutral-90:#333333;
@@ -184,14 +185,28 @@
   --font-ui-active:var(--font-ui-roboto);
 }
 
-:root[data-ui-font="system"],
-[data-ui-font="system"]{
-  --font-ui-active:var(--font-ui-system);
+:root[data-ui-font="inter"],
+[data-ui-font="inter"]{
+  --font-ui-active:var(--font-ui-inter);
 }
 
-:root[data-ui-font="arial"],
-[data-ui-font="arial"]{
-  --font-ui-active:var(--font-ui-arial);
+:root[data-ui-font="pragmata"],
+[data-ui-font="pragmata"]{
+  --font-ui-active:var(--font-ui-pragmata);
+  --font-ui-letter-spacing:-.3px;
+}
+
+[data-ui-font="pragmata"] body,
+[data-ui-font="pragmata"] button,
+[data-ui-font="pragmata"] input,
+[data-ui-font="pragmata"] select,
+[data-ui-font="pragmata"] textarea{
+  font-weight:400;
+  letter-spacing:var(--font-ui-letter-spacing);
+}
+
+[data-ui-font="pragmata"] body{
+  line-height:18px;
 }
 
 [data-theme="dark"],

@@ -23,6 +23,9 @@
     "light": "Claro",
     "dark": "Oscuro"
   },
+  "font": {
+    "label": "Selector de fuente de interfaz"
+  },
   "menu": {
     "overview": "Resumen",
     "gettingStarted": "Getting Started",

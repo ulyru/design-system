@@ -23,6 +23,9 @@
     "light": "Светлая",
     "dark": "Темная"
   },
+  "font": {
+    "label": "Выбор шрифта интерфейса"
+  },
   "menu": {
     "overview": "Обзор",
     "gettingStarted": "Getting Started",

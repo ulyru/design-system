@@ -16,7 +16,7 @@
   .nav-head{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-bottom:22px; margin-bottom:16px; border-bottom:1px solid rgba(201,208,221,.14);}
   .nav-product{display:flex; align-items:center; gap:12px; min-width:0;}
   .nav-product-mark{display:block; width:22px; height:22px; flex:0 0 auto;}
-  .nav-product-title{font-family:var(--font-mono); font-size:17px; font-weight:400; letter-spacing:-2px; color:var(--surface-inverse-text); white-space:nowrap;}
+  .nav-product-title{font-family:var(--font-body); font-size:17px; font-weight:400; letter-spacing:var(--font-ui-letter-spacing); color:var(--surface-inverse-text); white-space:nowrap;}
   .brand-lockup{display:block;height:24px;width:auto;}
   .mobile-menu-toggle{display:none; align-items:center; justify-content:center; width:36px; height:36px; color:var(--surface-inverse-text); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); cursor:pointer;}
   .mobile-menu-toggle:focus-visible{outline:none; box-shadow:var(--shadow-focus-ring);}
@@ -26,6 +26,12 @@
   .nav-control:focus-visible{outline:none; box-shadow:var(--shadow-focus-ring);}
   .nav-control-left{display:flex; align-items:center; gap:8px; min-width:0;}
   .nav-control strong{font-weight:500;}
+  .font-select-wrap{position:relative;}
+  .font-select-wrap .bi-type{position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--surface-inverse-muted); font-size:13px; pointer-events:none;}
+  .font-select{width:100%; height:38px; color:var(--surface-inverse-muted); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); padding:0 30px 0 32px; font:inherit; font-size:12.5px; cursor:pointer; outline:none; appearance:none;}
+  .font-select:hover{color:var(--surface-inverse-text); background:var(--surface-inverse-hover);}
+  .font-select:focus{border-color:rgba(73,118,244,.72); box-shadow:0 0 0 2px rgba(73,118,244,.18);}
+  .font-select-wrap .bi-chevron-down{position:absolute; right:10px; top:50%; transform:translateY(-50%); color:var(--surface-inverse-muted); font-size:12px; pointer-events:none;}
   .language-switcher{position:relative;}
   .language-menu{display:none; position:absolute; z-index:20; left:0; right:0; top:calc(100% + 6px); background:var(--surface-inverse); border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-md); padding:6px; box-shadow:var(--shadow-float);}
   .language-switcher.is-open .language-menu{display:grid; gap:2px;}
@@ -42,9 +48,9 @@
   .nav-search input:focus{border-color:rgba(73,118,244,.72); box-shadow:0 0 0 2px rgba(73,118,244,.18);}
   .nav-tree{display:grid; gap:2px; padding-top:2px;}
   .nav-section{padding-top:18px; margin-top:18px; border-top:1px solid rgba(201,208,221,.12);}
-  .nav-section-title{color:rgba(201,208,221,.48); padding:0 8px 10px 0; font-family:var(--font-mono); font-size:10.5px; font-weight:400; letter-spacing:0; text-transform:uppercase;}
+  .nav-section-title{color:rgba(201,208,221,.48); padding:0 8px 10px 0; font-family:var(--font-body); font-size:10.5px; font-weight:400; letter-spacing:var(--font-ui-letter-spacing); text-transform:uppercase;}
   .nav-children{display:grid; gap:3px;}
-  .nav-item{position:relative; display:block; color:var(--surface-inverse-muted); background:transparent; text-decoration:none; font-family:var(--font-mono); font-size:13.5px; font-weight:400; letter-spacing:0; padding:8px 10px 8px 16px; border-radius:0 4px 4px 0; margin-bottom:1px; transition:color .15s var(--ease), background-color .15s var(--ease);}
+  .nav-item{position:relative; display:block; color:var(--surface-inverse-muted); background:transparent; text-decoration:none; font-family:var(--font-body); font-size:13.5px; font-weight:400; letter-spacing:var(--font-ui-letter-spacing); padding:8px 10px 8px 16px; border-radius:0 4px 4px 0; margin-bottom:1px; transition:color .15s var(--ease), background-color .15s var(--ease);}
   .nav-item:hover{color:var(--surface-inverse-text); background:rgba(255,255,255,.04);}
   .nav-item.active{color:var(--surface-inverse-text); background:rgba(255,255,255,.018);}
   .nav-item.active::before{content:""; position:absolute; left:0; top:7px; bottom:7px; width:2px; background:#4976F4; border-radius:var(--radius-pill);}
@@ -227,6 +233,15 @@
         <button class="nav-control theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
           <span class="nav-control-left"><i class="bi bi-sun" aria-hidden="true"></i><strong data-theme-label></strong></span>
         </button>
+        <div class="font-select-wrap">
+          <i class="bi bi-type" aria-hidden="true"></i>
+          <select class="font-select" data-font-select data-i18n-aria-label="font.label">
+            <option value="roboto">Roboto Flex</option>
+            <option value="inter">Inter</option>
+            <option value="pragmata">Pragmata Pro</option>
+          </select>
+          <i class="bi bi-chevron-down" aria-hidden="true"></i>
+        </div>
       </div>
       <div class="nav-tree" data-nav-tree>
         <a class="nav-item" href="#overview">Обзор</a>
@@ -415,7 +430,7 @@
     <section id="type">
       <div class="tag-eyebrow">Основы</div>
       <h2>Типографика</h2>
-      <p class="desc">UI-шрифт в продукте переключаемый. Компоненты всегда используют <code class="inline">--font-body</code>, а конкретная гарнитура выбирается через <code class="inline">data-ui-font</code>. PragmataPro — только логотип и декоративные акценты, не для чтения.</p>
+      <p class="desc">UI-шрифт в продукте переключаемый. Компоненты всегда используют <code class="inline">--font-body</code>, а конкретная гарнитура выбирается через <code class="inline">data-ui-font</code>. Доступные варианты: Roboto Flex, Inter, Pragmata Pro.</p>
       <div class="font-cards">
         <div class="font-card">
           <div class="role">UI / Default — Roboto Flex</div>
@@ -424,16 +439,16 @@
           <div class="use">Шрифт по умолчанию для интерфейса: заголовки, тело, формы, кнопки, таблицы.</div>
         </div>
         <div class="font-card">
-          <div class="role">UI / User Choice</div>
-          <div class="big" style="font-family:var(--font-ui-arial);">Audiotechnik Y8</div>
-          <div class="name">System / Arial fallback</div>
-          <div class="use">Пользовательская настройка меняет только значение <code class="inline">--font-body</code>; размеры, line-height и веса не меняются.</div>
+          <div class="role">UI / Option — Inter</div>
+          <div class="big" style="font-family:var(--font-ui-inter);">Audiotechnik Y8</div>
+          <div class="name">Inter, 400–700</div>
+          <div class="use">Нейтральный интерфейсный вариант. Подключается через <code class="inline">data-ui-font="inter"</code>.</div>
         </div>
         <div class="font-card">
-          <div class="role">Display / Logo — Mono</div>
-          <div class="big mono">golova.system</div>
-          <div class="name">PragmataPro Mono, Regular (400)</div>
-          <div class="use">Логотип, hero-заголовки, декоративные акценты. Точечно — не тело текста.</div>
+          <div class="role">UI / Option — Pragmata Pro</div>
+          <div class="big" style="font-family:var(--font-ui-pragmata); letter-spacing:-.3px;">golova.system</div>
+          <div class="name">PragmataPro Mono Regular</div>
+          <div class="use">Regular · line-height 18 px · letter-spacing -0.3 px. Подключается через <code class="inline">data-ui-font="pragmata"</code>.</div>
         </div>
       </div>
       <div style="margin-top:28px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:24px 28px;">
@@ -452,13 +467,13 @@
         <div class="usage-table">
           <div class="usage-col"><h4>Token</h4>
             <div class="usage-row"><span>font/ui/roboto</span><span class="token">default</span></div>
-            <div class="usage-row"><span>font/ui/system</span><span class="token">native UI</span></div>
-            <div class="usage-row"><span>font/ui/arial</span><span class="token">Arial fallback</span></div>
+            <div class="usage-row"><span>font/ui/inter</span><span class="token">secondary</span></div>
+            <div class="usage-row"><span>font/ui/pragmata</span><span class="token">mono UI</span></div>
           </div>
           <div class="usage-col"><h4>Runtime</h4>
             <div class="usage-row"><span>default</span><span class="token">data-ui-font="roboto"</span></div>
-            <div class="usage-row"><span>system</span><span class="token">data-ui-font="system"</span></div>
-            <div class="usage-row"><span>arial</span><span class="token">data-ui-font="arial"</span></div>
+            <div class="usage-row"><span>inter</span><span class="token">data-ui-font="inter"</span></div>
+            <div class="usage-row"><span>pragmata</span><span class="token">data-ui-font="pragmata"</span></div>
           </div>
         </div>
         <pre class="code-sample"><code>&lt;html data-ui-font="roboto"&gt;
@@ -1450,15 +1465,18 @@ body {
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const themeToggle = document.querySelector('[data-theme-toggle]');
   const themeLabel = document.querySelector('[data-theme-label]');
+  const fontSelect = document.querySelector('[data-font-select]');
   const languageSwitcher = document.querySelector('[data-language-switcher]');
   const languageToggle = document.querySelector('[data-language-toggle]');
   const languageLabel = document.querySelector('[data-language-label]');
   const languageMenu = document.querySelector('[data-language-menu]');
   const navTree = document.querySelector('[data-nav-tree]');
   const savedTheme = localStorage.getItem('golova-theme');
+  const savedFont = localStorage.getItem('golova-ui-font') || 'roboto';
   const savedLanguage = localStorage.getItem('golova-language') || 'ru';
   const supportedLanguages = ['ru', 'en', 'es'];
   const enabledLanguages = ['ru'];
+  const supportedFonts = ['roboto', 'inter', 'pragmata'];
   let activeLanguage = enabledLanguages.includes(savedLanguage) ? savedLanguage : 'ru';
   const fallbackMessages = {
     app: {
@@ -1479,6 +1497,9 @@ body {
     theme: {
       light: 'Светлая',
       dark: 'Темная'
+    },
+    font: {
+      label: 'Выбор шрифта интерфейса'
     }
   };
   let messages = fallbackMessages;
@@ -1535,6 +1556,13 @@ body {
     themeLabel.textContent = isDark ? t('theme.dark') : t('theme.light');
     themeToggle.querySelector('.bi').className = isDark ? 'bi bi-moon' : 'bi bi-sun';
     localStorage.setItem('golova-theme', root.dataset.theme);
+  }
+
+  function setUIFont(font){
+    const nextFont = supportedFonts.includes(font) ? font : 'roboto';
+    root.dataset.uiFont = nextFont;
+    fontSelect.value = nextFont;
+    localStorage.setItem('golova-ui-font', nextFont);
   }
 
   function getRouteKey(url){
@@ -1623,6 +1651,7 @@ body {
     bindNavigation();
     bindLanguage();
     setTheme(savedTheme === 'dark' ? 'dark' : 'light');
+    setUIFont(savedFont);
     setActiveLink();
   }
 
@@ -1631,6 +1660,9 @@ body {
   });
   themeToggle.addEventListener('click', () => {
     setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+  fontSelect.addEventListener('change', () => {
+    setUIFont(fontSelect.value);
   });
   window.addEventListener('hashchange', setActiveLink);
   window.addEventListener('popstate', setActiveLink);

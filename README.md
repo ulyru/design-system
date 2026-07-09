@@ -32,7 +32,7 @@ Live version: <https://golova-ds.rubashkin.xyz>
 - Use SaaS platform tokens for product handoff naming: `content-neutral-*`, `content-informative`, `background-primary`, `border-informative`, `category-equipment`, `warning-rating`, etc.
 - Forms are intentionally angular and use `--radius-form` (`4px`); the switch track is the only pill-shaped form control.
 - Rating stars use the official `warning/rating` token: `--warning-rating:#F5A623`.
-- UI typography is routed through `--font-body`; the active family can switch via `data-ui-font="roboto|system|arial"`. PragmataPro Mono is reserved for logo/decorative/display accents, not body copy.
+- UI typography is routed through `--font-body`; the active family can switch via `data-ui-font="roboto|inter|pragmata"`.
 
 ## Verification
 
