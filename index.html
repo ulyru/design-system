@@ -26,18 +26,12 @@
   .nav-control:focus-visible{outline:none; box-shadow:var(--shadow-focus-ring);}
   .nav-control-left{display:flex; align-items:center; gap:8px; min-width:0;}
   .nav-control strong{font-weight:500;}
-  .font-select-wrap{position:relative;}
-  .font-select-wrap .bi-type{position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--surface-inverse-muted); font-size:13px; pointer-events:none;}
-  .font-select{width:100%; height:38px; color:var(--surface-inverse-muted); background:transparent; border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-form); padding:0 30px 0 32px; font:inherit; font-size:12.5px; cursor:pointer; outline:none; appearance:none;}
-  .font-select:hover{color:var(--surface-inverse-text); background:var(--surface-inverse-hover);}
-  .font-select:focus{border-color:rgba(73,118,244,.72); box-shadow:0 0 0 2px rgba(73,118,244,.18);}
-  .font-select-wrap .bi-chevron-down{position:absolute; right:10px; top:50%; transform:translateY(-50%); color:var(--surface-inverse-muted); font-size:12px; pointer-events:none;}
-  .language-switcher{position:relative;}
-  .language-menu{display:none; position:absolute; z-index:20; left:0; right:0; top:calc(100% + 6px); background:var(--surface-inverse); border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-md); padding:6px; box-shadow:var(--shadow-float);}
-  .language-switcher.is-open .language-menu{display:grid; gap:2px;}
-  .language-option{width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--surface-inverse-muted); background:transparent; border:0; border-radius:var(--radius-form); padding:8px 8px; font:inherit; font-size:12.5px; text-align:left; cursor:pointer;}
-  .language-option:hover{background:rgba(255,255,255,.04); color:var(--surface-inverse-text);}
-  .language-option.is-current{color:var(--surface-inverse-text);}
+  .language-switcher,.font-switcher{position:relative;}
+  .language-menu,.font-menu{display:none; position:absolute; z-index:20; left:0; right:0; top:calc(100% + 6px); background:var(--surface-inverse); border:1px solid var(--surface-inverse-hover); border-radius:var(--radius-md); padding:6px; box-shadow:var(--shadow-float);}
+  .language-switcher.is-open .language-menu,.font-switcher.is-open .font-menu{display:grid; gap:2px;}
+  .language-option,.font-option{width:100%; display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--surface-inverse-muted); background:transparent; border:0; border-radius:var(--radius-form); padding:8px 8px; font:inherit; font-size:12.5px; text-align:left; cursor:pointer;}
+  .language-option:hover,.font-option:hover{background:rgba(255,255,255,.04); color:var(--surface-inverse-text);}
+  .language-option.is-current,.font-option.is-current{color:var(--surface-inverse-text);}
   .language-option[disabled]{cursor:not-allowed; opacity:.48;}
   .language-option[disabled]:hover{background:transparent; color:var(--surface-inverse-muted);}
   .language-soon{font-size:10.5px; color:var(--surface-inverse-subtle);}
@@ -147,6 +141,16 @@
   .font-card .big{font-size:28px; margin-bottom:6px;}
   .font-card .name{font-size:13px; color:var(--text-primary); font-weight:600;}
   .font-card .use{font-size:12.5px; color:var(--text-secondary); margin-top:4px;}
+  .typeface-preview{border:1px solid var(--border-default); border-radius:var(--radius-lg); background:var(--bg-card); padding:28px 32px; max-width:720px;}
+  .typeface-preview-title{font-size:18px; margin:0 0 18px; color:var(--text-primary);}
+  .typeface-preview-sample{font-family:var(--font-body); font-size:22px; line-height:1.35; letter-spacing:var(--font-ui-letter-spacing); color:var(--text-primary); white-space:pre-line; margin:0;}
+  .typeface-preview-divider{height:1px; background:var(--border-default); margin:22px 0;}
+  .typeface-preview-meta{display:grid; gap:10px;}
+  .typeface-preview-meta .usage-row{font-size:12.5px; padding:0; border:0;}
+  .typeface-preview-list{margin:0; padding-left:18px; display:grid; gap:6px; color:var(--text-secondary); font-size:12.5px;}
+  .typeface-preview-example{display:grid; gap:8px; font-family:var(--font-body); font-size:13px; line-height:1.4; letter-spacing:var(--font-ui-letter-spacing); color:var(--text-primary);}
+  .typeface-preview-example div{display:grid; grid-template-columns:110px 1fr; gap:16px;}
+  .typeface-preview-section-title{font-size:13px; margin:0 0 10px; color:var(--text-primary);}
   .type-row{display:flex; align-items:baseline; gap:24px; padding:18px 0; border-bottom:1px solid var(--border-default);}
   .type-row:last-child{border-bottom:none;}
   .type-row .label{width:120px; flex:0 0 auto; font-size:11.5px; color:var(--text-secondary);}
@@ -233,14 +237,12 @@
         <button class="nav-control theme-toggle" type="button" aria-pressed="false" data-theme-toggle>
           <span class="nav-control-left"><i class="bi bi-sun" aria-hidden="true"></i><strong data-theme-label></strong></span>
         </button>
-        <div class="font-select-wrap">
-          <i class="bi bi-type" aria-hidden="true"></i>
-          <select class="font-select" data-font-select data-i18n-aria-label="font.label">
-            <option value="roboto">Roboto Flex</option>
-            <option value="inter">Inter</option>
-            <option value="pragmata">Pragmata Pro</option>
-          </select>
-          <i class="bi bi-chevron-down" aria-hidden="true"></i>
+        <div class="font-switcher" data-font-switcher>
+          <button class="nav-control" type="button" aria-haspopup="true" aria-expanded="false" data-font-toggle data-i18n-aria-label="font.label">
+            <span class="nav-control-left"><i class="bi bi-type" aria-hidden="true"></i><strong data-font-label></strong></span>
+            <i class="bi bi-chevron-down" aria-hidden="true"></i>
+          </button>
+          <div class="font-menu" role="menu" data-font-menu></div>
         </div>
       </div>
       <div class="nav-tree" data-nav-tree>
@@ -254,7 +256,7 @@
           <div class="nav-children">
             <a class="nav-item" href="#type">Типографика</a>
             <a class="nav-item" href="#color">Цвет</a>
-            <a class="nav-item" href="#space">Отступы</a>
+            <a class="nav-item" href="#space">Layout</a>
             <a class="nav-item" href="#radius">Скругления</a>
             <a class="nav-item" href="#shadow">Тени</a>
             <a class="nav-item" href="#motion">Motion</a>
@@ -430,27 +432,62 @@
     <section id="type">
       <div class="tag-eyebrow">Основы</div>
       <h2>Типографика</h2>
-      <p class="desc">UI-шрифт в продукте переключаемый. Компоненты всегда используют <code class="inline">--font-body</code>, а конкретная гарнитура выбирается через <code class="inline">data-ui-font</code>. Доступные варианты: Roboto Flex, Inter, Pragmata Pro.</p>
-      <div class="font-cards">
-        <div class="font-card">
-          <div class="role">UI / Default — Roboto Flex</div>
-          <div class="big" style="font-family:var(--font-body);">Audiotechnik Y8</div>
-          <div class="name">Roboto Flex, 400–700 (variable)</div>
-          <div class="use">Шрифт по умолчанию для интерфейса: заголовки, тело, формы, кнопки, таблицы.</div>
-        </div>
-        <div class="font-card">
-          <div class="role">UI / Option — Inter</div>
-          <div class="big" style="font-family:var(--font-ui-inter);">Audiotechnik Y8</div>
-          <div class="name">Inter, 400–700</div>
-          <div class="use">Нейтральный интерфейсный вариант. Подключается через <code class="inline">data-ui-font="inter"</code>.</div>
-        </div>
-        <div class="font-card">
-          <div class="role">UI / Option — Pragmata Pro</div>
-          <div class="big" style="font-family:var(--font-ui-pragmata); letter-spacing:-.3px;">golova.system</div>
-          <div class="name">PragmataPro Mono Regular</div>
-          <div class="use">Regular · line-height 18 px · letter-spacing -0.3 px. Подключается через <code class="inline">data-ui-font="pragmata"</code>.</div>
+      <p class="desc">Типографика Golova построена на единой системе размеров, интервалов и ролей текста. Пользователь может переключать гарнитуру интерфейса, при этом размеры, иерархия и компоненты остаются неизменными.</p>
+
+      <div class="coll-block">
+        <h3>Работа с гарнитурами</h3>
+        <p class="sub">В системе поддерживается несколько гарнитур. Переключение влияет только на внешний вид текста и не изменяет размеры, отступы или поведение компонентов.</p>
+        <div class="usage-grid">
+          <div class="usage-card do"><div class="head">✓ Так делаем</div><p>Все гарнитуры используют единую типографическую шкалу и одинаковые роли текста.</p></div>
+          <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не создаём отдельные размеры, line-height или компоненты под каждую гарнитуру.</p></div>
         </div>
       </div>
+
+      <div class="coll-block">
+        <h3>Правила использования</h3>
+        <ul class="typeface-preview-list" style="margin-top:0;">
+          <li>Один экран — одна гарнитура.</li>
+          <li>Не смешивать разные гарнитуры внутри одного интерфейса.</li>
+          <li>Иерархия строится размером и насыщенностью, а не цветом.</li>
+          <li>Для Pragmata Pro Mono использовать только рекомендованные параметры Line Height и Letter Spacing.</li>
+          <li>Переключение гарнитуры не должно влиять на размеры компонентов или нарушать сетку интерфейса.</li>
+        </ul>
+      </div>
+
+      <div class="coll-block">
+        <h3>Текущая гарнитура</h3>
+        <p class="sub">Preview автоматически показывает рекомендации для гарнитуры, выбранной в левом меню.</p>
+        <div class="typeface-preview" data-typeface-preview>
+          <div class="typeface-preview-section-title" data-typeface-preview-title>Preview</div>
+          <h4 class="typeface-preview-title" data-typeface-name>Pragmata Pro Mono</h4>
+          <pre class="typeface-preview-sample" data-typeface-sample>ABCDEFGHIJKLMNOPQRSTUVWXYZ
+abcdefghijklmnopqrstuvwxyz
+1234567890</pre>
+          <div class="typeface-preview-divider"></div>
+          <h4 class="typeface-preview-section-title" data-typeface-settings-title>Recommended settings</h4>
+          <div class="typeface-preview-meta">
+            <div class="usage-row"><span data-typeface-weight-label>Weight</span><span class="token" data-typeface-style>Regular</span></div>
+            <div class="usage-row"><span data-typeface-line-height-label>Line Height</span><span class="token" data-typeface-line-height>18 px</span></div>
+            <div class="usage-row"><span data-typeface-letter-spacing-label>Letter Spacing</span><span class="token" data-typeface-letter-spacing>-0.3 px</span></div>
+          </div>
+          <div class="typeface-preview-divider"></div>
+          <h4 class="typeface-preview-section-title" data-typeface-used-title>Используется</h4>
+          <ul class="typeface-preview-list" data-typeface-used-list>
+            <li>Таблицы</li>
+            <li>ERP</li>
+            <li>Аналитика</li>
+            <li>Рабочие экраны</li>
+          </ul>
+          <div class="typeface-preview-divider"></div>
+          <h4 class="typeface-preview-section-title" data-typeface-example-title>Пример</h4>
+          <div class="typeface-preview-example" data-typeface-example>
+            <div><span>Артикул</span><span>INV-02344</span></div>
+            <div><span>Стоимость</span><span>12 450 €</span></div>
+            <div><span>Дата</span><span>09.07.2026</span></div>
+          </div>
+        </div>
+      </div>
+
       <div style="margin-top:28px; background:var(--bg-card); border:1px solid var(--border-default); border-radius:var(--radius-lg); padding:24px 28px;">
         <div class="type-row"><div class="label">Display</div><div class="spec">32/40 · 700</div><div class="sample text-display">Найдите нужное решение</div></div>
         <div class="type-row"><div class="label">H1</div><div class="spec">24/32 · 700</div><div class="sample text-h1">Заголовок раздела</div></div>
@@ -662,20 +699,75 @@ body {
       </div>
     </section>
 
-    <!-- SPACE -->
+    <!-- LAYOUT -->
     <section id="space">
       <div class="tag-eyebrow">Основы</div>
-      <h2>Отступы</h2>
-      <p class="desc">Шкала на базе 4px.</p>
-      <div class="scale-grid">
-        <div class="scale-item"><div class="box" style="width:4px;height:24px;"></div><span>4 · sp-1</span></div>
-        <div class="scale-item"><div class="box" style="width:8px;height:24px;"></div><span>8 · sp-2</span></div>
-        <div class="scale-item"><div class="box" style="width:12px;height:24px;"></div><span>12 · sp-3</span></div>
-        <div class="scale-item"><div class="box" style="width:16px;height:24px;"></div><span>16 · sp-4</span></div>
-        <div class="scale-item"><div class="box" style="width:24px;height:24px;"></div><span>24 · sp-6</span></div>
-        <div class="scale-item"><div class="box" style="width:32px;height:24px;"></div><span>32 · sp-8</span></div>
-        <div class="scale-item"><div class="box" style="width:56px;height:24px;"></div><span>56 · sp-14</span></div>
-        <div class="scale-item"><div class="box" style="width:64px;height:24px;"></div><span>64 · sp-16</span></div>
+      <h2>Layout</h2>
+      <p class="desc">Интерфейс адаптируется не под разрешение монитора, а под ширину viewport. Компоненты строятся на responsive grid и spacing scale.</p>
+
+      <div class="coll-block">
+        <h3>Responsive philosophy</h3>
+        <p class="sub">В ERP самый важный вопрос — не breakpoint, а что меняется при переходе между ними. Количество колонок, навигация и поведение панелей должны меняться предсказуемо.</p>
+        <div class="usage-grid">
+          <div class="usage-card do"><div class="head">✓ Так делаем</div><p>Сначала определяем доступную ширину viewport, затем выбираем сетку, плотность и поведение навигации.</p></div>
+          <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не привязываем интерфейс к конкретным моделям устройств или физическому разрешению монитора.</p></div>
+        </div>
+      </div>
+
+      <div class="coll-block">
+        <h3>Responsive grid</h3>
+        <p class="sub">Количество колонок меняется в зависимости от ширины viewport. Это базовая сетка для продуктовых экранов Golova.</p>
+        <div class="usage-table">
+          <div class="usage-col"><h4>Width</h4>
+            <div class="usage-row"><span>320–767</span><span class="token">mobile</span></div>
+            <div class="usage-row"><span>768–1023</span><span class="token">tablet</span></div>
+            <div class="usage-row"><span>1024–1439</span><span class="token">desktop</span></div>
+            <div class="usage-row"><span>1440+</span><span class="token">wide</span></div>
+          </div>
+          <div class="usage-col"><h4>Layout</h4>
+            <div class="usage-row"><span>320–767</span><span class="token">4 колонки</span></div>
+            <div class="usage-row"><span>768–1023</span><span class="token">8 колонок</span></div>
+            <div class="usage-row"><span>1024–1439</span><span class="token">12 колонок</span></div>
+            <div class="usage-row"><span>1440+</span><span class="token">12 колонок</span></div>
+          </div>
+          <div class="usage-col"><h4>Grid</h4>
+            <div class="usage-row"><span>320–767</span><span class="token">Bottom Sheet</span></div>
+            <div class="usage-row"><span>768–1023</span><span class="token">Side Navigation</span></div>
+            <div class="usage-row"><span>1024–1439</span><span class="token">Sidebar</span></div>
+            <div class="usage-row"><span>1440+</span><span class="token">Sidebar</span></div>
+          </div>
+          <div class="usage-col"><h4>Navigation</h4>
+            <div class="usage-row"><span>320–767</span><span class="token">Drawer</span></div>
+            <div class="usage-row"><span>768–1023</span><span class="token">Collapsed</span></div>
+            <div class="usage-row"><span>1024–1439</span><span class="token">Expanded</span></div>
+            <div class="usage-row"><span>1440+</span><span class="token">Expanded + панели</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="coll-block">
+        <h3>iPhone и Android adaptation</h3>
+        <p class="sub">Мобильная версия SaaS-интерфейса не должна быть уменьшенной копией desktop. На телефоне показываем рабочий минимум: главное действие, текущий статус, поиск, фильтры и быстрый доступ к деталям.</p>
+        <div class="usage-table">
+          <div class="usage-col"><h4>iPhone</h4>
+            <div class="usage-row"><span>Safe area</span><span class="token">учитывать notch и home indicator</span></div>
+            <div class="usage-row"><span>Navigation</span><span class="token">bottom sheet / drawer</span></div>
+            <div class="usage-row"><span>Primary action</span><span class="token">в нижней зоне большого пальца</span></div>
+            <div class="usage-row"><span>Forms</span><span class="token">одна колонка, крупные поля</span></div>
+          </div>
+          <div class="usage-col"><h4>Android</h4>
+            <div class="usage-row"><span>System bars</span><span class="token">учитывать status/navigation bars</span></div>
+            <div class="usage-row"><span>Navigation</span><span class="token">drawer / bottom navigation</span></div>
+            <div class="usage-row"><span>Primary action</span><span class="token">FAB или закрепленная кнопка</span></div>
+            <div class="usage-row"><span>Forms</span><span class="token">клавиатура не перекрывает CTA</span></div>
+          </div>
+        </div>
+        <div class="usage-grid" style="margin-top:16px;">
+          <div class="usage-card do"><div class="head">✓ Так делаем</div><p>Таблицы превращаем в список сущностей: ключевой идентификатор, статус, сумма/дата и действие. Детали раскрываются на отдельном экране или в bottom sheet.</p></div>
+          <div class="usage-card do"><div class="head">✓ Так делаем</div><p>Фильтры, сортировку и массовые действия переносим в drawer или bottom sheet, чтобы не съедать рабочую ширину.</p></div>
+          <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не показываем desktop-таблицу с горизонтальным скроллом как основной мобильный сценарий.</p></div>
+          <div class="usage-card dont"><div class="head">✗ Так не делаем</div><p>Не размещаем критические кнопки рядом с системными жестами без safe-area отступов.</p></div>
+        </div>
       </div>
     </section>
 
@@ -1465,7 +1557,25 @@ body {
   const menuToggle = document.querySelector('[data-menu-toggle]');
   const themeToggle = document.querySelector('[data-theme-toggle]');
   const themeLabel = document.querySelector('[data-theme-label]');
-  const fontSelect = document.querySelector('[data-font-select]');
+  const fontSwitcher = document.querySelector('[data-font-switcher]');
+  const fontToggle = document.querySelector('[data-font-toggle]');
+  const fontLabel = document.querySelector('[data-font-label]');
+  const fontMenu = document.querySelector('[data-font-menu]');
+  const typefacePreview = document.querySelector('[data-typeface-preview]');
+  const typefacePreviewTitle = document.querySelector('[data-typeface-preview-title]');
+  const typefaceName = document.querySelector('[data-typeface-name]');
+  const typefaceSample = document.querySelector('[data-typeface-sample]');
+  const typefaceSettingsTitle = document.querySelector('[data-typeface-settings-title]');
+  const typefaceWeightLabel = document.querySelector('[data-typeface-weight-label]');
+  const typefaceStyle = document.querySelector('[data-typeface-style]');
+  const typefaceLineHeightLabel = document.querySelector('[data-typeface-line-height-label]');
+  const typefaceLineHeight = document.querySelector('[data-typeface-line-height]');
+  const typefaceLetterSpacingLabel = document.querySelector('[data-typeface-letter-spacing-label]');
+  const typefaceLetterSpacing = document.querySelector('[data-typeface-letter-spacing]');
+  const typefaceUsedTitle = document.querySelector('[data-typeface-used-title]');
+  const typefaceUsedList = document.querySelector('[data-typeface-used-list]');
+  const typefaceExampleTitle = document.querySelector('[data-typeface-example-title]');
+  const typefaceExample = document.querySelector('[data-typeface-example]');
   const languageSwitcher = document.querySelector('[data-language-switcher]');
   const languageToggle = document.querySelector('[data-language-toggle]');
   const languageLabel = document.querySelector('[data-language-label]');
@@ -1475,10 +1585,515 @@ body {
   const savedFont = localStorage.getItem('golova-ui-font') || 'roboto';
   const savedLanguage = localStorage.getItem('golova-language') || 'ru';
   const supportedLanguages = ['ru', 'en', 'es'];
-  const enabledLanguages = ['ru'];
+  const enabledLanguages = ['ru', 'en'];
   const supportedFonts = ['roboto', 'inter', 'pragmata'];
+  const fontLabels = {
+    roboto: 'Roboto Flex',
+    inter: 'Inter',
+    pragmata: 'Pragmata Pro'
+  };
+  const typefaceRecommendations = {
+    roboto: {
+      family: 'var(--font-ui-roboto)',
+      letterSpacing: '0',
+      lineHeight: '20px',
+      previewFontSize: '22px',
+      previewLineHeight: '30px',
+      ru: {
+        name: 'Roboto Flex',
+        previewTitle: 'Preview',
+        settingsTitle: 'Recommended settings',
+        weightLabel: 'Weight',
+        style: 'Regular / Medium / Bold',
+        lineHeightLabel: 'Line Height',
+        letterSpacingLabel: 'Letter Spacing',
+        usedTitle: 'Используется',
+        used: ['Основной интерфейс', 'Формы', 'Карточки', 'Текстовые страницы'],
+        exampleTitle: 'Пример',
+        example: [['Клиент', 'Light Sound Lab'], ['Проект', 'Event-2048'], ['Статус', 'Активен']]
+      },
+      en: {
+        name: 'Roboto Flex',
+        previewTitle: 'Preview',
+        settingsTitle: 'Recommended settings',
+        weightLabel: 'Weight',
+        style: 'Regular / Medium / Bold',
+        lineHeightLabel: 'Line Height',
+        letterSpacingLabel: 'Letter Spacing',
+        usedTitle: 'Used for',
+        used: ['Core interface', 'Forms', 'Cards', 'Text-heavy pages'],
+        exampleTitle: 'Example',
+        example: [['Client', 'Light Sound Lab'], ['Project', 'Event-2048'], ['Status', 'Active']]
+      }
+    },
+    inter: {
+      family: 'var(--font-ui-inter)',
+      letterSpacing: '0',
+      lineHeight: '20px',
+      previewFontSize: '22px',
+      previewLineHeight: '30px',
+      ru: {
+        name: 'Inter',
+        previewTitle: 'Preview',
+        settingsTitle: 'Recommended settings',
+        weightLabel: 'Weight',
+        style: 'Regular / Medium / Bold',
+        lineHeightLabel: 'Line Height',
+        letterSpacingLabel: 'Letter Spacing',
+        usedTitle: 'Используется',
+        used: ['Нейтральные интерфейсы', 'Настройки', 'Документация', 'Маркетплейс'],
+        exampleTitle: 'Пример',
+        example: [['Компания', 'Golova'], ['Раздел', 'Settings'], ['Состояние', 'Готово']]
+      },
+      en: {
+        name: 'Inter',
+        previewTitle: 'Preview',
+        settingsTitle: 'Recommended settings',
+        weightLabel: 'Weight',
+        style: 'Regular / Medium / Bold',
+        lineHeightLabel: 'Line Height',
+        letterSpacingLabel: 'Letter Spacing',
+        usedTitle: 'Used for',
+        used: ['Neutral interfaces', 'Settings', 'Documentation', 'Marketplace'],
+        exampleTitle: 'Example',
+        example: [['Company', 'Golova'], ['Section', 'Settings'], ['State', 'Ready']]
+      }
+    },
+    pragmata: {
+      family: 'var(--font-ui-pragmata)',
+      letterSpacing: '-0.3px',
+      lineHeight: '18px',
+      previewFontSize: '48px',
+      previewLineHeight: '58px',
+      ru: {
+        name: 'Pragmata Pro Mono',
+        previewTitle: 'Preview',
+        settingsTitle: 'Recommended settings',
+        weightLabel: 'Weight',
+        style: 'Regular',
+        lineHeightLabel: 'Line Height',
+        letterSpacingLabel: 'Letter Spacing',
+        usedTitle: 'Используется',
+        used: ['Таблицы', 'ERP', 'Аналитика', 'Рабочие экраны'],
+        exampleTitle: 'Пример',
+        example: [['Артикул', 'INV-02344'], ['Стоимость', '12 450 €'], ['Дата', '09.07.2026']]
+      },
+      en: {
+        name: 'Pragmata Pro Mono',
+        previewTitle: 'Preview',
+        settingsTitle: 'Recommended settings',
+        weightLabel: 'Weight',
+        style: 'Regular',
+        lineHeightLabel: 'Line Height',
+        letterSpacingLabel: 'Letter Spacing',
+        usedTitle: 'Used for',
+        used: ['Tables', 'ERP', 'Analytics', 'Working screens'],
+        exampleTitle: 'Example',
+        example: [['SKU', 'INV-02344'], ['Cost', '12 450 €'], ['Date', '09.07.2026']]
+      }
+    }
+  };
   let activeLanguage = enabledLanguages.includes(savedLanguage) ? savedLanguage : 'ru';
-  const fallbackMessages = {
+
+  const englishContent = {
+  "Обзор": "Overview",
+  "Бренд": "Brand",
+  "Принципы дизайна": "Design Principles",
+  "Типографика": "Typography",
+  "Типографика Golova построена на единой системе размеров, интервалов и ролей текста. Пользователь может переключать гарнитуру интерфейса, при этом размеры, иерархия и компоненты остаются неизменными.": "Golova typography is built on a unified system of sizes, intervals, and text roles. The user can switch the interface typeface while sizes, hierarchy, and components remain unchanged.",
+  "Работа с гарнитурами": "Working with Typefaces",
+  "В системе поддерживается несколько гарнитур. Переключение влияет только на внешний вид текста и не изменяет размеры, отступы или поведение компонентов.": "The system supports several typefaces. Switching affects only the visual appearance of text and does not change sizes, spacing, or component behavior.",
+  "Все гарнитуры используют единую типографическую шкалу и одинаковые роли текста.": "All typefaces use one typographic scale and the same text roles.",
+  "Не создаём отдельные размеры, line-height или компоненты под каждую гарнитуру.": "Do not create separate sizes, line-heights, or components for each typeface.",
+  "Текущая гарнитура": "Current Typeface",
+  "Правила использования": "Usage Rules",
+  "Один экран — одна гарнитура.": "One screen — one typeface.",
+  "Не смешивать разные гарнитуры внутри одного интерфейса.": "Do not mix different typefaces inside one interface.",
+  "Иерархия строится размером и насыщенностью, а не цветом.": "Hierarchy is built with size and weight, not color.",
+  "Для Pragmata Pro Mono использовать только рекомендованные параметры Line Height и Letter Spacing.": "For Pragmata Pro Mono, use only the recommended Line Height and Letter Spacing values.",
+  "Переключение гарнитуры не должно влиять на размеры компонентов или нарушать сетку интерфейса.": "Switching the typeface must not affect component sizes or break the interface grid.",
+  "Текущая гарнитура": "Current Typeface",
+  "Информация ниже описывает гарнитуру, выбранную в левом меню. Сейчас в качестве рабочей гарнитуры рассматриваем Pragmata Pro Mono.": "The information below describes the typeface selected in the left menu. At this stage, Pragmata Pro Mono is treated as the working typeface.",
+  "Preview автоматически показывает рекомендации для гарнитуры, выбранной в левом меню.": "The preview automatically shows recommendations for the typeface selected in the left menu.",
+  "Используется": "Used for",
+  "Таблицы": "Tables",
+  "ERP": "ERP",
+  "Аналитика": "Analytics",
+  "Рабочие экраны": "Working screens",
+  "Пример": "Example",
+  "Стоимость": "Cost",
+  "Дата": "Date",
+  "Начертание": "Style",
+  "Используется для:": "Used for:",
+  "таблиц": "tables",
+  "рабочих экранов": "working screens",
+  "ERP-интерфейсов": "ERP interfaces",
+  "аналитики": "analytics",
+  "Используется как основная рабочая гарнитура для плотных интерфейсов, таблиц и профессиональных рабочих пространств.": "Used as the primary working typeface for dense interfaces, tables, and professional workspaces.",
+  "Обязательные параметры": "Required Parameters",
+  "Особенности": "Characteristics",
+  "моноширинная гарнитура;": "monospaced typeface;",
+  "обеспечивает стабильное выравнивание данных;": "provides stable data alignment;",
+  "хорошо подходит для ERP/CRM-интерфейсов;": "works well for ERP/CRM interfaces;",
+  "требует специальных настроек межбуквенного интервала и высоты строки.": "requires specific letter-spacing and line-height settings.",
+  "Моноширинная гарнитура обеспечивает стабильное выравнивание данных и хорошо подходит для ERP/CRM-интерфейсов.": "The monospaced typeface provides stable data alignment and works well for ERP/CRM interfaces.",
+  "Настройки": "Settings",
+  "Pragmata Pro Mono требует специальных настроек межбуквенного интервала и высоты строки, чтобы текст оставался плотным, но читаемым.": "Pragmata Pro Mono requires specific letter-spacing and line-height settings so text stays dense but readable.",
+  "Цвет": "Color",
+  "Отступы": "Layout",
+  "Скругления": "Radius",
+  "Тени": "Shadows",
+  "Логотип": "Logo",
+  "Иконки": "Icons",
+  "Иллюстрации": "Illustrations",
+  "Кнопки": "Buttons",
+  "Бейджи": "Badges",
+  "Поля": "Fields",
+  "Таблицы": "Tables",
+  "Формы": "Forms",
+  "Карточки": "Cards",
+  "Модальные окна": "Modal Windows",
+  "Поиск": "Search",
+  "Фильтрация": "Filtering",
+  "Массовые действия": "Bulk Actions",
+  "Пустые состояния": "Empty States",
+  "Навигация": "Navigation",
+  "Ошибки": "Errors",
+  "Загрузка файлов": "File Upload",
+  "Единая система для SaaS-продукта Golova и всей экосистемы связанных продуктов. Три уровня токенов — примитивы → семантика → компоненты — так изменения палитры не ломают компоненты, собранные поверх неё.": "A unified system for the Golova SaaS product and the full ecosystem of related products. Three token levels — primitives → semantics → components — ensure palette changes do not break components built on top of it.",
+  "Структура:": "Structure:",
+  "— примитивы и семантические токены (цвет, шрифты, отступы, радиусы, тени),": "— primitives and semantic tokens (color, fonts, spacing, radii, shadows),",
+  "— компоненты поверх токенов, включая полный набор форм.": "— components built on top of tokens, including the complete form set.",
+  "и": "and",
+  "— фирменные ассеты. Шрифты:": "— brand assets. Fonts:",
+  "— весь UI-текст,": "— all UI text,",
+  "— только логотип и декоративные акценты.": "— only the logo and decorative accents.",
+  "Базовое описание Golova как продукта, миссии, видения и ценностей бренда. Этот раздел задает смысловую рамку для интерфейса, коммуникаций и продуктовых решений.": "A baseline description of Golova as a product, its mission, vision, and brand values. This section defines the semantic frame for interface, communication, and product decisions.",
+  "Что такое Golova": "What Golova Is",
+  "Golova — профессиональная SaaS-платформа для компаний, занимающихся арендой AV-оборудования и техническим обеспечением мероприятий. Система объединяет процессы планирования, управления оборудованием, персоналом, финансами, документами и логистикой в едином рабочем пространстве.": "Golova is a professional SaaS platform for companies that rent AV equipment and provide technical production for events. The system unifies planning, equipment, staff, finance, document, and logistics workflows in one workspace.",
+  "Наша цель — стать операционной системой индустрии, так же как POS-система стала стандартом для ресторанов или ERP — для производства.": "Our goal is to become the operating system for the industry, just as POS systems became standard for restaurants and ERP became standard for manufacturing.",
+  "Миссия": "Mission",
+  "Упростить управление сложными проектами и оборудованием, автоматизировав рутинные процессы и предоставив единую цифровую среду для всей команды.": "Simplify the management of complex projects and equipment by automating routine processes and providing one digital environment for the whole team.",
+  "Golova помогает компаниям быстрее принимать решения, снижать количество ошибок и сосредоточиться на реализации проектов, а не на работе с таблицами, файлами и разрозненными сервисами.": "Golova helps companies make decisions faster, reduce errors, and focus on project delivery instead of spreadsheets, files, and disconnected services.",
+  "Видение": "Vision",
+  "Мы создаём экосистему продуктов, которая станет единым стандартом работы для компаний AV rental и event production.": "We are building a product ecosystem that will become the shared operating standard for AV rental and event production companies.",
+  "Основная платформа дополняется специализированными сервисами, объединёнными общими данными и AI-инструментами.": "The core platform is complemented by specialized services connected through shared data and AI tools.",
+  "Ценность бренда: Практичность": "Brand Value: Practicality",
+  "Каждый элемент интерфейса существует для решения конкретной рабочей задачи. Мы избегаем декоративности ради декоративности.": "Every interface element exists to solve a specific work task. We avoid decoration for its own sake.",
+  "Golova — профессиональная B2B SaaS-платформа для компаний, занимающихся арендой AV-оборудования и техническим обеспечением мероприятий. Каждый экран должен в первую очередь помогать быстро выполнять ежедневные рабочие задачи.": "Golova is a professional B2B SaaS platform for companies renting AV equipment and supporting event production. Every screen must primarily help users complete daily work tasks quickly.",
+  "Интерфейс должен ощущаться как": "The interface should feel",
+  "инженерный;": "engineering-oriented;",
+  "профессиональный;": "professional;",
+  "насыщенный информацией;": "information-rich;",
+  "спокойный и надежный;": "calm and reliable;",
+  "ориентированный на ежедневную работу.": "focused on daily work.",
+  "Избегаем": "We Avoid",
+  "игрового или стартапного стиля;": "game-like or startup-like styling;",
+  "больших карточек без необходимости;": "large cards without a clear need;",
+  "градиентов и декоративных иллюстраций;": "gradients and decorative illustrations;",
+  "тяжелых теней;": "heavy shadows;",
+  "чрезмерного количества пустого пространства.": "excessive empty space.",
+  "Визуальный язык": "Visual Language",
+  "минимализм и плоский интерфейс;": "minimalism and a flat interface;",
+  "тонкие разделители вместо толстых рамок;": "thin dividers instead of heavy borders;",
+  "практически без теней;": "almost no shadows;",
+  "скругления только там, где они нужны;": "radius only where it is necessary;",
+  "иерархия строится типографикой, а не цветами.": "hierarchy is built with typography, not color.",
+  "Интерфейс Golova должен напоминать современную ERP/CRM-систему, а не лендинг или BI-панель: много структурированной информации, спокойная плотность, понятные действия и минимум декоративного шума.": "The Golova interface should resemble a modern ERP/CRM system, not a landing page or BI dashboard: lots of structured information, calm density, clear actions, and minimal decorative noise.",
+  "Гайдлайны": "Guidelines",
+  "Как использовать": "How to Use",
+  "✓ Так делаем": "✓ Do",
+  "✗ Так не делаем": "✗ Don’t",
+  "Компоненты ссылаются только на семантические токены (": "Components reference only semantic tokens (",
+  "...), никогда напрямую на": "...), never directly to",
+  "или": "or",
+  "Не хардкодим hex в компонентах и не создаём новые цвета «по ощущению» — сначала примитив, потом семантика.": "Do not hard-code hex values in components or create new colors by feel — primitive first, then semantics.",
+  "Все поля форм — 4px радиус, без исключений. Это единообразный, узнаваемо угловатый язык форм.": "All form fields use a 4px radius without exceptions. This creates a consistent, recognizably angular form language.",
+  "Не скругляем формы под общий radius-lg карточек — формы концептуально более острые, чем контейнеры.": "Do not round forms to the general card radius-lg — forms are intentionally sharper than containers.",
+  "Основы": "Foundations",
+  "UI-шрифт в продукте переключаемый. Компоненты всегда используют": "The product UI font is switchable. Components always use",
+  ", а конкретная гарнитура выбирается через": ", and the concrete family is selected with",
+  ". Доступные варианты: Roboto Flex, Inter, Pragmata Pro.": ". Available options: Roboto Flex, Inter, Pragmata Pro.",
+  "Шрифт по умолчанию для интерфейса: заголовки, тело, формы, кнопки, таблицы.": "Default interface font: headings, body text, forms, buttons, and tables.",
+  "Нейтральный интерфейсный вариант. Подключается через": "Neutral interface option. Enabled with",
+  "Regular · line-height 18 px · letter-spacing -0.3 px. Подключается через": "Regular · line-height 18 px · letter-spacing -0.3 px. Enabled with",
+  "Найдите нужное решение": "Find the right solution",
+  "Заголовок раздела": "Section heading",
+  "Подзаголовок": "Subheading",
+  "Обычный текст интерфейса": "Regular interface text",
+  "Акцентный текст": "Emphasized text",
+  "Подпись, мета-информация": "Caption, metadata",
+  "Категория": "Category",
+  "Смена шрифта — пользовательская настройка интерфейса. Компоненты не знают конкретную гарнитуру и всегда читают один алиас.": "Font switching is a user interface preference. Components do not know the concrete family; they always read a single alias.",
+  "Трёхуровневая модель: примитивы задают физические значения, семантика называет их по роли в интерфейсе, компоненты используют только семантику — никогда не примитивы напрямую. SaaS Platform Palette фиксирует продуктовые имена токенов, которые можно передавать в разработку и Figma.": "Three-tier model: primitives define physical values, semantics name them by interface role, and components use only semantic tokens — never primitives directly. The SaaS Platform Palette fixes product token names for engineering and Figma handoff.",
+  "Базовая графитовая шкала. Шаги неравномерные (90→80→70→50→30→20→0) — так и задумано.": "Base graphite scale. The steps are intentionally uneven (90→80→70→50→30→20→0).",
+  "Основные и их soft-варианты (10% opacity) для подложек.": "Core colors and their soft variants (10% opacity) for backgrounds.",
+  "Основные": "Core",
+  "Продуктовые токены для основной SaaS-платформы. Старые": "Product tokens for the core SaaS platform. Legacy",
+  "остаются для обратной совместимости компонентов.": "remain for component backward compatibility.",
+  "Роль → примитив. Компоненты ссылаются только на эти имена.": "Role → primitive. Components reference only these names.",
+  "используется для звезды рейтинга в карточке товара. Не используем этот цвет как общий статус ошибки или предупреждения без отдельного продуктового правила.": "is used for the rating star in the product card. Do not use this color as a generic error or warning state without a separate product rule.",
+  "Применение цветов": "Color Usage",
+  "Как семантика ложится на конкретные UI-паттерны.": "How semantics map to concrete UI patterns.",
+  "Текст": "Text",
+  "Основной текст": "Primary text",
+  "Вторичный текст": "Secondary text",
+  "Disabled текст": "Disabled text",
+  "Фоны": "Backgrounds",
+  "Фон страницы": "Page background",
+  "Карточки / модалки": "Cards / modals",
+  "Hover строк таблицы": "Table row hover",
+  "Границы": "Borders",
+  "Обычная граница": "Default border",
+  "Активная граница": "Active border",
+  "Ошибка": "Error",
+  "Состояния": "States",
+  "Выделенная строка": "Selected row",
+  "Ошибка инпута": "Input error",
+  "Успешное состояние": "Success state",
+  "фон 90, текст 0": "background 90, text 0",
+  "фон 0, обводка 70": "background 0, border 70",
+  "фон error, текст 0": "error background, text 0",
+  "Интерфейс адаптируется не под разрешение монитора, а под ширину viewport. Компоненты строятся на responsive grid и spacing scale.": "The interface adapts not to monitor resolution, but to viewport width. Components are built on a responsive grid and spacing scale.",
+  "В ERP самый важный вопрос — не breakpoint, а что меняется при переходе между ними. Количество колонок, навигация и поведение панелей должны меняться предсказуемо.": "In ERP, the most important question is not the breakpoint, but what changes when moving between breakpoints. Column count, navigation, and panel behavior must change predictably.",
+  "Сначала определяем доступную ширину viewport, затем выбираем сетку, плотность и поведение навигации.": "First define the available viewport width, then choose the grid, density, and navigation behavior.",
+  "Не привязываем интерфейс к конкретным моделям устройств или физическому разрешению монитора.": "Do not bind the interface to specific device models or physical monitor resolution.",
+  "Количество колонок меняется в зависимости от ширины viewport. Это базовая сетка для продуктовых экранов Golova.": "The number of columns changes depending on viewport width. This is the base grid for Golova product screens.",
+  "4 колонки": "4 columns",
+  "8 колонок": "8 columns",
+  "12 колонок": "12 columns",
+  "Expanded + панели": "Expanded + panels",
+  "iPhone и Android adaptation": "iPhone and Android adaptation",
+  "Мобильная версия SaaS-интерфейса не должна быть уменьшенной копией desktop. На телефоне показываем рабочий минимум: главное действие, текущий статус, поиск, фильтры и быстрый доступ к деталям.": "The mobile version of a SaaS interface should not be a reduced copy of desktop. On phones, show the working minimum: primary action, current status, search, filters, and quick access to details.",
+  "учитывать notch и home indicator": "account for notch and home indicator",
+  "в нижней зоне большого пальца": "in the lower thumb zone",
+  "одна колонка, крупные поля": "one column, large fields",
+  "учитывать status/navigation bars": "account for status/navigation bars",
+  "FAB или закрепленная кнопка": "FAB or sticky button",
+  "клавиатура не перекрывает CTA": "keyboard does not cover the CTA",
+  "Таблицы превращаем в список сущностей: ключевой идентификатор, статус, сумма/дата и действие. Детали раскрываются на отдельном экране или в bottom sheet.": "Turn tables into an entity list: key identifier, status, amount/date, and action. Details open on a separate screen or in a bottom sheet.",
+  "Фильтры, сортировку и массовые действия переносим в drawer или bottom sheet, чтобы не съедать рабочую ширину.": "Move filters, sorting, and bulk actions into a drawer or bottom sheet so they do not consume working width.",
+  "Не показываем desktop-таблицу с горизонтальным скроллом как основной мобильный сценарий.": "Do not show a desktop table with horizontal scroll as the main mobile scenario.",
+  "Не размещаем критические кнопки рядом с системными жестами без safe-area отступов.": "Do not place critical buttons near system gestures without safe-area spacing.",
+  "Шкала на базе 4px.": "Scale based on 4px.",
+  "Система в целом угловатая. Формы — самые острые: 4px флэт, без исключений (кроме переключателя-свитча — он физическая пилюля по смыслу).": "The system is generally angular. Forms are the sharpest: flat 4px radius without exceptions (except the switch track, which is physically pill-shaped by meaning).",
+  "4 · form — все поля форм": "4 · form — all form fields",
+  "6 · sm — чипы, теги": "6 · sm — chips, tags",
+  "8 · md — кнопки, поповеры": "8 · md — buttons, popovers",
+  "12 · lg — карточки, панели": "12 · lg — cards, panels",
+  "16 · xl — модалки": "16 · xl — modals",
+  "pill — только switch-track": "pill — switch track only",
+  "Незаметны в покое, раскрываются на интерактиве. Focus/error-ring — отдельные токены для полей форм.": "Barely visible at rest, revealed on interaction. Focus/error rings are separate tokens for form fields.",
+  "Активы": "Assets",
+  "Логотип используется как рабочий брендовый идентификатор внутри B2B-интерфейса. По умолчанию выбираем полный логотип, знак используем только там, где полная версия физически не помещается.": "The logo is used as a working brand identifier inside the B2B interface. Use the full logo by default; use the symbol only where the full version physically does not fit.",
+  "Четыре рабочих размера закрывают интерфейс, документацию и брендовые материалы.": "Four working sizes cover the interface, documentation, and brand materials.",
+  "Размер": "Size",
+  "Высота": "Height",
+  "Где используется": "Where used",
+  "favicon, плотные таблицы, статусные панели, очень плотные интерфейсы": "favicon, dense tables, status panels, very dense interfaces",
+  "верхняя панель приложения, сайдбар, модальные окна; основной размер внутри продукта": "application top bar, sidebar, modal windows; main in-product size",
+  "страницы авторизации, настройки, onboarding, пустые состояния": "auth pages, settings, onboarding, empty states",
+  "презентации, сайт, документация": "presentations, website, documentation",
+  "Logo Variants и Scale": "Logo Variants and Scale",
+  "Оставляем два допустимых варианта: Symbol и Full Logo. Оба масштабируются по общей сетке Logo Sizes.": "Keep two approved variants: Symbol and Full Logo. Both scale through the shared Logo Sizes grid.",
+  "Скачать": "Download",
+  "Minimum Size и Safe Area": "Minimum Size and Safe Area",
+  "правило применимо ко всем вариантам": "rule applies to all variants",
+  "Полный логотип": "Full logo",
+  "Ниже 20 px текстовая часть становится нечитаемой. Для меньших областей используем Symbol.": "Below 20 px the text part becomes unreadable. Use Symbol for smaller areas.",
+  "Минимальный отступ": "Minimum safe area",
+  "Вокруг логотипа оставляем пространство не меньше высоты символа или 8 px, что больше.": "Leave space around the logo at least equal to the symbol height or 8 px, whichever is larger.",
+  "В продукте используем Full Logo размера S 24 px. В плотных местах переходим на Symbol, а не ужимаем полный логотип ниже минимума.": "In product, use the Full Logo in S size, 24 px. In dense areas switch to Symbol instead of shrinking the full logo below the minimum.",
+  "Не растягиваем, не меняем пропорции, не добавляем тени или градиенты, не перекрашиваем текст отдельно от знака.": "Do not stretch, distort proportions, add shadows or gradients, or recolor the text separately from the symbol.",
+  "Используем только два SVG-ассета: Symbol и Full Logo. В темной теме они инвертируются системным стилем.": "Use only two SVG assets: Symbol and Full Logo. In dark theme they are inverted by the system style.",
+  "Не используем Blue, Product Lockup, отдельные white/monochrome карточки или новые логотипы под частные случаи.": "Do not use Blue, Product Lockup, separate white/monochrome cards, or new logos for special cases.",
+  "Шрифт": "Font",
+  ". Веб-лицензия FSD: один сайт, лимит 10 000 просмотров/мес. Загружен только Regular.": ". FSD web license: one site, 10,000 pageviews/month limit. Only Regular is loaded.",
+  "В интерфейсах используем Bootstrap Icons. Иконки подключены как шрифт через CDN и вызываются классами": "Use Bootstrap Icons in interfaces. Icons are connected as a font via CDN and called with classes",
+  "Базовый набор для навигации, действий, таблиц, форм и системных состояний.": "Base set for navigation, actions, tables, forms, and system states.",
+  "Используем системные классы": "Use system classes",
+  "и красим иконки через semantic tokens:": "and color icons through semantic tokens:",
+  "Не смешиваем Bootstrap Icons с другими наборами без отдельного решения в дизайн-системе.": "Do not mix Bootstrap Icons with other sets without a separate design-system decision.",
+  "Иллюстрации используем как брендовые материалы и вспомогательную графику. Не подменяем ими рабочий интерфейс и не превращаем продуктовые экраны в маркетинговые.": "Use illustrations as brand materials and supporting graphics. Do not use them to replace the working interface or turn product screens into marketing pages.",
+  "Базовая техническая иллюстрация для брендовых и документационных материалов.": "Base technical illustration for brand and documentation materials.",
+  "Скачать SVG": "Download SVG",
+  "Дополнительная SVG-иллюстрация. Темные контуры переключаются на светлые в dark theme.": "Additional SVG illustration. Dark contours switch to light in dark theme.",
+  "Дополнительная SVG-иллюстрация. Графитовые линии адаптируются под темную тему.": "Additional SVG illustration. Graphite lines adapt to dark theme.",
+  "Компоненты": "Components",
+  "Один компонент": "One component",
+  ", собираемый из вариантов, размеров и состояний. Иконки —": ", assembled from variants, sizes, and states. Icons —",
+  "(MIT, свободная лицензия), подключены как иконный шрифт: класс": "(MIT, free license), connected as an icon font: class",
+  "Варианты": "Variants",
+  "Link-кнопка": "Link button",
+  "Primary — одна на экран, для главного действия. Secondary — для второстепенного рядом с primary. Danger — необратимые/разрушающие действия. Ghost — низкоприоритетные действия в тулбарах. Link — действие, встроенное в текст.": "Primary — one per screen for the main action. Secondary — for secondary actions next to primary. Danger — irreversible/destructive actions. Ghost — low-priority toolbar actions. Link — an action embedded in text.",
+  "Размеры": "Sizes",
+  "hover / focus / active — интерактивны, наведите и нажмите": "hover / focus / active — interactive, hover and press",
+  "Hover ⁠— наведите сами": "Hover — hover manually",
+  "Focus ⁠— Tab к кнопке": "Focus — Tab to the button",
+  "Active ⁠— зажмите ЛКМ": "Active — hold the left mouse button",
+  "С иконками": "With icons",
+  "bi bi-* ведущая / замыкающая / только иконка": "bi bi-* leading / trailing / icon-only",
+  "Создать": "Create",
+  "Продолжить": "Continue",
+  "Удалить": "Delete",
+  "Экспорт": "Export",
+  "У icon-only кнопок обязателен": "Icon-only buttons require",
+  "— своей подписи у них нет.": "— they do not have their own visible label.",
+  "Круглые иконочные кнопки": "Round icon buttons",
+  ".btn-round — тулбары, действия над таблицей, FAB": ".btn-round — toolbars, table actions, FAB",
+  "Круглая форма — только для плотных тулбаров над таблицами/деревьями (действия с выбранными, параметры, сворачивание уровней) и для одиночного FAB-действия «добавить». Обычные действия в интерфейсе — квадратные": "Round shape is only for dense toolbars above tables/trees (selected actions, parameters, collapsing levels) and for a single FAB add action. Regular interface actions are square",
+  "выше.": "above.",
+  "Группа кнопок": "Button group",
+  ".btn-group — сегментированный переключатель": ".btn-group — segmented control",
+  "Сетка": "Grid",
+  "Список": "List",
+  "Карта": "Map",
+  "Бейджи и теги": "Badges and Tags",
+  "Информативный": "Informative",
+  "Нейтральный": "Neutral",
+  "Тёмный": "Dark",
+  "💡 Категория": "💡 Category",
+  "Активно": "Active",
+  "Табы": "Tabs",
+  "Все": "All",
+  "Раздел 2": "Section 2",
+  "Раздел 3": "Section 3",
+  "Раздел 4": "Section 4",
+  "Полный набор форм-компонентов на базе переменных Golova. Все контролы — 4px радиус (": "A complete form-component set based on Golova variables. All controls use a 4px radius (",
+  "), фокус — рамка": "), focus — border",
+  "+ мягкое кольцо": "+ soft ring",
+  ", ошибка —": ", error —",
+  "Название компании": "Company name",
+  "Как в учредительных документах": "As in registration documents",
+  "ИНН": "Tax ID",
+  "⚠ Должно быть 10 или 12 цифр": "⚠ Must be 10 or 12 digits",
+  "Промокод": "Promo code",
+  "✓ Промокод применён": "✓ Promo code applied",
+  "Заблокировано": "Locked",
+  "Поиск с иконкой": "Search with icon",
+  "Комментарий": "Comment",
+  "Роль в команде": "Team role",
+  "Администратор": "Administrator",
+  "Редактор": "Editor",
+  "Только просмотр": "View only",
+  "Часовой пояс": "Time zone",
+  "МСК (UTC+3)": "MSK (UTC+3)",
+  "Согласен с условиями": "I agree to the terms",
+  "Подписаться на рассылку": "Subscribe to newsletter",
+  "Недоступно": "Unavailable",
+  "Месячный тариф": "Monthly plan",
+  "Годовой тариф (−20%)": "Annual plan (−20%)",
+  "Уведомления включены": "Notifications enabled",
+  "Двухфакторная аутентификация": "Two-factor authentication",
+  "Контактное лицо": "Contact person",
+  "Имя": "Name",
+  "Телефон": "Phone",
+  "Сохранить": "Save",
+  "Отмена": "Cancel",
+  "Карточка товара": "Product Card",
+  "Продажа": "Sale",
+  "фото товара": "product photo",
+  "📍 Москва, Московская область": "📍 Moscow, Moscow region",
+  "Связаться": "Contact",
+  "Продажа б/у": "Used sale",
+  "Комплект": "Kit",
+  "Модалки": "Modals",
+  "Три сценария под самые частые действия у сложных таблиц/деревьев: форма-редактор строки, подтверждение удаления, настройка видимости колонок. Структура одинаковая: заголовок с подписью и крестиком → тело (скроллится само, если контента много) → футер с действиями, прижатыми вправо.": "Three scenarios for common actions in complex tables/trees: row-edit form, delete confirmation, and column visibility settings. The structure is the same: title with subtitle and close button → body (scrolls if content is large) → footer with actions aligned right.",
+  "Форма редактирования строки": "Row edit form",
+  "Редактировать позицию": "Edit item",
+  "Спецификация · Звуковое оборудование — аренда": "Specification · Sound equipment — rental",
+  "Название": "Name",
+  "Артикул": "SKU",
+  "Количество": "Quantity",
+  "Бэклайн": "Backline",
+  "Микрофоны": "Microphones",
+  "Поставщик": "Supplier",
+  "⚠ На складе только 2 из 17 запрошенных": "⚠ Only 2 of 17 requested are in stock",
+  "Подтверждение удаления": "Delete confirmation",
+  "деструктивное действие — danger в футере": "destructive action — danger in footer",
+  "Удалить 44 позиции?": "Delete 44 items?",
+  "Раздел «Звуковое оборудование — аренда» будет удалён из спецификации вместе со всеми вложенными строками. Это действие необратимо.": "The “Sound equipment — rental” section will be deleted from the specification with all nested rows. This action cannot be undone.",
+  "Настройка колонок таблицы": "Table column settings",
+  "для плотных таблиц/деревьев с параметрами": "for dense tables/trees with parameters",
+  "Параметры таблицы": "Table settings",
+  "Видимость и порядок колонок": "Column visibility and order",
+  "Вес": "Weight",
+  "Мощность": "Power",
+  "Ток": "Current",
+  "Сбросить": "Reset",
+  "Применить": "Apply",
+  "Заголовок модалки — краткий, подпись под ним уточняет контекст (где именно мы редактируем). Крестик закрытия — всегда круглый ghost справа.": "The modal title is brief; the subtitle clarifies context (where exactly we are editing). The close cross is always a round ghost button on the right.",
+  "Не ставим danger-действие первым/слева в футере — порядок всегда: второстепенное слева, главное (в т.ч. деструктивное) справа.": "Do not place the danger action first/left in the footer — order is always secondary on the left, primary (including destructive) on the right.",
+  "Темная тема": "Dark Theme",
+  "Темная версия строится тем же способом, что и светлая: примитивы → семантика → компоненты. Компоненты не получают отдельные dark-классы; меняются значения семантических токенов через": "The dark version is built the same way as the light one: primitives → semantics → components. Components do not get separate dark classes; semantic token values change through",
+  "Отдельная шкала темных поверхностей нужна, чтобы не ломать существующую neutral-шкалу.": "A separate dark surface scale is needed to avoid breaking the existing neutral scale.",
+  "фон приложения": "application background",
+  "глубокие поверхности": "deep surfaces",
+  "карточки и модалки": "cards and modals",
+  "hover и разделители": "hover and dividers",
+  "активные границы": "active borders",
+  "вторичный текст": "secondary text",
+  "основной текст": "primary text",
+  "Названия токенов не меняются между темами; меняются только значения.": "Token names do not change between themes; only values change.",
+  "Рабочий экран в темной теме": "Working screen in dark theme",
+  "Плотный B2B-интерфейс: минимум декора, видимые разделители, спокойная иерархия.": "Dense B2B interface: minimal decoration, visible dividers, calm hierarchy.",
+  "Фильтры": "Filters",
+  "Оборудование": "Equipment",
+  "Заказы": "Orders",
+  "Склад": "Warehouse",
+  "Позиция": "Item",
+  "Статус": "Status",
+  "Локация": "Location",
+  "Действие": "Action",
+  "В аренде": "Rented",
+  "Павильон 4": "Pavilion 4",
+  "Открыть": "Open",
+  "Резерв": "Reserved",
+  "Склад A": "Warehouse A",
+  "Выездная зона": "Field zone",
+  "Поиск по инвентарю": "Inventory search",
+  "Показывать только доступное": "Show available only",
+  "Темная тема меняет только semantic/component tokens. Разметка компонента остается такой же, как в светлой теме.": "Dark theme changes only semantic/component tokens. Component markup stays the same as in light theme.",
+  "Не создаем отдельные классы вроде": "Do not create separate classes like",
+  "и не хардкодим цвета в компонентах.": "and do not hard-code colors in components.",
+  "Футер": "Footer",
+  "Продукты": "Products",
+  "Экосистема": "Ecosystem",
+  "О нас": "About",
+  "База знаний": "Knowledge Base",
+  "Контакты": "Contacts",
+  "Этот раздел нужен разработчикам и ИИ-агентам, которые собирают прототипы или переносят паттерны в продукт. Источник истины остается в токенах, компонентах и правилах витрины.": "This section is for developers and AI agents building prototypes or transferring patterns into the product. The source of truth remains in the tokens, components, and showcase rules.",
+  "подключаются напрямую в HTML-прототип.": "are connected directly in an HTML prototype.",
+  "можно читать агентам, скриптам, Figma-плагинам и будущему экспорту токенов.": "can be read by agents, scripts, Figma plugins, and future token exports.",
+  "— короткий контракт для Claude Code, Codex и других агентов.": "— a short contract for Claude Code, Codex, and other agents.",
+  "Базовые HTML-snippets лежат рядом с кнопками, табами, формами, модалками и карточкой товара.": "Basic HTML snippets are placed next to buttons, tabs, forms, modals, and the product card.",
+  "Где взять файлы": "Where to Get Files",
+  "Разработчик или ИИ-агент может взять файлы из репозитория или скачать прямо из этой статической витрины.": "A developer or AI agent can take files from the repository or download them directly from this static showcase.",
+  "Открыть репозиторий": "Open repository",
+  "Работает при открытии через static server или из репозитория.": "Works when opened through a static server or from the repository.",
+  "Минимальный prompt для ИИ-агента": "Minimal prompt for an AI agent",
+  "Можно вставить в Claude Code перед созданием прототипа Golova.": "Can be pasted into Claude Code before creating a Golova prototype."
+};
+  const englishAttributes = {
+  "Ещё": "More",
+  "Закрыть": "Close",
+  "Добавить": "Add",
+  "Свернуть": "Collapse",
+  "Развернуть": "Expand",
+  "Свернуть уровень": "Collapse level",
+  "Перемешать": "Shuffle",
+  "Настройки таблицы": "Table settings",
+  "Добавить запись": "Add record",
+  "ООО «Ромашка»": "Acme LLC",
+  "Недоступно для редактирования": "Not editable",
+  "Найти в системе": "Search in the system",
+  "Опишите задачу подробнее...": "Describe the task in more detail...",
+  "Иван Иванов": "John Smith",
+  "Радиосистема полное название": "Full radio system name",
+  "Артикул или название": "SKU or name"
+};
+  const inlineMessages = {
+    ru: {
     app: {
       title: 'Design System',
       openMenu: 'Открыть меню',
@@ -1500,9 +2115,21 @@ body {
     },
     font: {
       label: 'Выбор шрифта интерфейса'
+    },
+    content: {},
+    attributes: {}
+  },
+    en: {
+      app: { title: 'Design System', openMenu: 'Open menu', closeMenu: 'Close menu' },
+      search: { placeholder: 'Search documentation...', label: 'Search documentation' },
+      language: { ru: 'Русский', en: 'English', es: 'Español', soon: 'Soon' },
+      theme: { light: 'Light', dark: 'Dark' },
+      font: { label: 'Interface font selector' },
+      content: englishContent,
+      attributes: englishAttributes
     }
   };
-  let messages = fallbackMessages;
+  let messages = inlineMessages[activeLanguage] || inlineMessages.ru;
 
   function t(key){
     return key.split('.').reduce((value, part) => value && value[part], messages) || key;
@@ -1512,11 +2139,70 @@ body {
     try {
       const response = await fetch(`locales/${language}.json`);
       if (!response.ok) throw new Error(`Cannot load locale: ${language}`);
-      messages = await response.json();
+      const remoteMessages = await response.json();
+      const inline = inlineMessages[language] || inlineMessages.ru;
+      messages = { ...inline, ...remoteMessages, content: { ...(inline.content || {}), ...(remoteMessages.content || {}) }, attributes: { ...(inline.attributes || {}), ...(remoteMessages.attributes || {}) } };
     } catch (error) {
-      messages = fallbackMessages;
+      messages = inlineMessages[language] || inlineMessages.ru;
     }
     root.lang = language;
+  }
+
+
+  const originalTextNodes = new WeakMap();
+  const originalAttributes = new WeakMap();
+  const translationSkipTags = new Set(['SCRIPT', 'STYLE', 'CODE', 'PRE', 'NOSCRIPT']);
+
+  function normalizeI18nValue(value){
+    return value.replace(/\s+/g, ' ').trim();
+  }
+
+  function renderTranslatedText(raw, translated){
+    const leading = raw.match(/^\s*/)?.[0] || '';
+    const trailing = raw.match(/\s*$/)?.[0] || '';
+    return `${leading}${translated}${trailing}`;
+  }
+
+  function applyContentTranslations(){
+    const content = activeLanguage === 'ru' ? {} : (messages.content || {});
+    const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+      acceptNode(node){
+        const parent = node.parentElement;
+        if (!parent || parent.closest('script, style, code, pre, noscript')) return NodeFilter.FILTER_REJECT;
+        const key = normalizeI18nValue(node.data);
+        if (!key) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    while (walker.nextNode()) {
+      const node = walker.currentNode;
+      if (!originalTextNodes.has(node)) {
+        originalTextNodes.set(node, { raw: node.data, key: normalizeI18nValue(node.data) });
+      }
+      const original = originalTextNodes.get(node);
+      const translated = content[original.key];
+      node.data = translated ? renderTranslatedText(original.raw, translated) : original.raw;
+    }
+
+    document.querySelectorAll('[placeholder], [value], [aria-label], [alt], [title]').forEach((node) => {
+      if (translationSkipTags.has(node.tagName)) return;
+      const attrs = ['placeholder', 'value', 'aria-label', 'alt', 'title'];
+      let store = originalAttributes.get(node);
+      if (!store) {
+        store = {};
+        attrs.forEach((attr) => {
+          if (node.hasAttribute(attr)) store[attr] = node.getAttribute(attr);
+        });
+        originalAttributes.set(node, store);
+      }
+      attrs.forEach((attr) => {
+        if (!(attr in store)) return;
+        const original = store[attr];
+        const translated = activeLanguage === 'ru' ? original : (messages.attributes || {})[normalizeI18nValue(original)];
+        node.setAttribute(attr, translated || original);
+      });
+    });
   }
 
   function applyI18n(){
@@ -1530,6 +2216,9 @@ body {
       node.setAttribute('aria-label', t(node.dataset.i18nAriaLabel));
     });
     languageLabel.textContent = t(`language.${activeLanguage}`);
+    fontLabel.textContent = fontLabels[root.dataset.uiFont] || fontLabels.roboto;
+    applyContentTranslations();
+    updateTypefacePreview();
   }
 
   function renderLanguageMenu(){
@@ -1540,6 +2229,42 @@ body {
       const soon = disabled ? `<span class="language-soon">${t('language.soon')}</span>` : '';
       return `<button class="language-option${isCurrent ? ' is-current' : ''}" type="button" role="menuitem" data-language="${language}"${disabled ? ' disabled aria-disabled="true"' : ''}><span>${check} ${t(`language.${language}`)}</span>${soon}</button>`;
     }).join('');
+  }
+
+  function renderFontMenu(){
+    const activeFont = root.dataset.uiFont || 'roboto';
+    fontMenu.innerHTML = supportedFonts.map((font) => {
+      const isCurrent = font === activeFont;
+      const check = isCurrent ? '✓' : '';
+      return `<button class="font-option${isCurrent ? ' is-current' : ''}" type="button" role="menuitem" data-font="${font}"><span>${check} ${fontLabels[font]}</span></button>`;
+    }).join('');
+  }
+
+  function updateTypefacePreview(){
+    const activeFont = root.dataset.uiFont || 'roboto';
+    const config = typefaceRecommendations[activeFont] || typefaceRecommendations.roboto;
+    const copy = config[activeLanguage] || config.ru;
+    typefacePreviewTitle.textContent = copy.previewTitle;
+    typefaceName.textContent = copy.name;
+    typefaceSettingsTitle.textContent = copy.settingsTitle;
+    typefaceSample.textContent = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ\nabcdefghijklmnopqrstuvwxyz\n1234567890';
+    typefaceSample.style.fontFamily = config.family;
+    typefaceSample.style.fontSize = config.previewFontSize;
+    typefaceSample.style.lineHeight = config.previewLineHeight;
+    typefaceSample.style.letterSpacing = config.letterSpacing;
+    typefaceWeightLabel.textContent = copy.weightLabel;
+    typefaceStyle.textContent = copy.style;
+    typefaceLineHeightLabel.textContent = copy.lineHeightLabel;
+    typefaceLineHeight.textContent = config.lineHeight.replace('px', ' px');
+    typefaceLetterSpacingLabel.textContent = copy.letterSpacingLabel;
+    typefaceLetterSpacing.textContent = config.letterSpacing.replace('px', ' px');
+    typefaceUsedTitle.textContent = copy.usedTitle;
+    typefaceUsedList.innerHTML = copy.used.map((item) => `<li>${item}</li>`).join('');
+    typefaceExampleTitle.textContent = copy.exampleTitle;
+    typefaceExample.style.fontFamily = config.family;
+    typefaceExample.style.lineHeight = config.lineHeight;
+    typefaceExample.style.letterSpacing = config.letterSpacing;
+    typefaceExample.innerHTML = copy.example.map(([label, value]) => `<div><span>${label}</span><span>${value}</span></div>`).join('');
   }
 
   function setMenu(open){
@@ -1561,7 +2286,9 @@ body {
   function setUIFont(font){
     const nextFont = supportedFonts.includes(font) ? font : 'roboto';
     root.dataset.uiFont = nextFont;
-    fontSelect.value = nextFont;
+    fontLabel.textContent = fontLabels[nextFont];
+    renderFontMenu();
+    updateTypefacePreview();
     localStorage.setItem('golova-ui-font', nextFont);
   }
 
@@ -1620,6 +2347,8 @@ body {
   function bindLanguage(){
     languageToggle.addEventListener('click', () => {
       const open = !languageSwitcher.classList.contains('is-open');
+      fontSwitcher.classList.remove('is-open');
+      fontToggle.setAttribute('aria-expanded', 'false');
       languageSwitcher.classList.toggle('is-open', open);
       languageToggle.setAttribute('aria-expanded', String(open));
     });
@@ -1643,6 +2372,28 @@ body {
     });
   }
 
+  function bindFont(){
+    fontToggle.addEventListener('click', () => {
+      const open = !fontSwitcher.classList.contains('is-open');
+      languageSwitcher.classList.remove('is-open');
+      languageToggle.setAttribute('aria-expanded', 'false');
+      fontSwitcher.classList.toggle('is-open', open);
+      fontToggle.setAttribute('aria-expanded', String(open));
+    });
+    fontMenu.addEventListener('click', (event) => {
+      const option = event.target.closest('[data-font]');
+      if (!option) return;
+      setUIFont(option.dataset.font);
+      fontSwitcher.classList.remove('is-open');
+      fontToggle.setAttribute('aria-expanded', 'false');
+    });
+    document.addEventListener('click', (event) => {
+      if (fontSwitcher.contains(event.target)) return;
+      fontSwitcher.classList.remove('is-open');
+      fontToggle.setAttribute('aria-expanded', 'false');
+    });
+  }
+
   async function initNavigation(){
     await loadMessages(activeLanguage);
     applyI18n();
@@ -1650,6 +2401,7 @@ body {
     markMissingNavItems();
     bindNavigation();
     bindLanguage();
+    bindFont();
     setTheme(savedTheme === 'dark' ? 'dark' : 'light');
     setUIFont(savedFont);
     setActiveLink();
@@ -1660,9 +2412,6 @@ body {
   });
   themeToggle.addEventListener('click', () => {
     setTheme(root.dataset.theme === 'dark' ? 'light' : 'dark');
-  });
-  fontSelect.addEventListener('change', () => {
-    setUIFont(fontSelect.value);
   });
   window.addEventListener('hashchange', setActiveLink);
   window.addEventListener('popstate', setActiveLink);
